@@ -168,6 +168,11 @@
     .alert-success { background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.3); color: #4ade80; }
     .alert-error { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); color: #f87171; }
 
+    <button onclick="payWithPaystack(15000, 'Indigo Signature Spa — Full Payment')" 
+  style="background:#CC0000;color:#fff;border:none;padding:14px 28px;font-size:16px;font-weight:700;border-radius:6px;cursor:pointer;margin-top:10px;">
+  Pay KES 15,000 Online
+</button>
+
     /* CONTACT */
     #contact { background: var(--dark); }
     .contact-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
@@ -214,6 +219,9 @@
       .gallery-strip { height: 220px; }
     }
   </style>
+
+  <script src="https://js.paystack.co/v1/inline.js"></script>
+  
 </head>
 <body>
 
@@ -341,6 +349,10 @@
       <div class="service-name">Headlight Restoration</div>
       <p class="service-desc">The Magic Fix. Yellowed, foggy headlights restored to crystal clarity. Safer driving, sharper look.</p>
       <div class="service-price">KES 5,000</div>
+      <button onclick="payWithPaystack(5000, 'Headlight Restoration')" 
+  style="background:#CC0000;color:#fff;border:none;padding:14px 28px;font-size:16px;font-weight:700;border-radius:6px;cursor:pointer;margin-top:10px;">
+  Pay KES 5,000 Online
+</button>
     </div>
     <div class="service-card">
       <div class="service-num">03</div>
@@ -548,6 +560,12 @@
         <div class="alert alert-success" id="successMsg">✅ Redirecting to WhatsApp to confirm your booking...</div>
         <div class="alert alert-error" id="errorMsg">❌ Something went wrong. Please WhatsApp us directly.</div>
         <button type="submit" class="submit-btn" id="submitBtn">Confirm Booking via WhatsApp →</button>
+
+        <button onclick="payWithPaystack(2000, 'Booking Deposit — Indigo Car Care')" 
+  style="background:#CC0000;color:#fff;border:none;padding:14px 28px;font-size:16px;font-weight:700;border-radius:6px;cursor:pointer;margin-top:10px;">
+  Pay KES 2,000 Deposit via Card/M-Pesa Online
+</button>
+  
       </form>
     </div>
   </div>
@@ -670,6 +688,27 @@
       btn.textContent = 'Confirm Booking via WhatsApp →';
     }, 800);
   }
+
+  function payWithPaystack(amount, description) {
+    var handler = PaystackPop.setup({
+      key: 'pk_live_5fb6acb9c3f1d79882d7d71adfd2ccf53d97d5ba',
+      email: document.getElementById('booking-email') 
+             ? document.getElementById('booking-email').value || 'customer@indigocarcare.co.ke'
+             : 'customer@indigocarcare.co.ke',
+      amount: amount * 100, // Paystack uses kobo/cents
+      currency: 'KES',
+      ref: 'INDIGO-' + Math.floor(Math.random() * 1000000),
+      metadata: { custom_fields: [{ display_name: "Service", value: description }] },
+      callback: function(response) {
+        alert('✅ Payment successful! Reference: ' + response.reference + '\nJoe will confirm your booking via WhatsApp.');
+      },
+      onClose: function() {
+        alert('Payment window closed. You can also pay via M-Pesa Paybill 516600, Account 929787.');
+      }
+    });
+    handler.openIframe();
+  }
+
 </script>
 </body>
 </html>
