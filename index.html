@@ -561,9 +561,15 @@
         <div class="alert alert-error" id="errorMsg">❌ Something went wrong. Please WhatsApp us directly.</div>
         <button type="submit" class="submit-btn" id="submitBtn">Confirm Booking via WhatsApp →</button>
 
-        <button onclick="payWithPaystack(2000, 'Booking Deposit — Indigo Car Care')" 
-  style="background:#CC0000;color:#fff;border:none;padding:14px 28px;font-size:16px;font-weight:700;border-radius:6px;cursor:pointer;margin-top:10px;">
-  Pay KES 2,000 Deposit via Card/M-Pesa Online
+        <button onclick="
+  var name = document.getElementById('fname').value.trim();
+  var phone = document.getElementById('phone').value.trim();
+  var service = document.getElementById('service').value;
+  if (!name || !phone || !service) {
+    alert('Please fill in your Full Name, WhatsApp Number and Service before paying.');
+    return;
+  }
+  payWithPaystack(2000, 'Booking Deposit — ' + service)"
 </button>
   
       </form>
@@ -690,24 +696,22 @@
   }
 
   function payWithPaystack(amount, description) {
-    var handler = PaystackPop.setup({
-      key: 'pk_live_5fb6acb9c3f1d79882d7d71adfd2ccf53d97d5ba',
-      email: document.getElementById('booking-email') 
-             ? document.getElementById('booking-email').value || 'customer@indigocarcare.co.ke'
-             : 'customer@indigocarcare.co.ke',
-      amount: amount * 100, // Paystack uses kobo/cents
-      currency: 'KES',
-      ref: 'INDIGO-' + Math.floor(Math.random() * 1000000),
-      metadata: { custom_fields: [{ display_name: "Service", value: description }] },
-      callback: function(response) {
-        alert('✅ Payment successful! Reference: ' + response.reference + '\nJoe will confirm your booking via WhatsApp.');
-      },
-      onClose: function() {
-        alert('Payment window closed. You can also pay via M-Pesa Paybill 516600, Account 929787.');
-      }
-    });
-    handler.openIframe();
-  }
+  var handler = PaystackPop.setup({
+    key: 'pk_live_5fb6acb9c3f1d79882d7d71adfd2ccf53d97d5ba',
+    email: document.getElementById('email').value || 'customer@indigocarcare.co.ke',
+    amount: amount * 100,
+    currency: 'KES',
+    ref: 'INDIGO-' + Math.floor(Math.random() * 1000000),
+    metadata: { custom_fields: [{ display_name: "Service", value: description }] },
+    callback: function(response) {
+      alert('✅ Payment successful! Reference: ' + response.reference + '\nJoe will confirm your booking via WhatsApp.');
+    },
+    onClose: function() {
+      alert('Payment window closed. You can also pay via M-Pesa Paybill 516600, Account 929787.');
+    }
+  });
+  handler.openIframe();
+}
 
 </script>
 </body>
