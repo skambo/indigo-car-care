@@ -102,9 +102,9 @@
     .clinic-card.selected { border-color: var(--red); background: rgba(204,0,0,0.06); }
     .clinic-card.selected::before { content: '✓'; position: absolute; top: 0.75rem; right: 0.75rem; font-size: 0.75rem; color: var(--red); font-weight: 700; }
     .clinic-card { position: relative; }
-    .clinic-problem { font-size: 0.95rem; font-weight: 600; color: var(--text); margin-bottom: 0.4rem; }
-    .clinic-detail { font-size: 0.78rem; color: var(--muted); line-height: 1.6; margin-bottom: 0.75rem; }
-    .clinic-rx { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.06em; color: var(--red); }
+    .clinic-problem { font-size: 1.05rem; font-weight: 600; color: var(--text); margin-bottom: 0.4rem; }
+    .clinic-detail { font-size: 0.88rem; color: var(--muted); line-height: 1.6; margin-bottom: 0.75rem; }
+    .clinic-rx { font-family: 'DM Mono', monospace; font-size: 0.82rem; letter-spacing: 0.06em; color: var(--red); }
     .clinic-rx span { opacity: 0.6; }
     .clinic-result { display: none; margin-top: 2rem; padding: 1.5rem; border: 1px solid rgba(204,0,0,0.25); background: rgba(204,0,0,0.04); }
     .clinic-result.visible { display: block; }
@@ -167,11 +167,6 @@
     .alert { padding: 1rem; font-size: 0.85rem; line-height: 1.6; display: none; margin-top: 0.5rem; }
     .alert-success { background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.3); color: #4ade80; }
     .alert-error { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); color: #f87171; }
-
-    <button onclick="payWithPaystack(15000, 'Indigo Signature Spa — Full Payment')" 
-  style="background:#CC0000;color:#fff;border:none;padding:14px 28px;font-size:16px;font-weight:700;border-radius:6px;cursor:pointer;margin-top:10px;">
-  Pay KES 15,000 Online
-</button>
 
     /* CONTACT */
     #contact { background: var(--dark); }
@@ -285,32 +280,32 @@
       <div class="clinic-card" data-problem="watermarks" onclick="toggleClinic(this)">
         <div class="clinic-problem">Watermarks (Paint &amp; Windows)</div>
         <div class="clinic-detail">Mineral deposits baked by the Kisumu sun. Hazy glass, white spots on paint.</div>
-        <div class="clinic-rx"><span>Rx: </span>Signature Spa + Indigo Ultra Spray Detailer (Silica-infused protection)</div>
+        <div class="clinic-rx"><span>Solution: </span>Signature Spa + Indigo Ultra Spray Detailer (Silica-infused protection)</div>
       </div>
       <div class="clinic-card" data-problem="interior" onclick="toggleClinic(this)">
         <div class="clinic-problem">Filthy Fabric Interior</div>
         <div class="clinic-detail">Bacteria and deep-seated grime. That smell that won't go away.</div>
-        <div class="clinic-rx"><span>Rx: </span>Steam Extraction + Indigo Miracle All Purpose Cleaner</div>
+        <div class="clinic-rx"><span>Solution: </span>Steam Extraction + Indigo Miracle All Purpose Cleaner</div>
       </div>
       <div class="clinic-card" data-problem="leather" onclick="toggleClinic(this)">
         <div class="clinic-problem">Cracked or Dry Leather</div>
         <div class="clinic-detail">"Once it cracks, it's gone." Sun and heat destroy untreated leather fast.</div>
-        <div class="clinic-rx"><span>Rx: </span>Indigo Magic Leather Conditioner deep hydration</div>
+        <div class="clinic-rx"><span>Solution: </span>Indigo Magic Leather Conditioner deep hydration</div>
       </div>
       <div class="clinic-card" data-problem="dashboard" onclick="toggleClinic(this)">
         <div class="clinic-problem">Faded Dashboard &amp; Trim</div>
         <div class="clinic-detail">UV rot turning plastics chalky grey. Makes even a new car look old.</div>
-        <div class="clinic-rx"><span>Rx: </span>Indigo Premium Interior Dressing with UV blockers</div>
+        <div class="clinic-rx"><span>Solution: </span>Indigo Premium Interior Dressing with UV blockers</div>
       </div>
       <div class="clinic-card" data-problem="engine" onclick="toggleClinic(this)">
         <div class="clinic-problem">Greasy Engine Bay</div>
         <div class="clinic-detail">Heat-trapping filth that shortens engine life and masks leaks.</div>
-        <div class="clinic-rx"><span>Rx: </span>Steam Degrease + Indigo Bullet Degreaser</div>
+        <div class="clinic-rx"><span>Solution: </span>Steam Degrease + Indigo Bullet Degreaser</div>
       </div>
       <div class="clinic-card" data-problem="tyres" onclick="toggleClinic(this)">
         <div class="clinic-problem">Faded Dull Tyres &amp; Rims</div>
         <div class="clinic-detail">Brown, chalky tyres and brake-dust-caked rims drag down the whole look.</div>
-        <div class="clinic-rx"><span>Rx: </span>Bullet Degreaser + Black Mamba Tyre &amp; Trim Dressing</div>
+        <div class="clinic-rx"><span>Solution: </span>Bullet Degreaser + Black Mamba Tyre &amp; Trim Dressing</div>
       </div>
     </div>
     <div class="clinic-result" id="clinicResult">
@@ -341,7 +336,20 @@
         <span>Exterior glow — pH neutral foam wash, sealant, watermark removal</span>
         <span>Elite wheel finish — degrease rims &amp; tyres, dust-resistant matte tyre shine</span>
       </div>
-      <div class="service-price" style="margin-top:1.5rem;font-size:1.1rem;">KES 15,000</div>
+      <div class="service-price" style="margin-top:1.5rem;font-size:1rem;">
+        <div>Saloon / Sedan: <strong>KES 14,000</strong></div>
+        <div>SUV / 4x4: <strong>KES 15,000</strong></div>
+      </div>
+      <div style="display:flex;gap:10px;margin-top:12px;flex-wrap:wrap;">
+        <button onclick="payWithPaystack(14000, 'Indigo Signature Spa — Saloon/Sedan')"
+          style="background:#CC0000;color:#fff;border:none;padding:12px 20px;font-size:14px;font-weight:700;border-radius:6px;cursor:pointer;">
+          Pay KES 14,000 (Saloon)
+        </button>
+        <button onclick="payWithPaystack(15000, 'Indigo Signature Spa — SUV/4x4')"
+          style="background:#CC0000;color:#fff;border:none;padding:12px 20px;font-size:14px;font-weight:700;border-radius:6px;cursor:pointer;">
+          Pay KES 15,000 (SUV/4x4)
+        </button>
+      </div>
     </div>
     <div class="service-card">
       <div class="service-num">02</div>
@@ -364,6 +372,7 @@
         <span>SUV: from KES 7,000</span>
       </div>
       <div class="service-price" style="margin-top:1rem;">From KES 5,000</div>
+      <p style="font-size:0.75rem;color:var(--muted);margin-top:0.6rem;line-height:1.6;border-left:2px solid var(--red);padding-left:0.75rem;">* Final price depends on paint condition and extent of correction. Quote confirmed after inspection.</p>
     </div>
     <div class="service-card">
       <div class="service-num">04</div>
@@ -405,8 +414,8 @@
       ">
         <blockquote
           class="tiktok-embed"
-          cite="https://vt.tiktok.com/ZSu39y2tr/"
-          data-video-id=""
+          cite="https://www.tiktok.com/@indigocarcare/video/7558392928180129036"
+          data-video-id="7558392928180129036"
           style="max-width:605px; min-width:325px;">
           <section>
             <a href="https://vt.tiktok.com/ZSu39y2tr/">View on TikTok</a>
@@ -425,8 +434,8 @@
       ">
         <blockquote
           class="tiktok-embed"
-          cite="https://vt.tiktok.com/ZSu39GPTt/"
-          data-video-id=""
+          cite="https://www.tiktok.com/@indigocarcare/video/7555411791350697228"
+          data-video-id="7555411791350697228"
           style="max-width:605px; min-width:325px;">
           <section>
             <a href="https://vt.tiktok.com/ZSu39GPTt/">View on TikTok</a>
@@ -445,8 +454,8 @@
       ">
         <blockquote
           class="tiktok-embed"
-          cite="https://vt.tiktok.com/ZSu39aYWM/"
-          data-video-id=""
+          cite="https://www.tiktok.com/@indigocarcare/video/7550734249595292934"
+          data-video-id="7550734249595292934"
           style="max-width:605px; min-width:325px;">
           <section>
             <a href="https://vt.tiktok.com/ZSu39aYWM/">View on TikTok</a>
@@ -465,8 +474,8 @@
       ">
         <blockquote
           class="tiktok-embed"
-          cite="https://vt.tiktok.com/ZSu39fFgY/"
-          data-video-id=""
+          cite="https://www.tiktok.com/@indigocarcare/video/7582091822642646328"
+          data-video-id="7582091822642646328"
           style="max-width:605px; min-width:325px;">
           <section>
             <a href="https://vt.tiktok.com/ZSu39fFgY/">View on TikTok</a>
