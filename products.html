@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Products &amp; Accessories — Indigo Car Care Club</title>
+  <meta name="description" content="Shop Indigo Car Care Club's range of premium detailing products and accessories. Interior dressings, exterior sprays, microfiber tools and more. Order via WhatsApp."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --red: #CC0000;
+      --red-dark: #990000;
+      --red-light: #FF2222;
+      --black: #0A0A0A;
+      --dark: #111111;
+      --mid: #1A1A1A;
+      --card: #222222;
+      --text: #F0F0F0;
+      --muted: #888888;
+      --white: #FFFFFF;
+      --green: #22c55e;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--black); color: var(--text); overflow-x: hidden; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.75rem 2.5rem;
+      background: rgba(10,10,10,0.95); backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(204,0,0,0.2);
+    }
+    .nav-logo img { height: 44px; width: auto; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--red); }
+    .nav-links a.active { color: var(--red); }
+    .nav-cta { background: var(--red); color: var(--white); font-family: 'DM Mono', monospace; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.65rem 1.5rem; border: none; cursor: pointer; text-decoration: none; transition: background 0.2s; }
+    .nav-cta:hover { background: var(--red-light); }
+
+    /* HAMBURGER + MOBILE NAV */
+    .nav-end { display: flex; align-items: center; gap: 1rem; }
+    .nav-hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; background: none; border: none; cursor: pointer; padding: 6px; min-width: 44px; min-height: 44px; }
+    .nav-hamburger span { display: block; width: 22px; height: 2px; background: var(--white); transition: all 0.3s; border-radius: 2px; }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .nav-mobile { display: none; position: absolute; top: 100%; left: 0; right: 0; background: rgba(10,10,10,0.98); border-top: 1px solid rgba(204,0,0,0.15); border-bottom: 2px solid rgba(204,0,0,0.3); flex-direction: column; backdrop-filter: blur(14px); max-height: calc(100vh - 70px); overflow-y: auto; }
+    .nav-mobile.open { display: flex; }
+    .nav-mobile a { font-size: 0.82rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); text-decoration: none; padding: 0.9rem 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.04); transition: color 0.2s, background 0.2s; }
+    .nav-mobile a:hover, .nav-mobile a:active { color: var(--white); background: rgba(204,0,0,0.06); }
+    .nav-mobile .nav-mobile-cta { background: var(--red); color: var(--white) !important; text-align: center; padding: 1rem; margin: 0.75rem 1.5rem 1rem; border-bottom: none; font-family: 'DM Mono', monospace; font-weight: 500; }
+    .nav-mobile .nav-mobile-cta:hover { background: var(--red-light); }
+
+    /* PAGE HERO */
+    .page-hero {
+      padding: 8rem 2.5rem 4rem;
+      background: var(--mid);
+      border-bottom: 1px solid rgba(204,0,0,0.12);
+    }
+    .page-hero-inner { max-width: 1100px; margin: 0 auto; }
+    .section-label { font-family: 'DM Mono', monospace; font-size: 0.63rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--red); margin-bottom: 0.9rem; }
+    h1.page-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.6rem, 6vw, 5rem); letter-spacing: 0.04em; line-height: 1; color: var(--white); margin-bottom: 0.75rem; }
+    .page-intro { font-size: 0.92rem; color: var(--muted); max-width: 520px; line-height: 1.8; font-weight: 300; }
+
+    /* SHARED */
+    h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2rem, 4vw, 3rem); letter-spacing: 0.04em; line-height: 1; color: var(--white); margin-bottom: 1rem; }
+    section { padding: 5rem 2.5rem; }
+
+    /* TABS */
+    .tabs-section { background: var(--dark); }
+    .tabs-inner { max-width: 1100px; margin: 0 auto; }
+    .tab-strip {
+      display: flex;
+      overflow-x: auto;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      margin-bottom: 3rem;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .tab-strip::-webkit-scrollbar { display: none; }
+    .tab-btn {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      padding: 0.9rem 1.75rem;
+      background: transparent;
+      color: var(--muted);
+      border: none;
+      border-bottom: 2px solid transparent;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+      min-height: 44px;
+      margin-bottom: -1px;
+    }
+    .tab-btn:hover { color: var(--white); }
+    .tab-btn.active { color: var(--red); border-bottom-color: var(--red); background: rgba(204,0,0,0.04); }
+
+    /* PRODUCT GRID */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+    .product-card {
+      background: var(--card);
+      border: 1.5px solid rgba(255,255,255,0.06);
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .product-card:hover { border-color: rgba(204,0,0,0.4); transform: translateY(-2px); }
+    .product-img-wrap {
+      width: 100%;
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      background: var(--mid);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .product-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s;
+    }
+    .product-card:hover .product-img-wrap img { transform: scale(1.03); }
+    .product-body { padding: 1.25rem; flex: 1; display: flex; flex-direction: column; }
+    .product-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.15rem; letter-spacing: 0.05em; color: var(--white); margin-bottom: 0.4rem; line-height: 1.2; }
+    .product-desc { font-size: 0.83rem; color: var(--muted); line-height: 1.65; margin-bottom: 1rem; flex: 1; }
+    .product-price { font-family: 'DM Mono', monospace; font-size: 1rem; color: var(--red); letter-spacing: 0.06em; margin-bottom: 1rem; }
+    .product-order {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      background: #25D366;
+      color: var(--white);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.75rem;
+      text-decoration: none;
+      transition: background 0.2s;
+      min-height: 44px;
+    }
+    .product-order:hover { background: #1da851; }
+    .product-order svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+    /* CARE PACKAGE HIGHLIGHT */
+    .product-card.featured { border-color: rgba(204,0,0,0.3); }
+    .product-card.featured .product-name { color: var(--red); }
+    .featured-badge { display: inline-block; font-family: 'DM Mono', monospace; font-size: 0.58rem; letter-spacing: 0.16em; text-transform: uppercase; padding: 0.22rem 0.55rem; background: rgba(204,0,0,0.14); color: var(--red); margin-bottom: 0.6rem; }
+
+    /* FOOTER */
+    footer { background: var(--mid); border-top: 1px solid rgba(204,0,0,0.12); padding: 3rem 2.5rem; text-align: center; }
+    .footer-tagline { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 1.5rem; }
+    .footer-links { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+    .footer-links a { font-size: 0.78rem; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--red); }
+    .footer-copy { font-size: 0.68rem; color: rgba(136,136,136,0.45); }
+
+    /* WA FLOAT */
+    .wa-float { position: fixed; bottom: 2rem; right: 2rem; z-index: 200; background: #25D366; color: #fff; width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(37,211,102,0.4); text-decoration: none; transition: transform 0.2s; }
+    .wa-float:hover { transform: scale(1.1); }
+    .wa-float svg { width: 28px; height: 28px; }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      nav { padding: 0.75rem 1.25rem; }
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      .page-hero { padding: 6rem 1.25rem 3rem; }
+      section { padding: 3.5rem 1.25rem; }
+      .tab-btn { padding: 0.9rem 1.25rem; font-size: 0.65rem; }
+      .product-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
+    }
+    @media (max-width: 480px) {
+      .nav-cta { font-size: 0.65rem; padding: 0.55rem 1rem; }
+      .product-grid { grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+      .product-body { padding: 0.9rem; }
+      .product-name { font-size: 1rem; }
+      .product-desc { font-size: 0.78rem; }
+    }
+    @media (max-width: 375px) {
+      .nav-cta { display: none; }
+      .product-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <a href="index.html"><img src="images/logo.png" alt="Indigo Car Care Club"></a>
+  </div>
+  <ul class="nav-links">
+    <li><a href="index.html#clinic">Diagnose</a></li>
+    <li><a href="index.html#services">Services</a></li>
+    <li><a href="index.html#booking">Book Now</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+    <li><a href="index.html#videos">Videos</a></li>
+    <li><a href="products.html" class="active">Products</a></li>
+    <li><a href="careers.html">Careers</a></li>
+  </ul>
+  <div class="nav-end">
+    <a href="index.html#booking" class="nav-cta">Book the Spa</a>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Toggle navigation" onclick="toggleMobileNav()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="nav-mobile" id="navMobile">
+    <a href="index.html#clinic">Diagnose</a>
+    <a href="index.html#services">Services</a>
+    <a href="index.html#videos">Videos</a>
+    <a href="products.html">Products</a>
+    <a href="careers.html">Careers</a>
+    <a href="index.html#contact">Contact</a>
+    <a href="index.html#booking" class="nav-mobile-cta">Book the Spa</a>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="section-label">The Indigo Range</div>
+    <h1 class="page-title">Products &amp; Accessories</h1>
+    <p class="page-intro">Professional-grade detailing products used and sold by Indigo Car Care Club. Order any product via WhatsApp and we'll deliver in Kisumu.</p>
+  </div>
+</div>
+
+<!-- PRODUCTS TABS -->
+<section class="tabs-section">
+  <div class="tabs-inner">
+    <div class="tab-strip" role="tablist">
+      <button class="tab-btn active" onclick="switchTab('interior', this)" role="tab" aria-selected="true">Interior Products</button>
+      <button class="tab-btn" onclick="switchTab('exterior', this)" role="tab" aria-selected="false">Exterior Products</button>
+      <button class="tab-btn" onclick="switchTab('accessories', this)" role="tab" aria-selected="false">Accessories</button>
+    </div>
+
+    <!-- ── INTERIOR PRODUCTS ─────────────────────────────────── -->
+    <div class="product-grid" id="tab-interior">
+
+      <div class="product-card">
+        <div class="product-img-wrap">
+          <img src="images/products/Indigo%20Premium%20Interior%20Dressing.jpg" alt="Indigo Premium Interior Dressing" loading="lazy">
+        </div>
+        <div class="product-body">
+          <div class="product-name">Indigo Premium Interior Dressing</div>
+          <p class="product-desc">A professional-grade dressing for interior plastic and vinyl surfaces.</p>
+          <div class="product-price">KES 999</div>
+          <a class="product-order" href="https://wa.me/254112657174?text=Hi%2C%20I%27d%20like%20to%20order%3A%20Indigo%20Premium%20Interior%20Dressing" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Order via WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img-wrap">
+          <img src="images/products/Indigo%20Leather%20Magic%20Conditioner.jpg" alt="Indigo Leather Magic Conditioner" loading="lazy">
+        </div>
+        <div class="product-body">
+          <div class="product-name">Indigo Leather Magic Conditioner</div>
+          <p class="product-desc">A conditioner formulated to nourish and protect leather surfaces.</p>
+          <div class="product-price">KES 999</div>
+          <a class="product-order" href="https://wa.me/254112657174?text=Hi%2C%20I%27d%20like%20to%20order%3A%20Indigo%20Leather%20Magic%20Conditioner" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Order via WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img-wrap">
+          <img src="images/products/Indigo%20Miracle%20All%20Purpose%20Cleaner.jpg" alt="Indigo Miracle All Purpose Cleaner" loading="lazy">
+        </div>
+        <div class="product-body">
+          <div class="product-name">Indigo Miracle All Purpose Cleaner</div>
+          <p class="product-desc">A versatile cleaner suitable for multiple interior surfaces.</p>
+          <div class="product-price">KES 999</div>
+          <a class="product-order" href="https://wa.me/254112657174?text=Hi%2C%20I%27d%20like%20to%20order%3A%20Indigo%20Miracle%20All%20Purpose%20Cleaner" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Order via WhatsApp
+          </a>
+        </div>
+      </div>
+
+    </div><!-- /tab-interior -->
+
+    <!-- ── EXTERIOR PRODUCTS ─────────────────────────────────── -->
+    <div class="product-grid" id="tab-exterior" style="display:none">
+
+      <div class="product-card">
+        <div class="product-img-wrap">
+          <img src="images/products/Indigo%20Ultra%20Spray%20Detailer.jpg" alt="Indigo Ultra Spray Detailer" loading="lazy">
+        </div>
+        <div class="product-body">
+          <div class="product-name">Indigo Ultra Spray Detailer</div>
+          <p class="product-desc">A quick-detailer spray for maintaining exterior paintwork between washes.</p>
+          <div class="product-price">KES 999</div>
+          <a class="product-order" href="https://wa.me/254112657174?text=Hi%2C%20I%27d%20like%20to%20order%3A%20Indigo%20Ultra%20Spray%20Detailer" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Order via WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img-wrap">
+          <img src="images/products/Indigo%20Mirage%20Glass%20Cleaner.jpg" alt="Indigo Mirage Glass Cleaner" loading="lazy">
+        </div>
+        <div class="product-body">
+          <div class="product-name">Indigo Mirage Glass Cleaner</div>
+          <p class="product-desc">A glass cleaner formulated for streak-free clarity on automotive glass.</p>
+          <div class="product-price">KES 999</div>
+          <a class="product-order" href="https://wa.me/254112657174?text=Hi%2C%20I%27d%20like%20to%20order%3A%20Indigo%20Mirage%20Glass%20Cleaner" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Order via WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img-wrap">
+          <img src="images/products/Indigo%20Black%20Mamba%20Tyre%20%26%20Trim%20Dressing.jpg" alt="Indigo Black Mamba Tyre &amp; Trim Dressing" loading="lazy">
+        </div>
+        <div class="product-body">
+          <div class="product-name">Indigo Black Mamba Tyre &amp; Trim Dressing</div>
+          <p class="product-desc">A dressing that restores deep colour and shine to tyres and exterior trim.</p>
+          <div class="product-price">KES 999</div>
+          <a class="product-order" href="https://wa.me/254112657174?text=Hi%2C%20I%27d%20like%20to%20order%3A%20Indigo%20Black%20Mamba%20Tyre%20%26%20Trim%20Dressing" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Order via WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img-wrap">
+          <img src="images/products/Indigo%20Bullet%20Degreaser.jpg" alt="Indigo Bullet Degreaser" loading="lazy">
+        </div>
+        <div class="product-body">
+          <div class="product-name">Indigo Bullet Degreaser</div>
+          <p class="product-desc">A heavy-duty degreaser for cutting through grime on exterior surfaces.</p>
+          <div class="product-price">KES 999</div>
+          <a class="product-order" href="https://wa.me/254112657174?text=Hi%2C%20I%27d%20like%20to%20order%3A%20Indigo%20Bullet%20Degreaser" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.998-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Order via WhatsApp
+          </a>
+        </div>
+      </div>
+
+    </div><!-- /tab-exterior -->
+
+    <!-- ── ACCESSORIES ────────────────────────────────────────── -->
+    <div class="product-grid" id="tab-accessories" style="display:none">
+
+      <div class="product-card">
+        <div class="product-img-wrap">
+          <img src="images/products/Premium%20Microfiber%20Wash%20Mitt.jpg" alt="Premium Microfiber Wash Mitt" loading="lazy">
+        </div>
+        <div class="product-body">
+          <div class="product-name">Premium Microfiber Wash Mitt</div>
+          <p class="product-desc">A soft microfiber mitt designed for scratch-free exterior washing.</p>
+          <div class="product-price">KES 850</div>
+          <a class="product-order" href="https://wa.me/254112657174?text=Hi%2C%20I%27d%20like%20to%20order%3A%20Premium%20Microfiber%20Wash%20Mitt" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Order via WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img-wrap">
+          <img src="images/products/Contoured%20Tyre%20Dressing%20Applicator.jpg" alt="Contoured Tyre Dressing Applicator" loading="lazy">
+        </div>
+        <div class="product-body">
+          <div class="product-name">Contoured Tyre Dressing Applicator</div>
+          <p class="product-desc">A contoured applicator for even and precise tyre dressing application.</p>
+          <div class="product-price">KES 550</div>
+          <a class="product-order" href="https://wa.me/254112657174?text=Hi%2C%20I%27d%20like%20to%20order%3A%20Contoured%20Tyre%20Dressing%20Applicator" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Order via WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img-wrap">
+          <img src="images/products/Interior%20Multipurpose%20Applicator.jpg" alt="Interior Multipurpose Applicator" loading="lazy">
+        </div>
+        <div class="product-body">
+          <div class="product-name">Interior Multipurpose Applicator</div>
+          <p class="product-desc">A foam applicator for applying dressings and conditioners to interior surfaces.</p>
+          <div class="product-price">KES 650</div>
+          <a class="product-order" href="https://wa.me/254112657174?text=Hi%2C%20I%27d%20like%20to%20order%3A%20Interior%20Multipurpose%20Applicator" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Order via WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img-wrap">
+          <img src="images/products/Heavy%20Duty%20Tyre%20Brush.jpg" alt="Heavy Duty Tyre Brush" loading="lazy">
+        </div>
+        <div class="product-body">
+          <div class="product-name">Heavy Duty Tyre Brush</div>
+          <p class="product-desc">A stiff-bristled brush built for scrubbing tyres and heavy-duty cleaning.</p>
+          <div class="product-price">KES 650</div>
+          <a class="product-order" href="https://wa.me/254112657174?text=Hi%2C%20I%27d%20like%20to%20order%3A%20Heavy%20Duty%20Tyre%20Brush" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Order via WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img-wrap">
+          <img src="images/products/Plush%20Microfiber%20Towel%20%28high%20GSM%29.jpg" alt="Plush Microfiber Towel (High GSM)" loading="lazy">
+        </div>
+        <div class="product-body">
+          <div class="product-name">Plush Microfiber Towel (High GSM)</div>
+          <p class="product-desc">A high-GSM microfiber towel for safe, lint-free drying and buffing.</p>
+          <div class="product-price">KES 850</div>
+          <a class="product-order" href="https://wa.me/254112657174?text=Hi%2C%20I%27d%20like%20to%20order%3A%20Plush%20Microfiber%20Towel%20%28High%20GSM%29" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Order via WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img-wrap">
+          <img src="images/products/Precision%20Detailing%20Swabs.jpg" alt="Precision Detailing Swabs" loading="lazy">
+        </div>
+        <div class="product-body">
+          <div class="product-name">Precision Detailing Swabs</div>
+          <p class="product-desc">Fine-tipped swabs for reaching vents, seams, and tight detailing areas.</p>
+          <div class="product-price">KES 450</div>
+          <a class="product-order" href="https://wa.me/254112657174?text=Hi%2C%20I%27d%20like%20to%20order%3A%20Precision%20Detailing%20Swabs" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Order via WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <div class="product-card featured">
+        <div class="product-img-wrap">
+          <img src="images/products/Indigo%20Care%20Package.jpg" alt="Indigo Care Package" loading="lazy">
+        </div>
+        <div class="product-body">
+          <div class="featured-badge">Bundle Deal</div>
+          <div class="product-name">Indigo Care Package</div>
+          <p class="product-desc">A curated bundle of 5 Indigo detailing essentials — the complete starter kit.</p>
+          <div class="product-price">KES 6,500</div>
+          <a class="product-order" href="https://wa.me/254112657174?text=Hi%2C%20I%27d%20like%20to%20order%3A%20Indigo%20Care%20Package" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Order via WhatsApp
+          </a>
+        </div>
+      </div>
+
+    </div><!-- /tab-accessories -->
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-tagline">Kisumu's Premium Detail Studio · We Come to You</div>
+  <div class="footer-links">
+    <a href="index.html#clinic">Diagnose</a>
+    <a href="index.html#services">Services</a>
+    <a href="index.html#booking">Book Now</a>
+    <a href="index.html#contact">Contact</a>
+    <a href="careers.html">Careers</a>
+    <a href="mailto:info@indigocarcare.co.ke">info@indigocarcare.co.ke</a>
+  </div>
+  <div class="footer-copy">© 2026 Indigo Car Care Club. All rights reserved.</div>
+</footer>
+
+<!-- WhatsApp Float -->
+<a class="wa-float" href="https://wa.me/254112657174?text=Hi%20Indigo!%20I%27d%20like%20to%20enquire%20about%20your%20products." target="_blank" title="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+  function switchTab(name, btn) {
+    document.querySelectorAll('.product-grid').forEach(function(el) { el.style.display = 'none'; });
+    document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
+    document.getElementById('tab-' + name).style.display = 'grid';
+    if (btn) { btn.classList.add('active'); btn.setAttribute('aria-selected', 'true'); }
+  }
+
+  function toggleMobileNav() {
+    const mob = document.getElementById('navMobile');
+    const btn = document.getElementById('navHamburger');
+    mob.classList.toggle('open');
+    btn.classList.toggle('open');
+  }
+  document.querySelectorAll('.nav-mobile a').forEach(function(a) {
+    a.addEventListener('click', function() {
+      document.getElementById('navMobile').classList.remove('open');
+      document.getElementById('navHamburger').classList.remove('open');
+    });
+  });
+  document.addEventListener('click', function(e) {
+    const mob = document.getElementById('navMobile');
+    const btn = document.getElementById('navHamburger');
+    if (mob && mob.classList.contains('open') && !mob.contains(e.target) && !btn.contains(e.target)) {
+      mob.classList.remove('open');
+      btn.classList.remove('open');
+    }
+  });
+</script>
+</body>
+</html>
