@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Blog — Your Ride, Your Pride | Indigo Car Care Club</title>
+  <meta name="description" content="Expert car detailing tips, product insights, and auto reconditioning advice from Indigo Car Care Club — serving Kisumu and Nairobi, Kenya."/>
+  <link rel="canonical" href="https://indigocarcare.com/blog/"/>
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website"/>
+  <meta property="og:locale"      content="en_KE"/>
+  <meta property="og:site_name"   content="Indigo Car Care Club"/>
+  <meta property="og:title"       content="Blog — Your Ride, Your Pride | Indigo Car Care Club"/>
+  <meta property="og:description" content="Expert car detailing tips, product insights, and auto reconditioning advice from Indigo Car Care Club — serving Kisumu and Nairobi, Kenya."/>
+  <meta property="og:image"       content="https://indigocarcare.com/images/hero-premium-car-detail-kisumu.webp"/>
+  <meta property="og:url"         content="https://indigocarcare.com/blog/"/>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --red: #CC0000; --red-light: #FF2222;
+      --black: #0A0A0A; --dark: #111111; --mid: #1A1A1A; --card: #222222;
+      --text: #F0F0F0; --muted: #888888; --white: #FFFFFF;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--black); color: var(--text); }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.75rem 2.5rem;
+      background: rgba(10,10,10,0.95); backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(204,0,0,0.2);
+    }
+    .nav-logo img { height: 44px; width: auto; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--red); }
+    .nav-cta { background: var(--red); color: var(--white); font-family: 'DM Mono', monospace; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.65rem 1.5rem; border: none; cursor: pointer; text-decoration: none; transition: background 0.2s; }
+    .nav-cta:hover { background: var(--red-light); }
+
+    .page-header {
+      padding: 9rem 2.5rem 4rem;
+      border-bottom: 1px solid rgba(204,0,0,0.15);
+    }
+    .page-header-inner { max-width: 860px; margin: 0 auto; }
+    .page-label { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--red); margin-bottom: 1rem; }
+    h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 6vw, 5rem); line-height: 0.95; letter-spacing: 0.02em; color: var(--white); margin-bottom: 1rem; }
+    .page-intro { font-size: 1.05rem; color: var(--muted); line-height: 1.7; max-width: 560px; }
+
+    .posts { max-width: 860px; margin: 0 auto; padding: 3rem 2.5rem 6rem; }
+    .post-card {
+      display: block; text-decoration: none; color: inherit;
+      border: 1px solid rgba(255,255,255,0.06);
+      padding: 2rem 2rem 2rem;
+      margin-bottom: 1.5rem;
+      background: var(--dark);
+      transition: border-color 0.2s, background 0.2s;
+      position: relative;
+    }
+    .post-card::before {
+      content: ''; position: absolute; top: 0; left: 0;
+      width: 3px; height: 100%; background: var(--red); opacity: 0; transition: opacity 0.2s;
+    }
+    .post-card:hover { border-color: rgba(204,0,0,0.3); background: rgba(204,0,0,0.04); }
+    .post-card:hover::before { opacity: 1; }
+    .post-meta { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.75rem; }
+    .post-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 0.03em; color: var(--white); margin-bottom: 0.6rem; line-height: 1.1; }
+    .post-excerpt { font-size: 0.9rem; color: var(--muted); line-height: 1.65; }
+    .post-read-more { display: inline-block; margin-top: 1rem; font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--red); }
+
+    footer {
+      background: var(--mid); border-top: 1px solid rgba(204,0,0,0.15);
+      padding: 2.5rem; text-align: center;
+    }
+    .footer-logo img { height: 40px; width: auto; margin-bottom: 1rem; }
+    .footer-tagline { font-size: 0.78rem; color: var(--muted); letter-spacing: 0.1em; margin-bottom: 1.25rem; }
+    .footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem; margin-bottom: 1.5rem; }
+    .footer-links a { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--red); }
+    .footer-copy { font-size: 0.7rem; color: rgba(136,136,136,0.5); }
+
+    @media (max-width: 600px) {
+      nav { padding: 0.75rem 1.25rem; }
+      .page-header { padding: 7rem 1.25rem 3rem; }
+      .posts { padding: 2rem 1.25rem 4rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">
+    <a href="/"><img src="/images/indigo-car-care-club-logo.webp" alt="Indigo Car Care Club logo" width="300" height="168"/></a>
+  </div>
+  <ul class="nav-links">
+    <li><a href="/#clinic">Diagnose</a></li>
+    <li><a href="/#services">Services</a></li>
+    <li><a href="/#booking">Book Now</a></li>
+    <li><a href="/#contact">Contact</a></li>
+    <li><a href="/blog/" class="active">Blog</a></li>
+    <li><a href="/products">Products</a></li>
+  </ul>
+  <a href="/#booking" class="nav-cta">Book the Spa</a>
+</nav>
+
+<header class="page-header">
+  <div class="page-header-inner">
+    <div class="page-label">Knowledge &amp; Community</div>
+    <h1>Your Ride,<br>Your Pride.</h1>
+    <p class="page-intro">Expert detailing tips, product science, and the modern trends shaping premium auto care — bi-weekly from the Indigo team in Kisumu &amp; Nairobi.</p>
+  </div>
+</header>
+
+<main class="posts">
+
+  <a class="post-card" href="/blog/welcome-to-your-ride-your-pride-edition-1">
+    <div class="post-meta">19 June 2026 &nbsp;·&nbsp; Joe, Founder</div>
+    <div class="post-title">Welcome to Your Ride, Your Pride – Edition 1</div>
+    <p class="post-excerpt">The inaugural edition of our bi-weekly newsletter. Joe introduces the Indigo Car Care Club community — what to expect: expert tips, product insights, exclusive member perks, and a spotlight on our mobile detailing services across Nairobi and Kisumu.</p>
+    <span class="post-read-more">Read article →</span>
+  </a>
+
+</main>
+
+<footer>
+  <div class="footer-logo">
+    <a href="/"><img src="/images/indigo-car-care-club-logo.webp" alt="Indigo Car Care Club logo" width="300" height="168" loading="lazy"/></a>
+  </div>
+  <div class="footer-tagline">Kisumu &amp; Nairobi's Premium Detail Studio · We Come to You</div>
+  <div class="footer-links">
+    <a href="/#clinic">Diagnose</a>
+    <a href="/#services">Services</a>
+    <a href="/#booking">Book Now</a>
+    <a href="/#contact">Contact</a>
+    <a href="/blog/">Blog</a>
+    <a href="/careers">Careers</a>
+    <a href="mailto:info@indigocarcare.co.ke">info@indigocarcare.co.ke</a>
+  </div>
+  <div class="footer-copy">© 2026 Indigo Car Care Club. All rights reserved.</div>
+</footer>
+
+</body>
+</html>
