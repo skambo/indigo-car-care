@@ -410,6 +410,10 @@
         <span class="field-error" id="location-error">
           Please enter your location so we can confirm we cover your area
         </span>
+        <!-- Surcharge notice for Express Gloss outer zones -->
+        <div id="surchargeNotice" style="display:none;margin-top:0.5rem;padding:0.85rem 1rem;background:rgba(234,179,8,0.07);border:1px solid rgba(234,179,8,0.3);border-left:3px solid var(--yellow);font-size:0.8rem;color:rgba(234,179,8,0.9);line-height:1.65;">
+          ℹ️ A KES 1,500 fuel surcharge applies for your area. This will be communicated on WhatsApp confirmation.
+        </div>
       </div>
 
       <!-- 7. Vehicle Make & Model -->
@@ -546,11 +550,13 @@
 <script>
   // ── SERVICE MAP ──────────────────────────────────────────────────────────────
   var SERVICES = {
-    'express-gloss':         { name: 'Express Gloss',        tagline: 'The Quick Shine',     deposit: 2500 },
-    'cabin-refresh':         { name: 'Cabin Refresh',         tagline: 'Interior Deep Clean', deposit: 2500 },
-    'signature-spa':         { name: 'Indigo Signature Spa',  tagline: 'The Full Works',      deposit: 2500 },
-    'headlight-restoration': { name: 'Headlight Restoration', tagline: 'Specialist Add-On',   deposit: 2500 },
-    'paint-correction':      { name: 'Pro Machine Buffing',   tagline: 'Specialist Add-On',   deposit: 2500 }
+    'express-gloss':         { name: 'Express Gloss',                    tagline: 'Showroom Shine in 75 Minutes or Less',          deposit: 2500 },
+    'cabin-refresh':         { name: 'Cabin Refresh',                    tagline: 'Deep Interior Restoration',                     deposit: 2500 },
+    'signature-spa':         { name: 'Indigo Signature Spa',             tagline: 'The Ultimate Bumper-to-Bumper Transformation',  deposit: 2500 },
+    'headlight-restoration': { name: 'Headlight Restoration',            tagline: 'Crystal Clarity Restored',                     deposit: 2500 },
+    'paint-correction':      { name: 'Pro Machine Buffing',              tagline: 'Permanent Paint Correction',                   deposit: 2500 },
+    'ceramic-coating':       { name: 'Premium Graphene Ceramic Coating', tagline: 'The Pinnacle of Paint Protection',             deposit: 2500 },
+    'fleet':                 { name: 'Fleet Reconditioning',             tagline: 'B2B Fleet & Dealership Service',               deposit: 2500 }
   };
 
   // ── READ URL PARAM ───────────────────────────────────────────────────────────
@@ -647,6 +653,22 @@
       }
     }
     return true;
+  }
+
+  // ── KITENGELA / KIAMBU / ATHI RIVER SURCHARGE NOTICE (Express Gloss only) ───
+  var locationInput = document.getElementById('location');
+  var surchargeEl   = document.getElementById('surchargeNotice');
+  var SURCHARGE_RE  = /kitengela|kiambu|athi\s*river/i;
+  function checkSurcharge() {
+    if (slug === 'express-gloss' && SURCHARGE_RE.test(locationInput.value)) {
+      surchargeEl.style.display = 'block';
+    } else {
+      surchargeEl.style.display = 'none';
+    }
+  }
+  if (locationInput) {
+    locationInput.addEventListener('input', checkSurcharge);
+    locationInput.addEventListener('change', checkSurcharge);
   }
 
   // Clear error state on user input
