@@ -257,6 +257,38 @@
     @media (max-width: 375px) {
       .nav-cta { display: none; }
     }
+
+    /* HERO COVERAGE LINE */
+    .hero-coverage {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.63rem; letter-spacing: 0.1em;
+      color: rgba(136,136,136,0.65); line-height: 2.1;
+      margin: -0.75rem auto 2rem; max-width: 600px;
+    }
+
+    /* GOLD BADGE — Ceramic Coating */
+    .service-badge-gold {
+      background: rgba(201,168,76,0.14);
+      color: #C9A84C;
+    }
+
+    /* FAQ ACCORDION */
+    .faq-list { border-top: 1px solid rgba(255,255,255,0.06); }
+    .faq-item { border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .faq-q {
+      width: 100%; background: none; border: none; color: var(--text);
+      font-family: 'DM Sans', sans-serif; font-size: 0.96rem; font-weight: 500;
+      text-align: left; padding: 1.25rem 0;
+      display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+      cursor: pointer; transition: color 0.2s; min-height: 48px;
+    }
+    .faq-q:hover { color: var(--red); }
+    .faq-icon { font-size: 1.3rem; color: var(--red); flex-shrink: 0; transition: transform 0.25s; line-height: 1; }
+    .faq-q[aria-expanded="true"] .faq-icon { transform: rotate(45deg); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.35s ease, padding-bottom 0.25s ease; }
+    .faq-a.open { max-height: 400px; padding-bottom: 1.25rem; }
+    .faq-a p { font-size: 0.88rem; color: var(--muted); line-height: 1.85; }
+    .faq-a p a { color: var(--red); }
   </style>
 
   <script src="https://js.paystack.co/v1/inline.js"></script>
@@ -271,8 +303,8 @@
     "image": "https://indigocarcare.com/images/indigo-car-care-club-logo.webp",
     "url": "https://indigocarcare.com",
     "telephone": ["+254112657174", "+254793556794"],
-    "email": "info@indigocarcare.co.ke",
-    "priceRange": "KES 5,000 – KES 15,000",
+    "email": "jkcartage2015@gmail.com",
+    "priceRange": "KES 5,000 – KES 90,000",
     "areaServed": [
       { "@type": "City", "name": "Kisumu" },
       { "@type": "City", "name": "Nairobi" },
@@ -343,15 +375,16 @@
   <div class="hero-grid"></div>
   <div class="hero-content">
     <div class="hero-eyebrow">Kisumu & Nairobi's Premium Detail Studio</div>
-    <h1>
-      <span class="small">Indigo Car Care Club — Mobile Car Detailing in Kisumu &amp; Nairobi</span>
-      We Bring the <span class="red">Showroom to You.</span>
-    </h1>
+    <h1>We Bring the Ultimate Car Transformation<br><span class="red">to Your Doorstep.</span></h1>
     <p class="hero-sub">
-      Zero hassle. We bring our own water and power to <strong>Riat Hills, Milimani, Kanyakwar</strong> and across Nairobi — <strong>Karen, Runda, Lavington, Westlands</strong>. No scratches. No "basin" water. Just the <strong>Indigo Quality Standard.</strong>
+      No traffic. No waiting at a car wash. Professional, showroom-level deep cleaning and paint protection, done right in your compound or office parking. <strong>Available in Nairobi &amp; Kisumu.</strong>
+    </p>
+    <p class="hero-coverage">
+      Nairobi: Runda · Karen · Lavington · Westlands · Kilimani · Kileleshwa · Muthaiga · Lang'ata · Gigiri &amp; environs<br>
+      Kisumu: Riat Hills · Milimani · Kanyakwar &amp; environs
     </p>
     <div class="hero-actions">
-      <a href="#booking" class="btn-primary">Book the Indigo Spa — KES 15,000</a>
+      <a href="#services" class="btn-primary">Book Your Mobile Detail Now</a>
       <a href="#clinic" class="btn-outline">Diagnose My Car</a>
     </div>
     <div class="hero-stats">
@@ -372,6 +405,53 @@
         <img src="/images/engine-bay-detail-kisumu.webp" alt="Engine bay steam-cleaned and degreased as part of Indigo Signature Spa complete detail in Kisumu" width="800" height="500" loading="lazy">
   </div>
 </div>
+
+<!-- WHAT IS MOBILE DETAILING -->
+<section style="background:var(--black);border-top:1px solid rgba(255,255,255,0.04);">
+  <div style="max-width:800px;margin:0 auto;">
+    <div class="section-label">Mobile Detailing Explained</div>
+    <h2>What Is Mobile Detailing?</h2>
+    <p style="font-size:0.95rem;color:rgba(240,240,240,0.75);line-height:1.95;margin-top:1.25rem;">
+      To most people, a car just gets washed. But a standard car wash in Kenya only removes loose surface dirt — often leaving behind fine scratches, swirl marks, and deep-seated grime in your seats.
+    </p>
+    <p style="font-size:0.95rem;color:rgba(240,240,240,0.75);line-height:1.95;margin-top:1rem;">
+      Mobile Detailing is an intensive, top-to-bottom restoration and protection process for your vehicle, delivered to your location. Instead of driving to a car wash and leaving your car for days, Indigo brings the entire studio to you. We use specialised machine tools, safe chemical treatments, and deep-cleaning extraction machines to bring your car's interior and exterior back to showroom condition — right where it is parked. We bring our own water and power.
+    </p>
+  </div>
+</section>
+
+<!-- HOW WE DO IT -->
+<section style="background:var(--mid);">
+  <div style="max-width:800px;margin:0 auto;">
+    <div class="section-label">Our Process</div>
+    <h2>How We Do It</h2>
+    <p style="font-size:0.95rem;color:rgba(240,240,240,0.75);line-height:1.95;margin-top:1.25rem;">
+      You don't lift a finger. Our excellence lies in the hands of highly trained professionals using advanced specialised tools — including commercial-grade low-moisture steam extractors and precision dual-action machine polishers. Unlike regular car washes that use harsh household detergents, we treat every vehicle exclusively with our proprietary Indigo chemical and product line. <a href="/products.html" style="color:var(--red);text-decoration:none;font-family:'DM Mono',monospace;font-size:0.82rem;letter-spacing:0.06em;">View our products →</a> This specialised formula safely lifts deep-seated upholstery grime, permanently corrects clear-coat swirl marks from the harsh sun, and seals your paint with a mirror-like premium protective shield — right in your driveway.
+    </p>
+  </div>
+</section>
+
+<!-- WHY CHOOSE INDIGO -->
+<section style="background:var(--dark);">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="section-label">Why Indigo</div>
+    <h2>Why Choose Indigo?</h2>
+    <div class="clinic-grid" style="margin-top:2.5rem;">
+      <div class="clinic-card" style="cursor:default;">
+        <div class="clinic-problem">100% Mobile Convenience</div>
+        <div class="clinic-detail">Save 4 to 6 hours of your day. No sitting in traffic or waiting in line. Work, relax, or spend time with family while we transform your vehicle in your driveway.</div>
+      </div>
+      <div class="clinic-card" style="cursor:default;">
+        <div class="clinic-problem">Preserve Your Resale Value</div>
+        <div class="clinic-detail">Dust, rough roads, and harsh sun punish your car. Regular detailing protects your paint and interior surfaces from aging — protecting your investment and your car's value.</div>
+      </div>
+      <div class="clinic-card" style="cursor:default;">
+        <div class="clinic-problem">True Professional Expertise</div>
+        <div class="clinic-detail">Our founder Joe Kambo is a professionally certified Detailing Auto Craftsman from Detail King, Pittsburgh PA, USA — and a Jade Graphene Certified Ceramic Coating installer. We use premium, vehicle-specific Indigo chemicals and microfiber technology.</div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- INDIGO CLINIC -->
 <section id="clinic">
@@ -423,62 +503,86 @@
 <!-- SERVICES -->
 <section id="services">
   <div class="services-header">
-    <div class="section-label">Service Menu</div>
-    <h2>The Indigo Standard</h2>
-    <p class="section-intro">Three packages. Every level of care. Executed to perfection at your location.</p>
+    <div class="section-label">Services &amp; Pricing</div>
+    <h2>Services &amp; Pricing</h2>
+    <p class="section-intro">Every level of care. Executed to perfection at your location. No hidden fees.</p>
   </div>
 
-  <!-- PACKAGES -->
+  <!-- OUR PACKAGES -->
+  <div style="max-width:1100px;margin:0 auto 1.5rem;padding-bottom:1rem;border-bottom:1px solid rgba(204,0,0,0.1);">
+    <h3 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.4rem,2.5vw,2rem);letter-spacing:0.06em;color:rgba(240,240,240,0.55);">Our Packages</h3>
+  </div>
+
   <div class="services-grid">
 
-    <!-- TODO: Replace placeholder below with Express Gloss package details once flyer/brief is confirmed by Joe -->
+    <!-- EXPRESS GLOSS -->
     <div class="service-card">
-      <img src="/images/foam-wash-exterior-car-detailing.webp" alt="Express Gloss exterior detail service by Indigo Car Care Club" width="600" height="340" loading="lazy" style="width:100%;height:180px;object-fit:cover;border-radius:4px;margin-bottom:1rem;display:block;">
+      <img src="/images/foam-wash-exterior-car-detailing.webp"
+           alt="Indigo Express Gloss mobile exterior detail — pH foam wash, mirror-gloss sealant and tyre dressing service in Nairobi and Kisumu"
+           width="600" height="340" loading="lazy"
+           style="width:100%;height:180px;object-fit:cover;border-radius:4px;margin-bottom:1rem;display:block;">
       <div class="service-num">01</div>
-      <div class="service-badge">Entry Level</div>
+      <div class="service-badge">Quick Shine</div>
       <h3 class="service-name">Express Gloss</h3>
-      <p class="service-desc">Entry-level package — content and pricing to be confirmed. Contact us to enquire.</p>
-      <div class="service-price" style="margin-top:1rem;">Pricing TBC</div>
+      <p class="service-desc" style="color:var(--red);margin-bottom:0.5rem;">Showroom Shine in 75 Minutes or Less</p>
+      <p class="service-desc">For owners who demand the absolute best maintenance care without a full restoration session.</p>
+      <div class="service-includes">
+        <span>Scratch-Free Science: Deep pH-neutral active foam bath and two-bucket safe hand wash to protect paint from swirl marks</span>
+        <span>Hydrophobic Mirror-Gloss: Silica-infused Indigo Ultra Spray Detailer — locks in a deep reflection, repels rain and dust</span>
+        <span>Anti-Static Interior Cabin: Compressed air blowout, deep-suction vacuum, Indigo Premium Interior Dressing</span>
+        <span>Elite Rim &amp; Tyre Care: Outer wheel face clean, Black Mamba tire dressing for UV protection</span>
+      </div>
+      <div class="service-price" style="margin-top:1.5rem;font-size:1rem;"><strong>KES 5,000</strong></div>
+      <div style="margin-top:0.9rem;padding:0.75rem 1rem;background:rgba(204,0,0,0.04);border-left:3px solid var(--red);font-size:0.75rem;color:rgba(240,240,240,0.6);line-height:1.7;">
+        ⚠ KES 1,500 fuel surcharge for Kitengela, Kiambu &amp; Athi River. This is a dry-interior maintenance service — heavily soiled vehicles require the Signature Spa.
+      </div>
       <a href="/book.html?service=express-gloss" class="btn-primary" style="display:inline-block;margin-top:1.25rem;font-size:0.72rem;">Pay Deposit</a>
     </div>
 
+    <!-- CABIN REFRESH -->
+    <!-- NOTE TO JOE: Cabin Refresh pricing and exact inclusions below are placeholder — please confirm or send the flyer so we can update. -->
     <div class="service-card">
-      <img src="/images/saloon-after-signature-spa-kisumu.webp" alt="Immaculate car interior and exterior after Indigo Cabin Refresh deep clean service" width="600" height="340" loading="lazy" style="width:100%;height:180px;object-fit:cover;border-radius:4px;margin-bottom:1rem;display:block;">
+      <img src="/images/saloon-after-signature-spa-kisumu.webp"
+           alt="Indigo Cabin Refresh interior deep clean — steam extraction, leather conditioning and cabin dressing service in Nairobi and Kisumu"
+           width="600" height="340" loading="lazy"
+           style="width:100%;height:180px;object-fit:cover;border-radius:4px;margin-bottom:1rem;display:block;">
       <div class="service-num">02</div>
-      <div class="service-badge">Mid-Tier Package</div>
-      <h3 class="service-name">The Factory-Fresh Cabin Refresh</h3>
-      <p class="service-desc" style="color:var(--red);margin-bottom:0.5rem;">Stains &amp; Odors Eliminated.</p>
-      <p class="service-desc">Designed for owners who want an immaculate, deeply sanitized interior environment, without paying for engine bay detailing.</p>
+      <div class="service-badge">Interior Focus</div>
+      <h3 class="service-name">Cabin Refresh</h3>
+      <p class="service-desc" style="color:var(--red);margin-bottom:0.5rem;">Deep Interior Restoration</p>
+      <p class="service-desc">A focused, intensive interior transformation. Every surface, every crevice, every smell — eliminated.</p>
       <div class="service-includes">
-        <span>Thermal Steam Decontamination — high-pressure steam treatment of all surfaces</span>
-        <span>Deep Injection Carpet Extraction — all carpets and fabric/upholstery</span>
-        <span>Intensive Seat &amp; Dashboard/Door Panels Restoration — deep cleaning and matte dressing for leather, plastic and vinyl</span>
-        <span>Seat Belt &amp; Headliner Detailing — moisture-controlled spot removal and degreasing of safety straps</span>
-        <span>Bonus Hydrophobic Exterior Seal — scratch-free active foam bath and polymer paint sealant</span>
+        <span>Full cabin vacuum and compressed air blowout of all vents and crevices</span>
+        <span>Steam extraction of all fabric seats and carpets — removes bacteria, deep-seated grime and odours</span>
+        <span>Premium leather conditioning — pH-neutral treatment to strip skin oils and restore a factory finish</span>
+        <span>Dashboard and all-surfaces matte dressing with UV blockers</span>
+        <span>Door panels, roof lining and boot deep clean</span>
+        <span>Indigo Premium Interior Dressing — non-greasy matte finish throughout</span>
       </div>
-      <div class="service-price" style="margin-top:1.5rem;font-size:0.92rem;">
-        <div>Sedan &amp; Lower: <strong>KES 9,000</strong></div>
-        <div>SUV &amp; Up: <strong>KES 10,000</strong></div>
-      </div>
-      <p style="font-size:0.75rem;color:var(--muted);margin-top:0.6rem;line-height:1.6;border-left:2px solid var(--red);padding-left:0.75rem;">Interior detailing + exterior wash only. Engine bay detailing requires an upgrade to our Flagship Indigo Signature Spa.</p>
+      <div class="service-price" style="margin-top:1.5rem;font-size:1rem;"><strong>From KES 8,000</strong></div>
+      <p style="font-size:0.75rem;color:var(--muted);margin-top:0.6rem;line-height:1.6;border-left:2px solid rgba(255,255,255,0.08);padding-left:0.75rem;">Fabric seats/carpets will be damp for a few hours post-service. Ventilate the vehicle to dry.</p>
       <a href="/book.html?service=cabin-refresh" class="btn-primary" style="display:inline-block;margin-top:1.25rem;font-size:0.72rem;">Pay Deposit</a>
     </div>
 
+    <!-- SIGNATURE SPA -->
     <div class="service-card">
-      <img src="/images/signature-spa-exterior-foam-wash.webp" alt="Exterior pH-neutral foam wash during Indigo Signature Spa mobile detailing service, Kisumu" width="600" height="340" loading="lazy" style="width:100%;height:180px;object-fit:cover;border-radius:4px;margin-bottom:1rem;display:block;">
+      <img src="/images/signature-spa-exterior-foam-wash.webp"
+           alt="Indigo Signature Spa full mobile detail — bumper-to-bumper restoration, engine bay, paint sealant and interior extraction in Nairobi and Kisumu"
+           width="600" height="340" loading="lazy"
+           style="width:100%;height:180px;object-fit:cover;border-radius:4px;margin-bottom:1rem;display:block;">
       <div class="service-num">03</div>
-      <div class="service-badge">Flagship Service</div>
+      <div class="service-badge">Flagship</div>
       <h3 class="service-name">The Indigo Signature Spa</h3>
-      <p class="service-desc" style="color:var(--red);margin-bottom:0.5rem;">The Ultimate Bumper to Bumper Asset Transformation.</p>
-      <p class="service-desc">Our elite, flagship package. Designed for owners who demand complete vehicle restoration, deep molecular sanitization, and long-term protection.</p>
+      <p class="service-desc" style="color:var(--red);margin-bottom:0.5rem;">The Ultimate Bumper-to-Bumper Asset Transformation</p>
+      <p class="service-desc">Our elite flagship package. Complete vehicle restoration, deep molecular sanitization, and long-term protection.</p>
       <div class="service-includes">
         <span>Deep Cabin Restoration &amp; Extraction — air blowout, full vacuuming and high-suction extraction of all carpets and upholstery</span>
         <span>Thermal Steam Sanitization — medical-grade steam to sanitize all surfaces</span>
         <span>Premium Leather &amp; Matte Dressings — advanced pH-neutral conditioning, non-greasy anti-static factory finish</span>
         <span>Engine Bay Decontamination — precision degreasing, high-pressure steam blast, plastics restoration</span>
-        <span>pH-Neutral Exterior Foam Bath — safe, scratch-free active foam wash and hand-drying with ultra-plush microfibers</span>
-        <span>Hydrophobic Paint Sealant — high-grade polymer shield, actively repels Nairobi's rain and dust</span>
-        <span>Wheel &amp; Arch Purge — deep break-dust decontamination, Black Mamba tyre dressing for long-lasting UV protection</span>
+        <span>pH-Neutral Exterior Foam Bath — safe, scratch-free active foam wash, hand-dried with ultra-plush microfibers</span>
+        <span>Hydrophobic Paint Sealant — high-grade polymer shield, actively repels rain and dust</span>
+        <span>Wheel &amp; Arch Purge — deep brake-dust decontamination, Black Mamba tyre dressing for long-lasting UV protection</span>
       </div>
       <div class="service-price" style="margin-top:1.5rem;font-size:0.92rem;">
         <div>Sedan &amp; Lower: <strong>KES 14,000</strong></div>
@@ -490,43 +594,76 @@
 
   </div>
 
-  <!-- ADD-ONS -->
+  <!-- SPECIALIST SERVICES -->
   <div style="max-width:1100px;margin:3.5rem auto 1.5rem;padding-top:2.5rem;border-top:1px solid rgba(204,0,0,0.15);">
-    <div class="section-label">Add-Ons</div>
+    <div class="section-label">Specialist Add-Ons</div>
     <h3 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.6rem,3vw,2.4rem);letter-spacing:0.04em;color:var(--white);margin-bottom:0.5rem;">Specialist Services</h3>
     <p class="section-intro">Standalone upgrades. Pair with any package or book independently.</p>
   </div>
 
   <div class="services-grid" style="max-width:1100px;margin:0 auto;">
 
+    <!-- PRO MACHINE BUFFING -->
     <div class="service-card">
-      <img src="/images/headlight-restoration-service-kisumu.webp" alt="Yellowed headlights restored to crystal clarity by Indigo headlight restoration specialist service" width="600" height="340" loading="lazy" style="width:100%;height:180px;object-fit:cover;border-radius:4px;margin-bottom:1rem;display:block;">
+      <img src="/images/pro-machine-buffing-paint-correction.webp"
+           alt="Pro machine buffing and paint correction — swirl mark and scratch removal by dual-action polisher, Nairobi and Kisumu mobile detailing"
+           width="600" height="340" loading="lazy"
+           style="width:100%;height:180px;object-fit:cover;border-radius:4px;margin-bottom:1rem;display:block;">
       <div class="service-num">A1</div>
-      <div class="service-badge">Specialist Add-on</div>
-      <h3 class="service-name">Headlight Restoration</h3>
-      <p class="service-desc">A meticulous, multi-stage restoration process. Sequential wet-sanding strips away yellowed, cloudy UV oxidation from the lens surface, followed by a mechanical compound polish for absolute crystal clarity and an advanced UV sealant to lock in long-term night-driving visibility.</p>
-      <div class="service-price" style="margin-top:1rem;">KES 5,000 (per set)</div>
-      <a href="/book.html?service=headlight-restoration" class="btn-primary" style="display:inline-block;margin-top:1.25rem;font-size:0.72rem;">Pay Deposit</a>
-    </div>
-
-    <div class="service-card">
-      <img src="/images/pro-machine-buffing-paint-correction.webp" alt="Paint correction by machine buffing removing swirl marks and scratches from vehicle paintwork in Kisumu" width="600" height="340" loading="lazy" style="width:100%;height:180px;object-fit:cover;border-radius:4px;margin-bottom:1rem;display:block;">
-      <div class="service-num">A2</div>
-      <div class="service-badge">Specialist Add-on</div>
+      <div class="service-badge">Specialist Add-On</div>
       <h3 class="service-name">Pro Machine Buffing</h3>
-      <p class="service-desc">Multi-stage mechanical leveling designed to permanently eliminate clear-coat micro-scratches, dull swirl marks, and severe paint oxidation. Our technicians precision-shave surface imperfections to restore a perfectly flat, razor-sharp factory reflection.</p>
-      <div class="service-includes">
-        <span>Sedans &amp; Smaller: from KES 6,000</span>
-        <span>SUVs &amp; Larger: from KES 7,000</span>
+      <p class="service-desc" style="color:var(--red);margin-bottom:0.5rem;">Permanent Paint Correction</p>
+      <p class="service-desc">Multi-stage mechanical leveling to permanently eliminate clear-coat micro-scratches, dull swirl marks, and severe paint oxidation. We precision-shave surface imperfections to restore a factory reflection — no fillers, no wax masking.</p>
+      <div class="service-price" style="margin-top:1rem;font-size:0.92rem;">
+        <div>Sedan from <strong>KES 6,000</strong></div>
+        <div>SUV from <strong>KES 7,000</strong></div>
       </div>
-      <div class="service-price" style="margin-top:1rem;">From KES 6,000</div>
-      <p style="font-size:0.75rem;color:var(--muted);margin-top:0.6rem;line-height:1.6;border-left:2px solid var(--red);padding-left:0.75rem;">* Final price determined on-site depending on paint condition and correction depth required.</p>
+      <p style="font-size:0.75rem;color:var(--muted);margin-top:0.6rem;line-height:1.6;border-left:2px solid var(--red);padding-left:0.75rem;">Final price confirmed on-site depending on paint condition and correction depth required.</p>
       <a href="/book.html?service=paint-correction" class="btn-primary" style="display:inline-block;margin-top:1.25rem;font-size:0.72rem;">Pay Deposit</a>
     </div>
 
+    <!-- HEADLIGHT RESTORATION -->
     <div class="service-card">
-      <img src="/images/fleet-reconditioning-suv-kisumu.webp" alt="SUV fleet vehicle reconditioned to dealership-ready showroom condition by Indigo Car Care Club" width="600" height="340" loading="lazy" style="width:100%;height:180px;object-fit:cover;border-radius:4px;margin-bottom:1rem;display:block;">
+      <img src="/images/headlight-restoration-service-kisumu.webp"
+           alt="Headlight restoration service — yellowed UV oxidation stripped and sealed for crystal clarity, mobile detailing Nairobi and Kisumu"
+           width="600" height="340" loading="lazy"
+           style="width:100%;height:180px;object-fit:cover;border-radius:4px;margin-bottom:1rem;display:block;">
+      <div class="service-num">A2</div>
+      <div class="service-badge">Specialist Add-On</div>
+      <h3 class="service-name">Headlight Restoration</h3>
+      <p class="service-desc" style="color:var(--red);margin-bottom:0.5rem;">Crystal Clarity Restored</p>
+      <p class="service-desc">Multi-stage restoration using sequential wet-sanding to strip yellowed UV oxidation, mechanical compound polish for absolute clarity, and UV sealant application for long-term night-driving visibility.</p>
+      <div class="service-price" style="margin-top:1rem;">KES 5,000 per set</div>
+      <a href="/book.html?service=headlight-restoration" class="btn-primary" style="display:inline-block;margin-top:1.25rem;font-size:0.72rem;">Pay Deposit</a>
+    </div>
+
+    <!-- PREMIUM GRAPHENE CERAMIC COATING -->
+    <div class="service-card">
+      <!-- TODO: Replace with dedicated ceramic coating image once available -->
+      <img src="/images/pro-machine-buffing-paint-correction.webp"
+           alt="Premium Graphene Ceramic Coating application — nano-shield paint protection for SUVs and sedans, mobile detailing Nairobi"
+           width="600" height="340" loading="lazy"
+           style="width:100%;height:180px;object-fit:cover;border-radius:4px;margin-bottom:1rem;display:block;filter:hue-rotate(200deg) saturate(0.6);">
       <div class="service-num">A3</div>
+      <div class="service-badge service-badge-gold">Premium Protection</div>
+      <h3 class="service-name">Premium Graphene Ceramic Coating</h3>
+      <p class="service-desc" style="color:#C9A84C;margin-bottom:0.5rem;">The Pinnacle of Paint Protection</p>
+      <p class="service-desc">Infused with reduced graphene oxide, this advanced coating molecularly cross-links over your clear coat to form an ultra-hard, slick nano-shield. Delivers candy-like gloss, extreme scratch resistance, and an ultra-hydrophobic surface that actively repels Nairobi's red dust, mud, and water-spotting.</p>
+      <div class="service-price" style="margin-top:1.5rem;font-size:0.92rem;color:#C9A84C;">
+        <div>Sedan: <strong style="color:#C9A84C;">KES 80,000</strong></div>
+        <div>SUV: <strong style="color:#C9A84C;">KES 90,000</strong></div>
+      </div>
+      <p style="font-size:0.75rem;color:var(--muted);margin-top:0.6rem;line-height:1.6;border-left:2px solid #C9A84C;padding-left:0.75rem;">Requires 24–48 hours cure time. Vehicle must not be driven or exposed to water during curing.</p>
+      <a href="/book.html?service=ceramic-coating" class="btn-primary" style="display:inline-block;margin-top:1.25rem;font-size:0.72rem;">Pay Deposit</a>
+    </div>
+
+    <!-- FLEET RECONDITIONING -->
+    <div class="service-card">
+      <img src="/images/fleet-reconditioning-suv-kisumu.webp"
+           alt="Fleet and dealership vehicle reconditioning — showroom-ready preparation for inventory, Indigo Car Care Club Nairobi and Kisumu"
+           width="600" height="340" loading="lazy"
+           style="width:100%;height:180px;object-fit:cover;border-radius:4px;margin-bottom:1rem;display:block;">
+      <div class="service-num">A4</div>
       <div class="service-badge">B2B</div>
       <h3 class="service-name">Fleet Reconditioning</h3>
       <p class="service-desc">For dealerships and fleets. We turn aging inventory into high-premium assets. Faster sales, higher margins. Custom SLA and volume pricing for fleets of 3+ vehicles.</p>
@@ -547,6 +684,21 @@
       Real results. Real cars. See the Indigo difference.
     </p>
 
+    <!-- NOTE: The 162MB Audi detail video file is too large for GitHub/Vercel. TikTok embed used instead. -->
+    <div style="margin-bottom:48px;">
+      <h3 style="color:#fff;font-size:1.05rem;font-weight:600;margin-bottom:8px;opacity:0.9;">Featured: Full Audi Detail — Paint Correction, Interior &amp; Engine Bay</h3>
+      <p style="font-size:0.78rem;color:rgba(255,255,255,0.4);margin-bottom:20px;">Mobile Detailing in Nairobi: Paint Correction, Scratch Removal, Headlight Restoration, Interior Steam Clean, Engine Bay Detailing, Exterior Wash and Seal</p>
+      <div style="background:#111;border-radius:12px;overflow:hidden;border:1px solid #CC0000;max-width:420px;margin:0 auto;">
+        <blockquote
+          class="tiktok-embed"
+          cite="https://www.tiktok.com/@indigocarcare/video/7652038576376532245"
+          data-video-id="7652038576376532245"
+          style="max-width:605px; min-width:0; width:100%;">
+          <section><a href="https://vt.tiktok.com/ZSC26uxS2/">View on TikTok</a></section>
+        </blockquote>
+      </div>
+    </div>
+
     <!-- Video grid -->
     <div style="
       display:grid;
@@ -555,7 +707,7 @@
       justify-items:center;
     ">
 
-      <!-- Video 1 -->
+      <!-- Video 1 — Audi full detail -->
       <div style="
         background:#111;
         border-radius:12px;
@@ -566,11 +718,11 @@
       ">
         <blockquote
           class="tiktok-embed"
-          cite="https://www.tiktok.com/@indigocarcare/video/7558392928180129036"
-          data-video-id="7558392928180129036"
+          cite="https://www.tiktok.com/@indigocarcare/video/7652038576376532245"
+          data-video-id="7652038576376532245"
           style="max-width:605px; min-width:0; width:100%;">
           <section>
-            <a href="https://vt.tiktok.com/ZSu39y2tr/">View on TikTok</a>
+            <a href="https://vt.tiktok.com/ZSC26uxS2/">View on TikTok</a>
           </section>
         </blockquote>
       </div>
@@ -664,28 +816,109 @@
 </section>
 <!-- ========== END TIKTOK SECTION ========== -->
 
+<!-- FAQ -->
+<section id="faq" style="background:var(--mid);">
+  <div style="max-width:820px;margin:0 auto;">
+    <div class="section-label">Got Questions?</div>
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-list" style="margin-top:2.5rem;">
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+          Do you bring your own water and electricity?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p>Yes. Our mobile units are fully self-sufficient. We carry pressurised, treated water tanks and silent generators to power our machine polishers and vacuums. We do not need your water or electricity — all we need is a clear space next to your vehicle.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+          Do I need to book an appointment?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p>Appointments are strictly required. A thorough detail takes 3 to 6 hours of intensive work — our team handles a limited number of vehicles per day. We recommend booking at least 2 to 3 days in advance to secure your preferred slot.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+          I'm in Kisumu — how do I book?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p>We service Kisumu through dedicated detailing weeks each month. We stack Kisumu appointments into specific blocks for efficiency. Slots fill up fast — book well in advance. Check our booking calendar or WhatsApp us to find the next available Kisumu week.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+          Where exactly in Nairobi do you operate?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p>We cover the greater Nairobi metropolitan area including Kilimani, Kileleshwa, Lavington, Westlands, Muthaiga, Karen, Runda, Lang'ata, Gigiri, and surrounding neighbourhoods.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+          How long does a full mobile detail take?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p>Depending on the package and your vehicle's size and condition, a detail takes between 3 to 6 hours. We take our time — every vent, crevice, and corner is addressed.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+          Will my seats be wet when you leave?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p>We use low-moisture dry-steam machines and high-powered extraction vacuums. Cloth/upholstery seats may be slightly damp but not soaked — this is easily resolved by ventilating the vehicle for a few hours after service.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+          What packages do you offer and how much do they cost?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p>We offer three main packages (Express Gloss from KES 5,000, Cabin Refresh from KES 8,000, and Signature Spa from KES 14,000) plus specialist services. <a href="#services">Click the Services button above</a> to see full pricing with no hidden fees.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- BOOKING -->
 <section id="booking">
   <div class="booking-inner">
     <div class="booking-info">
       <div class="section-label">Confirm Your Slot</div>
       <h2>Book in 60 Seconds</h2>
-      <p>Fill the form. Pay your KES 2,000 deposit securely via Paystack. We confirm via WhatsApp within 5 minutes — then we come to you.</p>
+      <p>Fill the form. Pay your KES 2,500 deposit securely via Paystack. We confirm via WhatsApp within 5 minutes — then we come to you.</p>
 
       <div class="deposit-box">
         <div class="deposit-box-title">Booking Deposit</div>
-        <div class="deposit-amount">KES 2,000</div>
-        <p class="deposit-note">Secures your slot. Deducted from your service total on the day. Fully refundable with 24hr notice.</p>
+        <div class="deposit-amount">KES 2,500</div>
+        <p class="deposit-note">Secures your slot. Deducted from your service total on the day. Fully refundable with 48hr notice.</p>
       </div>
 
       <div class="booking-steps">
         <div class="step"><div class="step-num">01</div><div class="step-text"><strong>Fill the form</strong> — select your service, date, location and vehicle details.</div></div>
-        <div class="step"><div class="step-num">02</div><div class="step-text"><strong>Pay KES 2,000 deposit</strong> — a secure Paystack payment window opens automatically.</div></div>
+        <div class="step"><div class="step-num">02</div><div class="step-text"><strong>Pay KES 2,500 deposit</strong> — a secure Paystack payment window opens automatically.</div></div>
         <div class="step"><div class="step-num">03</div><div class="step-text"><strong>WhatsApp auto-opens</strong> — your booking details and Paystack reference are sent. We confirm within 5 minutes.</div></div>
       </div>
 
       <div style="margin-top:1.5rem;padding:1rem 1.25rem;background:rgba(255,255,255,0.02);border-left:2px solid rgba(204,0,0,0.3);">
-        <p style="font-size:0.72rem;color:var(--muted);line-height:1.8;"><strong style="color:var(--text);">Prefer M-Pesa?</strong> Pay KES 2,000 via Paybill <strong style="color:var(--text);">516600</strong>, Account <strong style="color:var(--text);">929787</strong>, then WhatsApp us your reference at +254 112 657 174.</p>
+        <p style="font-size:0.72rem;color:var(--muted);line-height:1.8;"><strong style="color:var(--text);">Prefer M-Pesa?</strong> Pay KES 2,500 via Paybill <strong style="color:var(--text);">516600</strong>, Account <strong style="color:var(--text);">929787</strong>, then WhatsApp us your reference at +254 112 657 174.</p>
       </div>
     </div>
 
@@ -700,11 +933,12 @@
           <label class="form-label">Service Required</label>
           <select class="form-control" id="service" required>
             <option value="">— Select a service —</option>
-            <option value="Express Gloss">Express Gloss</option>
-            <option value="Cabin Refresh – Sedan KES 9,000 / SUV KES 10,000">Cabin Refresh – Sedan KES 9,000 / SUV KES 10,000</option>
+            <option value="Express Gloss – KES 5,000">Express Gloss – KES 5,000</option>
+            <option value="Cabin Refresh – from KES 8,000">Cabin Refresh – from KES 8,000</option>
             <option value="Indigo Signature Spa – Sedan KES 14,000 / SUV KES 15,000">Indigo Signature Spa – Sedan KES 14,000 / SUV KES 15,000</option>
-            <option value="Headlight Restoration – KES 5,000">Headlight Restoration – KES 5,000</option>
-            <option value="Pro Machine Buffing – from KES 6,000">Pro Machine Buffing – from KES 6,000</option>
+            <option value="Pro Machine Buffing – Sedan from KES 6,000 / SUV from KES 7,000">Pro Machine Buffing – Sedan from KES 6,000 / SUV from KES 7,000</option>
+            <option value="Headlight Restoration – KES 5,000 per set">Headlight Restoration – KES 5,000 per set</option>
+            <option value="Premium Graphene Ceramic Coating – Sedan KES 80,000 / SUV KES 90,000">Premium Graphene Ceramic Coating – Sedan KES 80,000 / SUV KES 90,000</option>
             <option value="Fleet Reconditioning – Contact for Quote">Fleet Reconditioning – Contact for Quote</option>
           </select>
         </div>
@@ -713,12 +947,22 @@
           <div class="form-group"><label class="form-label">Preferred Date</label><input class="form-control" type="date" id="date" required></div>
         </div>
         <div class="form-group"><label class="form-label">Your Location / Estate</label><input class="form-control" type="text" id="location" placeholder="e.g. Milimani, Karen, Westlands..." required></div>
-        <div class="form-note">Your KES 2,000 deposit is paid securely via Paystack. On success, WhatsApp opens automatically with your booking details and payment reference.</div>
+        <div class="form-note">Your KES 2,500 deposit is paid securely via Paystack. On success, WhatsApp opens automatically with your booking details and payment reference.</div>
         <div class="alert alert-success" id="successMsg">✅ Payment confirmed! Opening WhatsApp with your booking details...</div>
         <div class="alert alert-error" id="errorMsg">❌ Payment window closed. You can retry above, or pay via M-Pesa Paybill <strong>516600</strong>, Account <strong>929787</strong>, then WhatsApp us your ref.</div>
-        <button type="submit" class="submit-btn" id="submitBtn">Pay KES 2,000 Deposit &amp; Confirm →</button>
+        <button type="submit" class="submit-btn" id="submitBtn">Pay KES 2,500 Deposit &amp; Confirm →</button>
       </form>
     </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section style="background:var(--dark);text-align:center;padding:5rem 2.5rem;">
+  <div style="max-width:620px;margin:0 auto;">
+    <div class="section-label">Get Started Today</div>
+    <h2>Ready to See Your Car Transform?</h2>
+    <p style="font-size:0.95rem;color:var(--muted);line-height:1.85;margin:1.25rem 0 2.5rem;">Don't let a regular car wash ruin your paint and interior. Give your car the premium care it deserves.</p>
+    <a href="/book.html" class="btn-primary" style="font-size:0.85rem;padding:1.1rem 2.8rem;">Schedule an Appointment Today</a>
   </div>
 </section>
 
@@ -732,8 +976,9 @@
       <div>
         <div class="contact-detail"><span class="contact-key">WhatsApp</span><a href="https://wa.me/254112657174" target="_blank" class="contact-val">+254 112 657 174</a></div>
         <div class="contact-detail"><span class="contact-key">Phone</span><a href="tel:+254793556794" class="contact-val">+254 793 556 794</a></div>
-        <div class="contact-detail"><span class="contact-key">Email</span><a href="mailto:info@indigocarcare.co.ke" class="contact-val">info@indigocarcare.co.ke</a></div>
-        <div class="contact-detail" style="align-items:flex-start;"><span class="contact-key" style="padding-top:2px;">Coverage</span><span class="contact-val" style="color:var(--muted);line-height:1.8;"><strong style="color:var(--text);">Kisumu:</strong> Riat Hills · Milimani · Kanyakwar &amp; environs<br><strong style="color:var(--text);">Nairobi:</strong> Karen · Runda · Lavington · Westlands &amp; environs</span></div>
+        <!-- TODO: Replace with info@indigocarcare.com once Zoho Mail is configured — see setup instructions from developer -->
+        <div class="contact-detail"><span class="contact-key">Email</span><a href="mailto:jkcartage2015@gmail.com" class="contact-val">jkcartage2015@gmail.com</a></div>
+        <div class="contact-detail" style="align-items:flex-start;"><span class="contact-key" style="padding-top:2px;">Coverage</span><span class="contact-val" style="color:var(--muted);line-height:1.8;"><strong style="color:var(--text);">Nairobi:</strong> Karen · Runda · Lavington · Westlands · Kilimani · Kileleshwa · Muthaiga · Lang'ata · Gigiri &amp; environs<br><strong style="color:var(--text);">Kisumu:</strong> Riat Hills · Milimani · Kanyakwar &amp; environs</span></div>
         <div class="contact-detail"><span class="contact-key">Hours</span><span class="contact-val" style="color:var(--muted);">Mon–Sat, 8am – 6pm</span></div>
       </div>
       <div class="social-strip">
@@ -775,7 +1020,8 @@
     <a href="#contact">Contact</a>
     <a href="careers.html">Careers</a>
     <a href="blog/">Blog</a>
-    <a href="mailto:info@indigocarcare.co.ke">info@indigocarcare.com</a>
+    <!-- TODO: Replace with info@indigocarcare.com once Zoho Mail is configured -->
+    <a href="mailto:jkcartage2015@gmail.com">jkcartage2015@gmail.com</a>
   </div>
   <div class="footer-copy">© 2026 Indigo Car Care Club. All rights reserved.</div>
 </footer>
@@ -842,7 +1088,7 @@
     var handler = PaystackPop.setup({
       key: window.PAYSTACK_PUBLIC_KEY,
       email: email,
-      amount: 200000,
+      amount: 250000,
       currency: 'KES',
       ref: 'INDIGO-' + Date.now(),
       metadata: {
@@ -856,17 +1102,17 @@
         ]
       },
       callback: function(response) {
-        const msg = `Hi Indigo! I'd like to book a detail.\n\n*Name:* ${name}\n*Phone:* ${phone}\n*Email:* ${email}\n*Service:* ${service}\n*Vehicle:* ${vehicle}\n*Date:* ${date}\n*Location:* ${location}\n*Paystack Ref:* ${response.reference}\n\nKES 2,000 deposit paid via Paystack.`;
+        const msg = `Hi Indigo! I'd like to book a detail.\n\n*Name:* ${name}\n*Phone:* ${phone}\n*Email:* ${email}\n*Service:* ${service}\n*Vehicle:* ${vehicle}\n*Date:* ${date}\n*Location:* ${location}\n*Paystack Ref:* ${response.reference}\n\nKES 2,500 deposit paid via Paystack.`;
         successDiv.style.display = 'block';
         setTimeout(() => {
           window.open('https://wa.me/254112657174?text=' + encodeURIComponent(msg), '_blank');
           btn.disabled = false;
-          btn.textContent = 'Pay KES 2,000 Deposit & Confirm →';
+          btn.textContent = 'Pay KES 2,500 Deposit & Confirm →';
         }, 800);
       },
       onClose: function() {
         btn.disabled = false;
-        btn.textContent = 'Pay KES 2,000 Deposit & Confirm →';
+        btn.textContent = 'Pay KES 2,500 Deposit & Confirm →';
         errorDiv.innerHTML = '❌ Payment window closed. You can retry above, or pay via M-Pesa Paybill <strong>516600</strong>, Account <strong>929787</strong>, then WhatsApp us your ref.';
         errorDiv.style.display = 'block';
       }
@@ -874,6 +1120,17 @@
     handler.openIframe();
   }
 
+
+  function toggleFaq(btn) {
+    var answer = btn.nextElementSibling;
+    var isOpen = answer.classList.contains('open');
+    document.querySelectorAll('.faq-a').forEach(function(a) { a.classList.remove('open'); });
+    document.querySelectorAll('.faq-q').forEach(function(b) { b.setAttribute('aria-expanded', 'false'); });
+    if (!isOpen) {
+      answer.classList.add('open');
+      btn.setAttribute('aria-expanded', 'true');
+    }
+  }
 
   function toggleMobileNav() {
     const mob = document.getElementById('navMobile');
