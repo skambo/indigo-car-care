@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Book Your Detail — Indigo Car Care Club</title>
+  <meta name="description" content="Book your Indigo Car Care Club mobile detailing service. Pay your deposit securely online — we confirm via WhatsApp within 5 minutes."/>
+  <meta name="robots" content="noindex"/>
+  <link rel="canonical" href="https://indigocarcare.com/book.html"/>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --red:       #CC0000;
+      --red-light: #FF2222;
+      --black:     #0A0A0A;
+      --dark:      #111111;
+      --mid:       #1A1A1A;
+      --card:      #222222;
+      --text:      #F0F0F0;
+      --muted:     #888888;
+      --white:     #FFFFFF;
+      --green:     #22c55e;
+      --yellow:    #eab308;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--black); color: var(--text); overflow-x: hidden; }
+
+    /* ── NAV ─────────────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.75rem 1.5rem;
+      background: rgba(10,10,10,0.97); backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(204,0,0,0.2);
+      min-height: 60px;
+    }
+    .nav-logo img { height: 34px; width: auto; }
+    .nav-back {
+      font-family: 'DM Mono', monospace; font-size: 0.7rem;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--muted); text-decoration: none; transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--red); }
+
+    /* ── MAIN WRAPPER ────────────────────────────────────────── */
+    .book-main {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 5.5rem 1.25rem 4rem;
+    }
+
+    /* ── PAGE HEADER ─────────────────────────────────────────── */
+    .page-eyebrow {
+      font-family: 'DM Mono', monospace; font-size: 0.62rem;
+      letter-spacing: 0.26em; text-transform: uppercase;
+      color: var(--red); margin-bottom: 0.5rem;
+    }
+    .page-header h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.2rem, 8vw, 3.4rem);
+      letter-spacing: 0.03em; line-height: 1;
+      color: var(--white); margin-bottom: 1.75rem;
+    }
+
+    /* ── SERVICE SUMMARY CARD ────────────────────────────────── */
+    .svc-card {
+      background: var(--mid);
+      border: 1px solid rgba(204,0,0,0.2);
+      border-left: 4px solid var(--red);
+      padding: 1.25rem 1.4rem;
+      margin-bottom: 2rem;
+    }
+    .svc-label {
+      font-family: 'DM Mono', monospace; font-size: 0.58rem;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 0.3rem;
+    }
+    .svc-name {
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.9rem;
+      color: var(--red); letter-spacing: 0.04em; line-height: 1;
+      margin-bottom: 0.2rem;
+    }
+    .svc-tagline { font-size: 0.85rem; color: var(--muted); margin-bottom: 0.9rem; }
+    .svc-deposit { font-size: 0.88rem; color: var(--text); }
+    .svc-deposit strong { font-family: 'DM Mono', monospace; color: var(--red); font-size: 1rem; }
+    .svc-balance { font-size: 0.72rem; color: var(--muted); margin-top: 0.2rem; }
+    .svc-change {
+      display: inline-block; margin-top: 0.75rem;
+      font-family: 'DM Mono', monospace; font-size: 0.62rem;
+      letter-spacing: 0.1em; color: var(--muted); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .svc-change:hover { color: var(--red); }
+
+    /* ── NO-SERVICE FALLBACK ─────────────────────────────────── */
+    .no-service {
+      text-align: center;
+      padding: 3rem 1.5rem;
+      background: var(--mid);
+      border: 1px solid rgba(255,255,255,0.06);
+      margin-bottom: 2rem;
+    }
+    .no-service h2 {
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem;
+      color: var(--muted); margin-bottom: 0.75rem;
+    }
+    .no-service p { font-size: 0.9rem; color: var(--muted); margin-bottom: 1.5rem; }
+
+    /* ── FORM BASE ───────────────────────────────────────────── */
+    .book-form { display: flex; flex-direction: column; gap: 1.25rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.35rem; }
+
+    .form-label {
+      font-family: 'DM Mono', monospace; font-size: 0.62rem;
+      letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted);
+    }
+    .form-label .optional {
+      font-size: 0.55rem; color: rgba(136,136,136,0.55);
+      text-transform: none; letter-spacing: 0; margin-left: 0.4rem;
+    }
+
+    .form-control {
+      background: rgba(255,255,255,0.04);
+      border: 1.5px solid rgba(255,255,255,0.09);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif; font-size: 1rem;
+      padding: 0.85rem 1rem;
+      outline: none; transition: border-color 0.2s;
+      width: 100%; min-height: 52px;
+      border-radius: 0; -webkit-appearance: none;
+      appearance: none;
+    }
+    .form-control:focus { border-color: var(--red); }
+    .form-control.has-error { border-color: #ef4444; }
+    .form-control option { background: var(--dark); }
+
+    textarea.form-control { min-height: 108px; resize: vertical; line-height: 1.6; }
+
+    /* Brighten the native calendar icon on dark backgrounds */
+    #date::-webkit-calendar-picker-indicator {
+      filter: invert(1);
+      opacity: 0.85;
+      cursor: pointer;
+    }
+
+    .char-count {
+      font-size: 0.66rem; color: var(--muted); text-align: right; margin-top: 0.15rem;
+    }
+    .char-count.near { color: var(--yellow); }
+    .char-count.full  { color: #ef4444; }
+
+    .field-error {
+      font-size: 0.75rem; color: #f87171;
+      margin-top: 0.2rem; display: none;
+    }
+    .field-error.visible { display: block; }
+
+    /* ── SUNDAY NOTICE ───────────────────────────────────────── */
+    .sunday-notice {
+      display: none;
+      margin-top: 0.5rem;
+      padding: 0.85rem 1rem;
+      background: rgba(234,179,8,0.07);
+      border: 1px solid rgba(234,179,8,0.3);
+      border-left: 3px solid var(--yellow);
+      font-size: 0.8rem; color: rgba(234,179,8,0.9); line-height: 1.65;
+    }
+    .sunday-notice.visible { display: block; }
+
+    /* ── DIVIDER ─────────────────────────────────────────────── */
+    .form-divider { border: none; border-top: 1px solid rgba(255,255,255,0.06); }
+
+    /* ── TERMS BOX ───────────────────────────────────────────── */
+    .terms-box {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-left: 3px solid var(--red);
+      padding: 1.25rem 1.25rem 1rem 1.4rem;
+    }
+    .terms-box-title {
+      font-family: 'DM Mono', monospace; font-size: 0.62rem;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--red); margin-bottom: 0.9rem;
+    }
+    .terms-item {
+      display: flex; gap: 0.6rem; align-items: flex-start;
+      margin-bottom: 0.5rem;
+    }
+    .terms-item .ico { flex-shrink: 0; font-size: 0.78rem; margin-top: 0.15rem; }
+    .terms-item .ico.ok { color: var(--green); }
+    .terms-item .ico.no { color: #ef4444; }
+    .terms-item p { font-size: 0.8rem; color: var(--muted); line-height: 1.6; }
+    .terms-note {
+      font-size: 0.73rem; color: rgba(136,136,136,0.55);
+      margin-top: 0.75rem; padding-top: 0.75rem;
+      border-top: 1px solid rgba(255,255,255,0.05); line-height: 1.65;
+    }
+
+    .terms-check-row {
+      display: flex; gap: 0.75rem; align-items: flex-start;
+      margin-top: 1rem; padding-top: 1rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .terms-check-row input[type="checkbox"] {
+      width: 22px; height: 22px; flex-shrink: 0; margin-top: 1px;
+      accent-color: var(--red); cursor: pointer;
+    }
+    .terms-check-row label {
+      font-size: 0.8rem; color: var(--muted); line-height: 1.65; cursor: pointer;
+    }
+    .terms-check-row label a { color: var(--red); text-decoration: none; }
+    .terms-check-row label a:hover { text-decoration: underline; }
+
+    /* ── PAY BUTTON ──────────────────────────────────────────── */
+    .pay-btn {
+      width: 100%; background: var(--red); color: var(--white);
+      font-family: 'DM Mono', monospace; font-size: 0.85rem;
+      font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 1.15rem 1rem; border: none; min-height: 56px;
+      cursor: pointer; transition: background 0.2s, transform 0.15s;
+    }
+    .pay-btn:not(:disabled):hover { background: var(--red-light); transform: translateY(-1px); }
+    .pay-btn:disabled {
+      background: rgba(255,255,255,0.07); color: rgba(136,136,136,0.6);
+      cursor: not-allowed; transform: none;
+    }
+
+    /* ── FAILURE NOTICE ──────────────────────────────────────── */
+    .failure-notice {
+      display: none;
+      padding: 1rem 1.25rem;
+      background: rgba(239,68,68,0.05);
+      border: 1px solid rgba(239,68,68,0.2);
+      border-left: 3px solid #ef4444;
+      font-size: 0.8rem; color: rgba(240,240,240,0.75); line-height: 1.75;
+    }
+    .failure-notice.visible { display: block; }
+    .failure-notice strong { color: var(--text); }
+    .failure-notice .mpesa-line {
+      font-family: 'DM Mono', monospace; font-size: 0.78rem;
+      color: var(--white); margin-top: 0.35rem;
+    }
+
+    /* ── SUCCESS OVERLAY ─────────────────────────────────────── */
+    .success-overlay {
+      display: none; position: fixed; inset: 0; z-index: 500;
+      background: var(--black);
+      flex-direction: column; align-items: center; justify-content: center;
+      padding: 2rem 1.5rem; text-align: center; overflow-y: auto;
+    }
+    .success-overlay.visible { display: flex; }
+
+    .success-icon { color: var(--green); margin-bottom: 1.25rem; }
+    .success-overlay h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.2rem, 9vw, 3.8rem);
+      letter-spacing: 0.04em; color: var(--white); margin-bottom: 0.4rem;
+    }
+    .success-desc {
+      font-size: 0.92rem; color: var(--muted); line-height: 1.75; margin-bottom: 0.4rem;
+    }
+    .success-ref {
+      display: inline-block;
+      font-family: 'DM Mono', monospace; font-size: 0.78rem; color: var(--green);
+      padding: 0.5rem 1.25rem; margin: 0.75rem 0 1.5rem;
+      background: rgba(34,197,94,0.08); border: 1px solid rgba(34,197,94,0.2);
+    }
+    .wa-cta {
+      display: flex; align-items: center; justify-content: center; gap: 0.6rem;
+      background: #25D366; color: var(--white);
+      font-family: 'DM Mono', monospace; font-size: 0.8rem;
+      font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 1rem 2rem; min-height: 52px; min-width: 260px;
+      text-decoration: none; transition: background 0.2s; margin-bottom: 1rem;
+    }
+    .wa-cta:hover { background: #22c55e; }
+    .success-note {
+      font-size: 0.72rem; color: var(--muted); line-height: 1.75;
+      max-width: 360px; margin: 0 auto;
+    }
+
+    /* ── FOOTER ──────────────────────────────────────────────── */
+    footer {
+      background: var(--mid); border-top: 1px solid rgba(204,0,0,0.12);
+      padding: 2.5rem 1.25rem; text-align: center;
+    }
+    .footer-logo img { height: 38px; width: auto; margin-bottom: 0.6rem; }
+    .footer-tagline { font-size: 0.66rem; color: var(--muted); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 1rem; }
+    .footer-links { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 1rem; }
+    .footer-links a { font-size: 0.73rem; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--red); }
+    .footer-copy { font-size: 0.63rem; color: rgba(136,136,136,0.4); }
+
+    /* ── WA FLOAT ────────────────────────────────────────────── */
+    .wa-float {
+      position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 200;
+      background: #25D366; color: #fff; width: 52px; height: 52px;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.35); text-decoration: none;
+      transition: transform 0.2s;
+    }
+    .wa-float:hover { transform: scale(1.1); }
+    .wa-float svg { width: 26px; height: 26px; }
+
+    /* ── SHARED BUTTON STYLE ─────────────────────────────────── */
+    .btn-red {
+      display: inline-block; background: var(--red); color: var(--white);
+      font-family: 'DM Mono', monospace; font-size: 0.78rem; font-weight: 500;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 1rem 2rem; text-decoration: none; border: none; cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-red:hover { background: var(--red-light); }
+  </style>
+
+  <script src="https://js.paystack.co/v1/inline.js"></script>
+</head>
+<body>
+
+<!-- Paystack key — public key, safe for frontend -->
+<script>
+  window.PAYSTACK_PUBLIC_KEY = "pk_live_5fb6acb9c3f1d79882d7d71adfd2ccf53d97d5ba";
+</script>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <a href="/index.html">
+      <img src="/images/indigo-car-care-club-logo.webp" alt="Indigo Car Care Club" width="300" height="168"/>
+    </a>
+  </div>
+  <a href="/index.html#services" class="nav-back">← Change service</a>
+</nav>
+
+<!-- MAIN -->
+<main class="book-main">
+
+  <div class="page-header">
+    <div class="page-eyebrow">Secure Your Slot</div>
+    <h1>Book Your Detail</h1>
+  </div>
+
+  <!-- Service summary card — populated by JS -->
+  <div id="serviceSummary"></div>
+
+  <!-- Form wrapper — hidden if no valid service -->
+  <div id="formWrapper" style="display:none;">
+    <form class="book-form" id="bookingForm" novalidate>
+
+      <!-- 1. Full Name -->
+      <div class="form-group">
+        <label class="form-label" for="fname">Full Name</label>
+        <input class="form-control" type="text" id="fname"
+               placeholder="Your full name" autocomplete="name" required>
+        <span class="field-error" id="fname-error">Please enter your full name</span>
+      </div>
+
+      <!-- 2. WhatsApp Number -->
+      <div class="form-group">
+        <label class="form-label" for="phone">WhatsApp Number</label>
+        <input class="form-control" type="tel" id="phone"
+               placeholder="07XX XXX XXX or +254 7XX XXX XXX" autocomplete="tel" required>
+        <span class="field-error" id="phone-error">Please enter a valid Kenyan mobile number</span>
+      </div>
+
+      <!-- 3. Email Address -->
+      <div class="form-group">
+        <label class="form-label" for="email">Email Address</label>
+        <input class="form-control" type="email" id="email"
+               placeholder="you@email.com" autocomplete="email" required>
+        <span class="field-error" id="email-error">Please enter a valid email address</span>
+      </div>
+
+      <!-- 4. Date of Service -->
+      <div class="form-group">
+        <label class="form-label" for="date">Date of Service</label>
+        <input class="form-control" type="date" id="date" required>
+        <span class="field-error" id="date-error">Please select your preferred date of service</span>
+        <div class="sunday-notice" id="sundayNotice">
+          Sunday selected — we will confirm availability with you before your deposit is processed.
+          If the date is unavailable, we will contact you to reschedule.
+        </div>
+      </div>
+
+      <!-- 5. Preferred Time Slot (optional) -->
+      <div class="form-group">
+        <label class="form-label" for="timeSlot">
+          Preferred Time Slot
+          <span class="optional">(optional)</span>
+        </label>
+        <select class="form-control" id="timeSlot">
+          <option value="Flexible / Anytime">Flexible / Anytime</option>
+          <option value="Morning (8am – 11am)">Morning (8am – 11am)</option>
+          <option value="Midday (11am – 2pm)">Midday (11am – 2pm)</option>
+          <option value="Afternoon (2pm – 5pm)">Afternoon (2pm – 5pm)</option>
+        </select>
+      </div>
+
+      <!-- 6. Location -->
+      <div class="form-group">
+        <label class="form-label" for="location">Your Location / Estate</label>
+        <input class="form-control" type="text" id="location"
+               placeholder="e.g. Karen, Runda, Milimani, Riat Hills..."
+               autocomplete="street-address" required>
+        <span class="field-error" id="location-error">
+          Please enter your location so we can confirm we cover your area
+        </span>
+      </div>
+
+      <!-- 7. Vehicle Make & Model -->
+      <div class="form-group">
+        <label class="form-label" for="vehicle">Vehicle Make &amp; Model</label>
+        <input class="form-control" type="text" id="vehicle"
+               placeholder="e.g. Toyota Prado, Mercedes C-Class, Nissan X-Trail" required>
+        <span class="field-error" id="vehicle-error">Please enter your vehicle details</span>
+      </div>
+
+      <!-- 8. Additional Notes (optional) -->
+      <div class="form-group">
+        <label class="form-label" for="notes">
+          Additional Notes
+          <span class="optional">(optional)</span>
+        </label>
+        <textarea class="form-control" id="notes"
+                  placeholder="Any specific concerns or requests? e.g. pet hair, heavy staining, paint scratches"
+                  maxlength="300" rows="4"></textarea>
+        <div class="char-count" id="notesCount">0 / 300</div>
+      </div>
+
+      <hr class="form-divider">
+
+      <!-- TERMS BOX -->
+      <div class="terms-box">
+        <div class="terms-box-title">Booking Terms — Please Read</div>
+
+        <div class="terms-item">
+          <span class="ico ok">✓</span>
+          <p>Your KES 2,500 deposit secures your booking slot.</p>
+        </div>
+        <div class="terms-item">
+          <span class="ico ok">✓</span>
+          <p>The deposit is deducted from your total on the day of service.</p>
+        </div>
+        <div class="terms-item">
+          <span class="ico ok">✓</span>
+          <p>Cancellations with 48+ hours notice: full deposit refund.</p>
+        </div>
+        <div class="terms-item">
+          <span class="ico no">✗</span>
+          <p>Cancellations with less than 48 hours notice: deposit is non-refundable. This protects our team's time and travel.</p>
+        </div>
+        <div class="terms-item">
+          <span class="ico no">✗</span>
+          <p>No-shows on the day: deposit is forfeited in full.</p>
+        </div>
+        <div class="terms-item">
+          <span class="ico ok">✓</span>
+          <p>Sunday bookings are subject to availability — we will confirm via WhatsApp before processing your deposit.</p>
+        </div>
+
+        <div class="terms-note">
+          Indigo Car Care Club reserves the right to reschedule due to weather or operational reasons.
+          In such cases, your deposit is fully protected and transferable to a new date.
+        </div>
+
+        <div class="terms-check-row">
+          <input type="checkbox" id="termsCheck" onchange="togglePayBtn()">
+          <label for="termsCheck">
+            I have read and agree to the Indigo Car Care Club Booking Terms and Conditions.
+            I understand that cancellations within 48 hours of my booking are non-refundable.
+            <a href="/terms.html" target="_blank">View full Terms &amp; Conditions →</a>
+          </label>
+        </div>
+      </div>
+
+      <!-- PAY BUTTON -->
+      <button type="submit" class="pay-btn" id="payBtn" disabled>
+        Pay KES 2,500 Deposit &amp; Confirm Booking
+      </button>
+
+      <!-- FAILURE NOTICE -->
+      <div class="failure-notice" id="failureNotice">
+        <strong>Payment not completed.</strong> You can try again above, or pay manually:<br>
+        <div class="mpesa-line">M-Pesa Paybill 516600 · Account 929787 · Amount KES 2,500</div>
+        Then WhatsApp us your M-Pesa ref on <strong>+254 112 657 174</strong>
+      </div>
+
+    </form>
+  </div>
+
+</main>
+
+<!-- SUCCESS OVERLAY -->
+<div class="success-overlay" id="successOverlay">
+  <div class="success-icon">
+    <svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="36" cy="36" r="34" stroke="#22c55e" stroke-width="3"/>
+      <path d="M20 37L30 47L52 25" stroke="#22c55e" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+  <h2>Booking Confirmed!</h2>
+  <p class="success-desc">Your KES 2,500 deposit has been received.</p>
+  <div class="success-ref" id="successRef">Reference: —</div>
+  <p class="success-desc">We will WhatsApp you within 5 minutes to confirm your arrival time.</p>
+  <br>
+  <a href="#" id="waSuccessBtn" class="wa-cta" target="_blank" rel="noopener">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+    Open WhatsApp to say hi →
+  </a>
+  <p class="success-note">
+    If you don't hear from us within 10 minutes, please WhatsApp us directly on +254 112 657 174.
+  </p>
+</div>
+
+<!-- WA FLOAT -->
+<a class="wa-float" href="https://wa.me/254112657174?text=Hi%20Indigo!%20I%27d%20like%20to%20book%20a%20detail." target="_blank" title="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <img src="/images/indigo-car-care-club-logo.webp" alt="Indigo Car Care Club logo" width="300" height="168" loading="lazy"/>
+  </div>
+  <div class="footer-tagline">Kisumu &amp; Nairobi's Premium Detail Studio · We Come to You</div>
+  <div class="footer-links">
+    <a href="/index.html">Home</a>
+    <a href="/index.html#services">Services</a>
+    <a href="/index.html#contact">Contact</a>
+    <a href="/terms.html">Terms &amp; Conditions</a>
+    <a href="/careers.html">Careers</a>
+    <a href="/blog/">Blog</a>
+  </div>
+  <div class="footer-copy">© 2026 Indigo Car Care Club. All rights reserved.</div>
+</footer>
+
+<script>
+  // ── SERVICE MAP ──────────────────────────────────────────────────────────────
+  var SERVICES = {
+    'express-gloss':         { name: 'Express Gloss',        tagline: 'The Quick Shine',     deposit: 2500 },
+    'cabin-refresh':         { name: 'Cabin Refresh',         tagline: 'Interior Deep Clean', deposit: 2500 },
+    'signature-spa':         { name: 'Indigo Signature Spa',  tagline: 'The Full Works',      deposit: 2500 },
+    'headlight-restoration': { name: 'Headlight Restoration', tagline: 'Specialist Add-On',   deposit: 2500 },
+    'paint-correction':      { name: 'Pro Machine Buffing',   tagline: 'Specialist Add-On',   deposit: 2500 }
+  };
+
+  // ── READ URL PARAM ───────────────────────────────────────────────────────────
+  var slug = new URLSearchParams(window.location.search).get('service') || '';
+  var service = SERVICES[slug] || null;
+
+  var summaryEl   = document.getElementById('serviceSummary');
+  var formWrapper = document.getElementById('formWrapper');
+
+  if (service) {
+    summaryEl.innerHTML =
+      '<div class="svc-card">' +
+        '<div class="svc-label">Selected Service</div>' +
+        '<div class="svc-name">' + service.name + '</div>' +
+        '<div class="svc-tagline">' + service.tagline + '</div>' +
+        '<div class="svc-deposit">Deposit to confirm: <strong>KES ' + service.deposit.toLocaleString() + '</strong></div>' +
+        '<div class="svc-balance">Balance payable on completion of service</div>' +
+        '<a href="/index.html#services" class="svc-change">← Change service</a>' +
+      '</div>';
+    formWrapper.style.display = 'block';
+  } else {
+    summaryEl.innerHTML =
+      '<div class="no-service">' +
+        '<h2>No Service Selected</h2>' +
+        '<p>Please choose a service from our menu before booking your slot.</p>' +
+        '<a href="/index.html#services" class="btn-red">View Our Services →</a>' +
+      '</div>';
+    formWrapper.style.display = 'none';
+  }
+
+  // ── DATE: set min = today, detect Sundays ────────────────────────────────────
+  var dateInput = document.getElementById('date');
+  (function() {
+    var t = new Date();
+    var yy = t.getFullYear();
+    var mm = String(t.getMonth() + 1).padStart(2, '0');
+    var dd = String(t.getDate()).padStart(2, '0');
+    dateInput.setAttribute('min', yy + '-' + mm + '-' + dd);
+  })();
+
+  dateInput.addEventListener('change', function() {
+    var notice = document.getElementById('sundayNotice');
+    if (!this.value) { notice.classList.remove('visible'); return; }
+    var parts = this.value.split('-').map(Number);
+    var sel = new Date(parts[0], parts[1] - 1, parts[2]);
+    notice.classList.toggle('visible', sel.getDay() === 0);
+  });
+
+  // ── CHARACTER COUNTER ────────────────────────────────────────────────────────
+  var notesTA    = document.getElementById('notes');
+  var notesCount = document.getElementById('notesCount');
+  notesTA.addEventListener('input', function() {
+    var len = this.value.length;
+    notesCount.textContent = len + ' / 300';
+    notesCount.className = 'char-count' + (len >= 300 ? ' full' : len >= 250 ? ' near' : '');
+  });
+
+  // ── TERMS CHECKBOX ───────────────────────────────────────────────────────────
+  function togglePayBtn() {
+    document.getElementById('payBtn').disabled = !document.getElementById('termsCheck').checked;
+  }
+
+  // ── VALIDATION HELPERS ───────────────────────────────────────────────────────
+  function validatePhone(val) {
+    var cleaned = val.replace(/[\s\-()]/g, '');
+    return /^(07\d{8}|01\d{8}|\+254[71]\d{8})$/.test(cleaned);
+  }
+
+  function setError(id, isError) {
+    var errEl   = document.getElementById(id + '-error');
+    var inputEl = document.getElementById(id);
+    if (errEl)   errEl.classList.toggle('visible', isError);
+    if (inputEl) inputEl.classList.toggle('has-error', isError);
+    return isError;
+  }
+
+  function validateAll() {
+    var errs = [
+      setError('fname',    !document.getElementById('fname').value.trim()),
+      setError('phone',    !validatePhone(document.getElementById('phone').value)),
+      setError('email',    !document.getElementById('email').validity.valid),
+      setError('date',     !document.getElementById('date').value),
+      setError('location', !document.getElementById('location').value.trim()),
+      setError('vehicle',  !document.getElementById('vehicle').value.trim())
+    ];
+    // Scroll to first error
+    var ids = ['fname','phone','email','date','location','vehicle'];
+    for (var i = 0; i < errs.length; i++) {
+      if (errs[i]) {
+        var el = document.getElementById(ids[i]);
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        el.focus();
+        return false;
+      }
+    }
+    return true;
+  }
+
+  // Clear error state on user input
+  ['fname','phone','email','date','location','vehicle'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) el.addEventListener('input', function() { setError(id, false); });
+  });
+
+  // ── FORM SUBMIT → PAYSTACK ───────────────────────────────────────────────────
+  document.getElementById('bookingForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    if (!validateAll()) return;
+
+    var btn     = document.getElementById('payBtn');
+    var failure = document.getElementById('failureNotice');
+    failure.classList.remove('visible');
+
+    var name     = document.getElementById('fname').value.trim();
+    var phone    = document.getElementById('phone').value.trim();
+    var email    = document.getElementById('email').value.trim();
+    var date     = document.getElementById('date').value;
+    var timeSlot = document.getElementById('timeSlot').value || 'Flexible / Anytime';
+    var location = document.getElementById('location').value.trim();
+    var vehicle  = document.getElementById('vehicle').value.trim();
+    var notes    = document.getElementById('notes').value.trim();
+    var svcName  = service ? service.name : 'Service';
+    var deposit  = service ? service.deposit : 2500;
+
+    btn.disabled    = true;
+    btn.textContent = 'Opening Payment…';
+
+    var handler = PaystackPop.setup({
+      key:      window.PAYSTACK_PUBLIC_KEY,
+      email:    email,
+      amount:   deposit * 100,
+      currency: 'KES',
+      ref:      'INDIGO-' + Date.now(),
+      metadata: {
+        custom_fields: [
+          { display_name: 'Name',     variable_name: 'name',      value: name },
+          { display_name: 'WhatsApp', variable_name: 'whatsapp',  value: phone },
+          { display_name: 'Service',  variable_name: 'service',   value: svcName },
+          { display_name: 'Date',     variable_name: 'date',      value: date },
+          { display_name: 'Time',     variable_name: 'time',      value: timeSlot },
+          { display_name: 'Location', variable_name: 'location',  value: location },
+          { display_name: 'Vehicle',  variable_name: 'vehicle',   value: vehicle },
+          { display_name: 'Notes',    variable_name: 'notes',     value: notes }
+        ]
+      },
+      callback: function(response) {
+        // Populate success overlay
+        document.getElementById('successRef').textContent = 'Reference: ' + response.reference;
+
+        var msg = encodeURIComponent(
+          'Hi Indigo! I just paid my deposit for ' + svcName + '.\n' +
+          'Booking details:\n' +
+          'Name: ' + name + '\n' +
+          'Date: ' + date + '\n' +
+          'Time: ' + timeSlot + '\n' +
+          'Location: ' + location + '\n' +
+          'Vehicle: ' + vehicle + '\n' +
+          'Paystack Ref: ' + response.reference + '\n' +
+          'Looking forward to it! 🚗✨'
+        );
+        document.getElementById('waSuccessBtn').href = 'https://wa.me/254112657174?text=' + msg;
+
+        document.getElementById('successOverlay').classList.add('visible');
+        window.scrollTo({ top: 0 });
+      },
+      onClose: function() {
+        btn.disabled    = false;
+        btn.textContent = 'Pay KES 2,500 Deposit & Confirm Booking';
+        failure.classList.add('visible');
+        failure.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    });
+    handler.openIframe();
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Booking Terms &amp; Conditions — Indigo Car Care Club</title>
+  <meta name="description" content="Booking terms and conditions for Indigo Car Care Club mobile car detailing services in Kisumu and Nairobi, Kenya."/>
+  <link rel="canonical" href="https://indigocarcare.com/terms.html"/>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --red:   #CC0000;
+      --black: #0A0A0A;
+      --mid:   #1A1A1A;
+      --text:  #F0F0F0;
+      --muted: #888888;
+      --white: #FFFFFF;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--black); color: var(--text); overflow-x: hidden; }
+
+    /* ── NAV ─────────────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.75rem 1.5rem;
+      background: rgba(10,10,10,0.97); backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(204,0,0,0.2);
+      min-height: 60px;
+    }
+    .nav-logo img { height: 34px; width: auto; }
+    .nav-back {
+      font-family: 'DM Mono', monospace; font-size: 0.7rem;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--muted); text-decoration: none; transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--red); }
+
+    /* ── TERMS MAIN ──────────────────────────────────────────── */
+    .terms-main {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 6rem 1.5rem 5rem;
+    }
+
+    /* ── HEADER ──────────────────────────────────────────────── */
+    .terms-header {
+      margin-bottom: 3rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid rgba(204,0,0,0.18);
+    }
+    .terms-header h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.2rem, 7vw, 3.8rem);
+      letter-spacing: 0.03em; color: var(--white); margin-bottom: 0.4rem;
+    }
+    .terms-subtitle {
+      font-family: 'DM Mono', monospace; font-size: 0.72rem;
+      letter-spacing: 0.14em; color: var(--muted);
+    }
+
+    /* ── SECTION BLOCKS ──────────────────────────────────────── */
+    .terms-section { margin-bottom: 2.75rem; }
+
+    .terms-section h2 {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem; letter-spacing: 0.24em; text-transform: uppercase;
+      color: var(--red); margin-bottom: 0.9rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid rgba(204,0,0,0.1);
+    }
+
+    .terms-section p {
+      font-size: 0.93rem; color: rgba(240,240,240,0.8);
+      line-height: 1.9; margin-bottom: 0.9rem;
+    }
+    .terms-section p:last-child { margin-bottom: 0; }
+
+    .terms-section ul { list-style: none; margin: 0.5rem 0 0.9rem; }
+    .terms-section ul li {
+      font-size: 0.93rem; color: rgba(240,240,240,0.8);
+      line-height: 1.85; margin-bottom: 0.5rem;
+      padding-left: 1.4rem; position: relative;
+    }
+    .terms-section ul li::before {
+      content: '—'; position: absolute; left: 0;
+      color: var(--red); font-size: 0.8rem; top: 0.15rem;
+    }
+    .terms-section ul li:last-child { margin-bottom: 0; }
+    .terms-section strong { color: var(--white); font-weight: 600; }
+
+    /* ── FOOTER ──────────────────────────────────────────────── */
+    footer {
+      background: var(--mid); border-top: 1px solid rgba(204,0,0,0.12);
+      padding: 2.5rem 1.25rem; text-align: center;
+    }
+    .footer-logo img { height: 38px; width: auto; margin-bottom: 0.6rem; }
+    .footer-tagline { font-size: 0.66rem; color: var(--muted); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 1rem; }
+    .footer-links { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 1rem; }
+    .footer-links a { font-size: 0.73rem; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--red); }
+    .footer-copy { font-size: 0.63rem; color: rgba(136,136,136,0.4); }
+
+    /* ── WA FLOAT ────────────────────────────────────────────── */
+    .wa-float {
+      position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 200;
+      background: #25D366; color: #fff; width: 52px; height: 52px;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.35); text-decoration: none;
+      transition: transform 0.2s;
+    }
+    .wa-float:hover { transform: scale(1.1); }
+    .wa-float svg { width: 26px; height: 26px; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <a href="/index.html">
+      <img src="/images/indigo-car-care-club-logo.webp" alt="Indigo Car Care Club" width="300" height="168"/>
+    </a>
+  </div>
+  <a href="/index.html" class="nav-back">← Back to Home</a>
+</nav>
+
+<!-- TERMS CONTENT -->
+<main class="terms-main">
+
+  <div class="terms-header">
+    <h1>Booking Terms &amp; Conditions</h1>
+    <p class="terms-subtitle">Indigo Car Care Club &nbsp;·&nbsp; Effective March 2026</p>
+  </div>
+
+  <!-- 1. ABOUT THESE TERMS -->
+  <div class="terms-section">
+    <h2>1. About These Terms</h2>
+    <p>
+      These terms and conditions apply to all bookings made through the Indigo Car Care Club website
+      (<strong>indigocarcare.com</strong>) and govern all services we provide. By using our website,
+      making a booking, or paying a deposit, you confirm that you have read, understood, and agree to
+      be bound by these terms.
+    </p>
+    <p>
+      These terms are governed by the laws of the <strong>Republic of Kenya</strong>. If you have any
+      questions before booking, please contact us on WhatsApp at <strong>+254 112 657 174</strong>
+      or by email at <strong>info@indigocarcare.com</strong> — we are happy to help.
+    </p>
+  </div>
+
+  <!-- 2. OUR SERVICES -->
+  <div class="terms-section">
+    <h2>2. Our Services</h2>
+    <p>
+      Indigo Car Care Club is a <strong>mobile car detailing service</strong>. We come to you — there
+      is no need to bring your vehicle to a workshop.
+    </p>
+    <ul>
+      <li>
+        We bring our own <strong>water supply and power equipment</strong>. You do not need to provide
+        either.
+      </li>
+      <li>
+        Our service areas include <strong>Kisumu</strong> (Riat Hills, Milimani, Kanyakwar and
+        surrounding areas) and <strong>Nairobi</strong> (Karen, Runda, Lavington, Westlands and
+        surrounding areas). If you are outside these areas, please contact us before booking to
+        confirm we can reach you.
+      </li>
+      <li>
+        For specialist services such as <strong>Pro Machine Buffing (paint correction)</strong>, the
+        final price is determined after an on-site inspection of your vehicle's paint condition. We
+        will confirm the price with you before any work begins — you are under no obligation to
+        proceed if the quote differs from your expectation.
+      </li>
+      <li>
+        All services are by <strong>appointment only</strong>. We do not accept walk-in bookings.
+      </li>
+    </ul>
+  </div>
+
+  <!-- 3. BOOKINGS & DEPOSITS -->
+  <div class="terms-section">
+    <h2>3. Bookings &amp; Deposits</h2>
+    <ul>
+      <li>
+        A deposit of <strong>KES 2,500</strong> is required to confirm every booking. Your slot is
+        not reserved until the deposit is received.
+      </li>
+      <li>
+        The deposit is <strong>deducted from your total service cost</strong>. You pay only the
+        remaining balance on the day of service, after the work is complete.
+      </li>
+      <li>
+        Your booking is not confirmed until you receive a <strong>WhatsApp confirmation message</strong>
+        from Indigo Car Care Club after your deposit is received.
+      </li>
+      <li>
+        We operate <strong>Monday to Saturday, 8am – 6pm</strong>. Bookings outside these hours are
+        not accepted.
+      </li>
+      <li>
+        <strong>Sunday bookings</strong> are accepted subject to availability and must be confirmed
+        via WhatsApp before the deposit is processed. We will contact you within 24 hours of a Sunday
+        booking request. If we cannot accommodate your date, no charge will be made.
+      </li>
+      <li>
+        We reserve the right to decline a booking at our discretion. In such cases, any deposit
+        already received will be refunded in full.
+      </li>
+    </ul>
+  </div>
+
+  <!-- 4. CANCELLATION & REFUND POLICY -->
+  <div class="terms-section">
+    <h2>4. Cancellation &amp; Refund Policy</h2>
+    <ul>
+      <li>
+        <strong>Cancellation 48 hours or more before the booking:</strong> You are entitled to a
+        full deposit refund. Refunds are processed within 3–5 business days via M-Pesa to the number
+        used for payment.
+      </li>
+      <li>
+        <strong>Cancellation less than 48 hours before the booking:</strong> The deposit is forfeited
+        in full. No refund will be issued. This policy exists to protect our team's time, travel
+        costs, and pre-service preparation. We thank you for understanding.
+      </li>
+      <li>
+        <strong>No-shows:</strong> If you are not present at the agreed location at the agreed time
+        without prior notice, the deposit is forfeited in full.
+      </li>
+      <li>
+        <strong>Rescheduling by Indigo Car Care Club:</strong> We reserve the right to reschedule a
+        booking in the event of equipment failure, adverse weather, road conditions, or other
+        operational circumstances beyond our control. In such cases, your deposit is fully protected
+        and transferred to a new date of your choosing. You may also request a full refund if
+        rescheduling is not convenient for you.
+      </li>
+      <li>
+        Refunds are processed via <strong>M-Pesa</strong> to the number used for the original
+        payment. We do not issue cash refunds or refunds to bank accounts.
+      </li>
+    </ul>
+  </div>
+
+  <!-- 5. PAYMENTS -->
+  <div class="terms-section">
+    <h2>5. Payments</h2>
+    <ul>
+      <li>
+        <strong>Deposits</strong> are accepted via Paystack (card and M-Pesa online), or M-Pesa
+        Paybill <strong>516600</strong>, Account <strong>929787</strong>.
+      </li>
+      <li>
+        The <strong>balance</strong> (total service cost minus deposit) is payable on completion of
+        the service, before our team departs your location.
+      </li>
+      <li>
+        We accept payment at point of service via <strong>M-Pesa, cash, or Paystack</strong>. We
+        do not offer credit or deferred payment under any circumstances.
+      </li>
+      <li>
+        All prices are quoted and charged in <strong>Kenyan Shillings (KES)</strong>.
+      </li>
+      <li>
+        Prices are subject to change without notice. The price confirmed at the time of your booking
+        applies to that booking and will not change retroactively.
+      </li>
+    </ul>
+  </div>
+
+  <!-- 6. OUR LIABILITY -->
+  <div class="terms-section">
+    <h2>6. Our Liability</h2>
+    <ul>
+      <li>
+        Our team handles all vehicles with the utmost care and professionalism. We take pride in
+        our zero-scratch record.
+      </li>
+      <li>
+        We are not liable for <strong>pre-existing damage</strong> that is not documented before work
+        begins. Before starting any service, our team will note visible scratches, dents, stains, or
+        other damage on the vehicle. You will be asked to acknowledge this record before we proceed.
+      </li>
+      <li>
+        In the unlikely event that damage is <strong>caused by our team</strong> during the service,
+        we will assess the situation in good faith and work directly with you to reach a fair
+        resolution. This may include repair, reimbursement, or a service credit, at our discretion.
+      </li>
+      <li>
+        We are not liable for any <strong>loss of personal belongings or valuables</strong> left in
+        the vehicle during the service. Please remove personal items before our team arrives.
+      </li>
+      <li>
+        Our liability in all cases is limited to the value of the service fee paid.
+      </li>
+    </ul>
+  </div>
+
+  <!-- 7. PRIVACY -->
+  <div class="terms-section">
+    <h2>7. Privacy</h2>
+    <ul>
+      <li>
+        The personal information you provide when booking (name, phone number, email address, vehicle
+        details, and location) is used <strong>solely to fulfil and confirm your booking</strong>. We
+        do not use it for unsolicited marketing.
+      </li>
+      <li>
+        We do not <strong>sell, rent, or share</strong> your personal data with third parties for
+        marketing or any other commercial purpose.
+      </li>
+      <li>
+        Our team may take <strong>before-and-after photos</strong> of your vehicle during and after
+        the service. These may be used on our social media channels and marketing materials. If you
+        do not want your vehicle photographed, please notify us in writing (WhatsApp is fine) before
+        the service begins, and we will respect your preference.
+      </li>
+      <li>
+        Payment data (card details, M-Pesa PIN) is processed securely by our payment providers
+        (<strong>Paystack</strong> and <strong>Safaricom</strong>). Indigo Car Care Club never
+        stores or has access to your payment credentials.
+      </li>
+    </ul>
+  </div>
+
+  <!-- 8. CONTACT -->
+  <div class="terms-section">
+    <h2>8. Contact Us</h2>
+    <p>
+      If you have a question, concern, or complaint about these terms or any aspect of our service,
+      please get in touch — we are a small team and we take every message seriously.
+    </p>
+    <ul>
+      <li><strong>WhatsApp:</strong> +254 112 657 174</li>
+      <li><strong>Phone:</strong> +254 793 556 794</li>
+      <li><strong>Email:</strong> info@indigocarcare.com</li>
+      <li><strong>Website:</strong> indigocarcare.com</li>
+    </ul>
+    <p style="margin-top:1rem;">
+      We aim to respond to all enquiries within 24 hours on business days (Monday – Saturday, 8am – 6pm).
+    </p>
+  </div>
+
+</main>
+
+<!-- WA FLOAT -->
+<a class="wa-float" href="https://wa.me/254112657174?text=Hi%20Indigo!%20I%20have%20a%20question%20about%20your%20terms." target="_blank" title="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <img src="/images/indigo-car-care-club-logo.webp" alt="Indigo Car Care Club logo" width="300" height="168" loading="lazy"/>
+  </div>
+  <div class="footer-tagline">Kisumu &amp; Nairobi's Premium Detail Studio · We Come to You</div>
+  <div class="footer-links">
+    <a href="/index.html">Home</a>
+    <a href="/index.html#services">Services</a>
+    <a href="/book.html">Book Now</a>
+    <a href="/index.html#contact">Contact</a>
+    <a href="/careers.html">Careers</a>
+    <a href="/blog/">Blog</a>
+  </div>
+  <div class="footer-copy">© 2026 Indigo Car Care Club. All rights reserved.</div>
+</footer>
+
+</body>
+</html>
