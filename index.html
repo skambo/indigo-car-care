@@ -299,6 +299,12 @@
 </head>
 <body>
 
+<!-- PAYSTACK: replace value below with window.ENV if using a build step. For now, key is inlined (public key — safe for frontend). Rotate via Vercel env vars. -->
+<script>
+  // Loaded from environment — see .env.example
+  window.PAYSTACK_PUBLIC_KEY = "pk_live_5fb6acb9c3f1d79882d7d71adfd2ccf53d97d5ba";
+</script>
+
 <!-- NAV -->
 <nav>
   <div class="nav-logo"><img src="/images/indigo-car-care-club-logo.webp" alt="Indigo Car Care Club logo" width="300" height="168"/></div>
@@ -342,7 +348,7 @@
       We Bring the <span class="red">Showroom to You.</span>
     </h1>
     <p class="hero-sub">
-      Zero hassle. We bring our own water and power to <strong>Riat Hills, Milimani, Kanyakwar</strong> and environs as well as in Nairobi. No scratches. No "basin" water. Just the <strong>Indigo Quality Standard.</strong>
+      Zero hassle. We bring our own water and power to <strong>Riat Hills, Milimani, Kanyakwar</strong> and across Nairobi — <strong>Karen, Runda, Lavington, Westlands</strong>. No scratches. No "basin" water. Just the <strong>Indigo Quality Standard.</strong>
     </p>
     <div class="hero-actions">
       <a href="#booking" class="btn-primary">Book the Indigo Spa — KES 15,000</a>
@@ -419,69 +425,114 @@
   <div class="services-header">
     <div class="section-label">Service Menu</div>
     <h2>The Indigo Standard</h2>
-    <p class="section-intro">One flagship service. Specialist add-ons. All executed to perfection at your location.</p>
+    <p class="section-intro">Three packages. Every level of care. Executed to perfection at your location.</p>
   </div>
+
+  <!-- PACKAGES -->
   <div class="services-grid">
+
+    <!-- TODO: Replace placeholder below with Express Gloss package details once flyer/brief is confirmed by Joe -->
+    <div class="service-card">
+      <img src="/images/foam-wash-exterior-car-detailing.webp" alt="Express Gloss exterior detail service by Indigo Car Care Club" width="600" height="340" loading="lazy" style="width:100%;height:180px;object-fit:cover;border-radius:4px;margin-bottom:1rem;display:block;">
+      <div class="service-num">01</div>
+      <div class="service-badge">Entry Level</div>
+      <h3 class="service-name">Express Gloss</h3>
+      <p class="service-desc">Entry-level package — content and pricing to be confirmed. Contact us to enquire.</p>
+      <div class="service-price" style="margin-top:1rem;">Pricing TBC</div>
+      <a href="/book.html?service=express-gloss" class="btn-primary" style="display:inline-block;margin-top:1.25rem;font-size:0.72rem;">Pay Deposit</a>
+    </div>
+
+    <div class="service-card">
+      <img src="/images/saloon-after-signature-spa-kisumu.webp" alt="Immaculate car interior and exterior after Indigo Cabin Refresh deep clean service" width="600" height="340" loading="lazy" style="width:100%;height:180px;object-fit:cover;border-radius:4px;margin-bottom:1rem;display:block;">
+      <div class="service-num">02</div>
+      <div class="service-badge">Mid-Tier Package</div>
+      <h3 class="service-name">The Factory-Fresh Cabin Refresh</h3>
+      <p class="service-desc" style="color:var(--red);margin-bottom:0.5rem;">Stains &amp; Odors Eliminated.</p>
+      <p class="service-desc">Designed for owners who want an immaculate, deeply sanitized interior environment, without paying for engine bay detailing.</p>
+      <div class="service-includes">
+        <span>Thermal Steam Decontamination — high-pressure steam treatment of all surfaces</span>
+        <span>Deep Injection Carpet Extraction — all carpets and fabric/upholstery</span>
+        <span>Intensive Seat &amp; Dashboard/Door Panels Restoration — deep cleaning and matte dressing for leather, plastic and vinyl</span>
+        <span>Seat Belt &amp; Headliner Detailing — moisture-controlled spot removal and degreasing of safety straps</span>
+        <span>Bonus Hydrophobic Exterior Seal — scratch-free active foam bath and polymer paint sealant</span>
+      </div>
+      <div class="service-price" style="margin-top:1.5rem;font-size:0.92rem;">
+        <div>Sedan &amp; Lower: <strong>KES 9,000</strong></div>
+        <div>SUV &amp; Up: <strong>KES 10,000</strong></div>
+      </div>
+      <p style="font-size:0.75rem;color:var(--muted);margin-top:0.6rem;line-height:1.6;border-left:2px solid var(--red);padding-left:0.75rem;">Interior detailing + exterior wash only. Engine bay detailing requires an upgrade to our Flagship Indigo Signature Spa.</p>
+      <a href="/book.html?service=cabin-refresh" class="btn-primary" style="display:inline-block;margin-top:1.25rem;font-size:0.72rem;">Pay Deposit</a>
+    </div>
+
     <div class="service-card">
       <img src="/images/signature-spa-exterior-foam-wash.webp" alt="Exterior pH-neutral foam wash during Indigo Signature Spa mobile detailing service, Kisumu" width="600" height="340" loading="lazy" style="width:100%;height:180px;object-fit:cover;border-radius:4px;margin-bottom:1rem;display:block;">
-      <div class="service-num">01</div>
+      <div class="service-num">03</div>
       <div class="service-badge">Flagship Service</div>
       <h3 class="service-name">The Indigo Signature Spa</h3>
-      <p class="service-desc">Top-to-bottom restoration. We bring our own water and power — zero inconvenience.</p>
+      <p class="service-desc" style="color:var(--red);margin-bottom:0.5rem;">The Ultimate Bumper to Bumper Asset Transformation.</p>
+      <p class="service-desc">Our elite, flagship package. Designed for owners who demand complete vehicle restoration, deep molecular sanitization, and long-term protection.</p>
       <div class="service-includes">
-        <span>Interior deep clean, vacuum, steam extraction &amp; all-surfaces matte dressing</span>
-        <span>Engine bay — steam, degrease and dress</span>
-        <span>Exterior glow — pH neutral foam wash, sealant, watermark removal</span>
-        <span>Elite wheel finish — degrease rims &amp; tyres, dust-resistant matte tyre shine</span>
+        <span>Deep Cabin Restoration &amp; Extraction — air blowout, full vacuuming and high-suction extraction of all carpets and upholstery</span>
+        <span>Thermal Steam Sanitization — medical-grade steam to sanitize all surfaces</span>
+        <span>Premium Leather &amp; Matte Dressings — advanced pH-neutral conditioning, non-greasy anti-static factory finish</span>
+        <span>Engine Bay Decontamination — precision degreasing, high-pressure steam blast, plastics restoration</span>
+        <span>pH-Neutral Exterior Foam Bath — safe, scratch-free active foam wash and hand-drying with ultra-plush microfibers</span>
+        <span>Hydrophobic Paint Sealant — high-grade polymer shield, actively repels Nairobi's rain and dust</span>
+        <span>Wheel &amp; Arch Purge — deep break-dust decontamination, Black Mamba tyre dressing for long-lasting UV protection</span>
       </div>
-      <div class="service-price" style="margin-top:1.5rem;font-size:1rem;">
-        <div>Saloon / Sedan: <strong>KES 14,000</strong></div>
-        <div>SUV / 4x4: <strong>KES 15,000</strong></div>
+      <div class="service-price" style="margin-top:1.5rem;font-size:0.92rem;">
+        <div>Sedan &amp; Lower: <strong>KES 14,000</strong></div>
+        <div>SUV &amp; Up: <strong>KES 15,000</strong></div>
       </div>
-      <div style="display:flex;gap:10px;margin-top:12px;flex-wrap:wrap;">
-        <button onclick="payWithPaystack(14000, 'Indigo Signature Spa — Saloon/Sedan')"
-          style="background:#CC0000;color:#fff;border:none;padding:12px 20px;font-size:14px;font-weight:700;border-radius:6px;cursor:pointer;">
-          Pay KES 14,000 (Saloon)
-        </button>
-        <button onclick="payWithPaystack(15000, 'Indigo Signature Spa — SUV/4x4')"
-          style="background:#CC0000;color:#fff;border:none;padding:12px 20px;font-size:14px;font-weight:700;border-radius:6px;cursor:pointer;">
-          Pay KES 15,000 (SUV/4x4)
-        </button>
-      </div>
+      <p style="font-size:0.75rem;color:var(--muted);margin-top:0.6rem;line-height:1.6;border-left:2px solid rgba(255,255,255,0.08);padding-left:0.75rem;">4.5 – 6 hours on-site. Fabric seats/carpets remain damp post-service — ventilation to dry required.</p>
+      <a href="/book.html?service=signature-spa" class="btn-primary" style="display:inline-block;margin-top:1.25rem;font-size:0.72rem;">Pay Deposit</a>
     </div>
+
+  </div>
+
+  <!-- ADD-ONS -->
+  <div style="max-width:1100px;margin:3.5rem auto 1.5rem;padding-top:2.5rem;border-top:1px solid rgba(204,0,0,0.15);">
+    <div class="section-label">Add-Ons</div>
+    <h3 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.6rem,3vw,2.4rem);letter-spacing:0.04em;color:var(--white);margin-bottom:0.5rem;">Specialist Services</h3>
+    <p class="section-intro">Standalone upgrades. Pair with any package or book independently.</p>
+  </div>
+
+  <div class="services-grid" style="max-width:1100px;margin:0 auto;">
+
     <div class="service-card">
       <img src="/images/headlight-restoration-service-kisumu.webp" alt="Yellowed headlights restored to crystal clarity by Indigo headlight restoration specialist service" width="600" height="340" loading="lazy" style="width:100%;height:180px;object-fit:cover;border-radius:4px;margin-bottom:1rem;display:block;">
-      <div class="service-num">02</div>
+      <div class="service-num">A1</div>
       <div class="service-badge">Specialist Add-on</div>
       <h3 class="service-name">Headlight Restoration</h3>
-      <p class="service-desc">The Magic Fix. Yellowed, foggy headlights restored to crystal clarity. Safer driving, sharper look.</p>
-      <div class="service-price">KES 5,000</div>
-      <button onclick="payWithPaystack(5000, 'Headlight Restoration')" 
-  style="background:#CC0000;color:#fff;border:none;padding:14px 28px;font-size:16px;font-weight:700;border-radius:6px;cursor:pointer;margin-top:10px;">
-  Pay KES 5,000 Online
-</button>
+      <p class="service-desc">A meticulous, multi-stage restoration process. Sequential wet-sanding strips away yellowed, cloudy UV oxidation from the lens surface, followed by a mechanical compound polish for absolute crystal clarity and an advanced UV sealant to lock in long-term night-driving visibility.</p>
+      <div class="service-price" style="margin-top:1rem;">KES 5,000 (per set)</div>
+      <a href="/book.html?service=headlight-restoration" class="btn-primary" style="display:inline-block;margin-top:1.25rem;font-size:0.72rem;">Pay Deposit</a>
     </div>
+
     <div class="service-card">
       <img src="/images/pro-machine-buffing-paint-correction.webp" alt="Paint correction by machine buffing removing swirl marks and scratches from vehicle paintwork in Kisumu" width="600" height="340" loading="lazy" style="width:100%;height:180px;object-fit:cover;border-radius:4px;margin-bottom:1rem;display:block;">
-      <div class="service-num">03</div>
+      <div class="service-num">A2</div>
       <div class="service-badge">Specialist Add-on</div>
       <h3 class="service-name">Pro Machine Buffing</h3>
-      <p class="service-desc">Paint correction. Swirl marks, scratches and oxidation removed. Final price by paint condition.</p>
+      <p class="service-desc">Multi-stage mechanical leveling designed to permanently eliminate clear-coat micro-scratches, dull swirl marks, and severe paint oxidation. Our technicians precision-shave surface imperfections to restore a perfectly flat, razor-sharp factory reflection.</p>
       <div class="service-includes">
-        <span>Sedan: from KES 5,000</span>
-        <span>SUV: from KES 7,000</span>
+        <span>Sedans &amp; Smaller: from KES 6,000</span>
+        <span>SUVs &amp; Larger: from KES 7,000</span>
       </div>
-      <div class="service-price" style="margin-top:1rem;">From KES 5,000</div>
-      <p style="font-size:0.75rem;color:var(--muted);margin-top:0.6rem;line-height:1.6;border-left:2px solid var(--red);padding-left:0.75rem;">* Final price depends on paint condition and extent of correction. Quote confirmed after inspection.</p>
+      <div class="service-price" style="margin-top:1rem;">From KES 6,000</div>
+      <p style="font-size:0.75rem;color:var(--muted);margin-top:0.6rem;line-height:1.6;border-left:2px solid var(--red);padding-left:0.75rem;">* Final price determined on-site depending on paint condition and correction depth required.</p>
+      <a href="/book.html?service=paint-correction" class="btn-primary" style="display:inline-block;margin-top:1.25rem;font-size:0.72rem;">Pay Deposit</a>
     </div>
+
     <div class="service-card">
       <img src="/images/fleet-reconditioning-suv-kisumu.webp" alt="SUV fleet vehicle reconditioned to dealership-ready showroom condition by Indigo Car Care Club" width="600" height="340" loading="lazy" style="width:100%;height:180px;object-fit:cover;border-radius:4px;margin-bottom:1rem;display:block;">
-      <div class="service-num">04</div>
+      <div class="service-num">A3</div>
       <div class="service-badge">B2B</div>
       <h3 class="service-name">Fleet Reconditioning</h3>
-      <p class="service-desc">For dealerships and fleets. We turn aging inventory into high-premium assets. Faster sales, higher margins.</p>
-      <div class="service-price">Contact for Custom Quote</div>
+      <p class="service-desc">For dealerships and fleets. We turn aging inventory into high-premium assets. Faster sales, higher margins. Custom SLA and volume pricing for fleets of 3+ vehicles.</p>
+      <div class="service-price" style="margin-top:1rem;">Contact for Custom Quote</div>
     </div>
+
   </div>
 </section>
 
@@ -619,29 +670,25 @@
     <div class="booking-info">
       <div class="section-label">Confirm Your Slot</div>
       <h2>Book in 60 Seconds</h2>
-      <p>Fill the form. Pay your deposit. We confirm via WhatsApp within 5 minutes — then we come to you.</p>
-      <div class="mpesa-box">
-        <div class="mpesa-box-title">Pay Deposit via M-Pesa</div>
-        <div class="mpesa-row"><span class="mpesa-label">Paybill Number</span><div style="display:flex;align-items:center;gap:0.75rem;"><span class="mpesa-value">516600</span><button class="copy-btn" onclick="copyText('516600',this)">Copy</button></div></div>
-        <div class="mpesa-row"><span class="mpesa-label">Account Number</span><div style="display:flex;align-items:center;gap:0.75rem;"><span class="mpesa-value">929787</span><button class="copy-btn" onclick="copyText('929787',this)">Copy</button></div></div>
-        <div class="mpesa-row"><span class="mpesa-label">Amount</span><span class="mpesa-value" style="color:#4ade80;">KES 2,000</span></div>
-      </div>
+      <p>Fill the form. Pay your KES 2,000 deposit securely via Paystack. We confirm via WhatsApp within 5 minutes — then we come to you.</p>
+
       <div class="deposit-box">
-        <div class="deposit-box-title">Your Booking Invoice</div>
-        <div class="invoice-preview">
-          <div class="invoice-row"><span>Indigo Signature Spa</span><span>KES 15,000</span></div>
-          <div class="invoice-row total"><span>Total</span><span>KES 15,000</span></div>
-          <div class="invoice-row deposit-line"><span>Deposit to confirm</span><span>KES 2,000</span></div>
-          <div class="invoice-row"><span style="color:var(--muted);">Balance on completion</span><span>KES 13,000</span></div>
-        </div>
-        <p class="deposit-note" style="margin-top:0.75rem;">Deposit deducted from total. Refundable with 24hr notice.</p>
+        <div class="deposit-box-title">Booking Deposit</div>
+        <div class="deposit-amount">KES 2,000</div>
+        <p class="deposit-note">Secures your slot. Deducted from your service total on the day. Fully refundable with 24hr notice.</p>
       </div>
+
       <div class="booking-steps">
-        <div class="step"><div class="step-num">01</div><div class="step-text"><strong>Fill the form</strong> — service, date, your location and vehicle.</div></div>
-        <div class="step"><div class="step-num">02</div><div class="step-text"><strong>Pay KES 2,000 via M-Pesa</strong> — Paybill 516600, Account 929787.</div></div>
-        <div class="step"><div class="step-num">03</div><div class="step-text"><strong>5-minute WhatsApp confirmation</strong> — we'll send your booking details and arrival time.</div></div>
+        <div class="step"><div class="step-num">01</div><div class="step-text"><strong>Fill the form</strong> — select your service, date, location and vehicle details.</div></div>
+        <div class="step"><div class="step-num">02</div><div class="step-text"><strong>Pay KES 2,000 deposit</strong> — a secure Paystack payment window opens automatically.</div></div>
+        <div class="step"><div class="step-num">03</div><div class="step-text"><strong>WhatsApp auto-opens</strong> — your booking details and Paystack reference are sent. We confirm within 5 minutes.</div></div>
+      </div>
+
+      <div style="margin-top:1.5rem;padding:1rem 1.25rem;background:rgba(255,255,255,0.02);border-left:2px solid rgba(204,0,0,0.3);">
+        <p style="font-size:0.72rem;color:var(--muted);line-height:1.8;"><strong style="color:var(--text);">Prefer M-Pesa?</strong> Pay KES 2,000 via Paybill <strong style="color:var(--text);">516600</strong>, Account <strong style="color:var(--text);">929787</strong>, then WhatsApp us your reference at +254 112 657 174.</p>
       </div>
     </div>
+
     <div>
       <form class="booking-form" id="bookingForm" onsubmit="handleBooking(event)">
         <div class="form-row">
@@ -653,10 +700,11 @@
           <label class="form-label">Service Required</label>
           <select class="form-control" id="service" required>
             <option value="">— Select a service —</option>
-            <option value="Indigo Signature Spa – KES 15,000">Indigo Signature Spa – KES 15,000</option>
-            <option value="Signature Spa + Headlight Restoration – KES 20,000">Signature Spa + Headlight Restoration – KES 20,000</option>
-            <option value="Signature Spa + Paint Correction (Sedan) – from KES 20,000">Signature Spa + Paint Correction (Sedan) – from KES 20,000</option>
-            <option value="Signature Spa + Paint Correction (SUV) – from KES 22,000">Signature Spa + Paint Correction (SUV) – from KES 22,000</option>
+            <option value="Express Gloss">Express Gloss</option>
+            <option value="Cabin Refresh – Sedan KES 9,000 / SUV KES 10,000">Cabin Refresh – Sedan KES 9,000 / SUV KES 10,000</option>
+            <option value="Indigo Signature Spa – Sedan KES 14,000 / SUV KES 15,000">Indigo Signature Spa – Sedan KES 14,000 / SUV KES 15,000</option>
+            <option value="Headlight Restoration – KES 5,000">Headlight Restoration – KES 5,000</option>
+            <option value="Pro Machine Buffing – from KES 6,000">Pro Machine Buffing – from KES 6,000</option>
             <option value="Fleet Reconditioning – Contact for Quote">Fleet Reconditioning – Contact for Quote</option>
           </select>
         </div>
@@ -664,24 +712,11 @@
           <div class="form-group"><label class="form-label">Vehicle Make &amp; Model</label><input class="form-control" type="text" id="vehicle" placeholder="e.g. Toyota Prado" required></div>
           <div class="form-group"><label class="form-label">Preferred Date</label><input class="form-control" type="date" id="date" required></div>
         </div>
-        <div class="form-group"><label class="form-label">Your Location / Estate</label><input class="form-control" type="text" id="location" placeholder="e.g. Milimani, Riat Hills, Kanyakwar..." required></div>
-        <div class="form-group"><label class="form-label">M-Pesa Ref (after paying deposit)</label><input class="form-control" type="text" id="mpesaref" placeholder="e.g. RGH4X2K..."></div>
-        <div class="form-note">After submitting, you'll go to WhatsApp to confirm with your M-Pesa reference. Pay KES 2,000 to Paybill <strong>516600</strong>, Account <strong>929787</strong>.</div>
-        <div class="alert alert-success" id="successMsg">✅ Redirecting to WhatsApp to confirm your booking...</div>
-        <div class="alert alert-error" id="errorMsg">❌ Something went wrong. Please WhatsApp us directly.</div>
-        <button type="submit" class="submit-btn" id="submitBtn">Confirm Booking via WhatsApp →</button>
-
-        <button onclick="
-  var name = document.getElementById('fname').value.trim();
-  var phone = document.getElementById('phone').value.trim();
-  var service = document.getElementById('service').value;
-  if (!name || !phone || !service) {
-    alert('Please fill in your Full Name, WhatsApp Number and Service before paying.');
-    return;
-  }
-  payWithPaystack(2000, 'Booking Deposit — ' + service)"
-</button>
-  
+        <div class="form-group"><label class="form-label">Your Location / Estate</label><input class="form-control" type="text" id="location" placeholder="e.g. Milimani, Karen, Westlands..." required></div>
+        <div class="form-note">Your KES 2,000 deposit is paid securely via Paystack. On success, WhatsApp opens automatically with your booking details and payment reference.</div>
+        <div class="alert alert-success" id="successMsg">✅ Payment confirmed! Opening WhatsApp with your booking details...</div>
+        <div class="alert alert-error" id="errorMsg">❌ Payment window closed. You can retry above, or pay via M-Pesa Paybill <strong>516600</strong>, Account <strong>929787</strong>, then WhatsApp us your ref.</div>
+        <button type="submit" class="submit-btn" id="submitBtn">Pay KES 2,000 Deposit &amp; Confirm →</button>
       </form>
     </div>
   </div>
@@ -698,7 +733,7 @@
         <div class="contact-detail"><span class="contact-key">WhatsApp</span><a href="https://wa.me/254112657174" target="_blank" class="contact-val">+254 112 657 174</a></div>
         <div class="contact-detail"><span class="contact-key">Phone</span><a href="tel:+254793556794" class="contact-val">+254 793 556 794</a></div>
         <div class="contact-detail"><span class="contact-key">Email</span><a href="mailto:info@indigocarcare.co.ke" class="contact-val">info@indigocarcare.co.ke</a></div>
-        <div class="contact-detail"><span class="contact-key">Coverage</span><span class="contact-val" style="color:var(--muted);">Riat Hills · Milimani · Kanyakwar &amp; environs</span></div>
+        <div class="contact-detail" style="align-items:flex-start;"><span class="contact-key" style="padding-top:2px;">Coverage</span><span class="contact-val" style="color:var(--muted);line-height:1.8;"><strong style="color:var(--text);">Kisumu:</strong> Riat Hills · Milimani · Kanyakwar &amp; environs<br><strong style="color:var(--text);">Nairobi:</strong> Karen · Runda · Lavington · Westlands &amp; environs</span></div>
         <div class="contact-detail"><span class="contact-key">Hours</span><span class="contact-val" style="color:var(--muted);">Mon–Sat, 8am – 6pm</span></div>
       </div>
       <div class="social-strip">
@@ -740,7 +775,7 @@
     <a href="#contact">Contact</a>
     <a href="careers.html">Careers</a>
     <a href="blog/">Blog</a>
-    <a href="mailto:info@indigocarcare.co.ke">info@indigocarcare.co.ke</a>
+    <a href="mailto:info@indigocarcare.co.ke">info@indigocarcare.com</a>
   </div>
   <div class="footer-copy">© 2026 Indigo Car Care Club. All rights reserved.</div>
 </footer>
@@ -795,35 +830,49 @@
     const vehicle = document.getElementById('vehicle').value.trim();
     const date = document.getElementById('date').value;
     const location = document.getElementById('location').value.trim();
-    const mpesaref = document.getElementById('mpesaref').value.trim();
     const btn = document.getElementById('submitBtn');
-    btn.disabled = true;
-    const msg = `Hi Indigo! I'd like to book a detail.\n\n*Name:* ${name}\n*Phone:* ${phone}\n*Email:* ${email}\n*Service:* ${service}\n*Vehicle:* ${vehicle}\n*Date:* ${date}\n*Location:* ${location}\n` + (mpesaref ? `*M-Pesa Ref:* ${mpesaref}\n` : '') + `\nI've paid the KES 2,000 deposit to Paybill 516600, Account 929787.`;
-    document.getElementById('successMsg').style.display = 'block';
-    setTimeout(() => {
-      window.open(`https://wa.me/254112657174?text=${encodeURIComponent(msg)}`, '_blank');
-      btn.disabled = false;
-      btn.textContent = 'Confirm Booking via WhatsApp →';
-    }, 800);
-  }
+    const errorDiv = document.getElementById('errorMsg');
+    const successDiv = document.getElementById('successMsg');
 
-  function payWithPaystack(amount, description) {
-  var handler = PaystackPop.setup({
-    key: 'pk_live_5fb6acb9c3f1d79882d7d71adfd2ccf53d97d5ba',
-    email: document.getElementById('email').value || 'customer@indigocarcare.co.ke',
-    amount: amount * 100,
-    currency: 'KES',
-    ref: 'INDIGO-' + Math.floor(Math.random() * 1000000),
-    metadata: { custom_fields: [{ display_name: "Service", value: description }] },
-    callback: function(response) {
-      alert('✅ Payment successful! Reference: ' + response.reference + '\nJoe will confirm your booking via WhatsApp.');
-    },
-    onClose: function() {
-      alert('Payment window closed. You can also pay via M-Pesa Paybill 516600, Account 929787.');
-    }
-  });
-  handler.openIframe();
-}
+    errorDiv.style.display = 'none';
+    successDiv.style.display = 'none';
+    btn.disabled = true;
+    btn.textContent = 'Opening Payment...';
+
+    var handler = PaystackPop.setup({
+      key: window.PAYSTACK_PUBLIC_KEY,
+      email: email,
+      amount: 200000,
+      currency: 'KES',
+      ref: 'INDIGO-' + Date.now(),
+      metadata: {
+        custom_fields: [
+          { display_name: 'Name',     variable_name: 'name',         value: name },
+          { display_name: 'Phone',    variable_name: 'phone',        value: phone },
+          { display_name: 'Service',  variable_name: 'service',      value: service },
+          { display_name: 'Date',     variable_name: 'booking_date', value: date },
+          { display_name: 'Location', variable_name: 'location',     value: location },
+          { display_name: 'Vehicle',  variable_name: 'vehicle',      value: vehicle }
+        ]
+      },
+      callback: function(response) {
+        const msg = `Hi Indigo! I'd like to book a detail.\n\n*Name:* ${name}\n*Phone:* ${phone}\n*Email:* ${email}\n*Service:* ${service}\n*Vehicle:* ${vehicle}\n*Date:* ${date}\n*Location:* ${location}\n*Paystack Ref:* ${response.reference}\n\nKES 2,000 deposit paid via Paystack.`;
+        successDiv.style.display = 'block';
+        setTimeout(() => {
+          window.open('https://wa.me/254112657174?text=' + encodeURIComponent(msg), '_blank');
+          btn.disabled = false;
+          btn.textContent = 'Pay KES 2,000 Deposit & Confirm →';
+        }, 800);
+      },
+      onClose: function() {
+        btn.disabled = false;
+        btn.textContent = 'Pay KES 2,000 Deposit & Confirm →';
+        errorDiv.innerHTML = '❌ Payment window closed. You can retry above, or pay via M-Pesa Paybill <strong>516600</strong>, Account <strong>929787</strong>, then WhatsApp us your ref.';
+        errorDiv.style.display = 'block';
+      }
+    });
+    handler.openIframe();
+  }
 
 
   function toggleMobileNav() {
