@@ -387,6 +387,24 @@
   <div id="formWrapper" style="display:none;">
     <form class="book-form" id="bookingForm" novalidate>
 
+      <!-- ADD-ON SERVICE (optional) -->
+      <div class="form-group">
+        <label class="form-label" for="addon">
+          Would you like to add a specialized service?
+          <span class="optional">(optional)</span>
+        </label>
+        <select class="form-control" id="addon">
+          <option value="">None</option>
+          <option value="paint-correction">Pro Machine Buffing</option>
+          <option value="headlight-restoration">Headlight Restoration</option>
+          <option value="ceramic-coating">Premium Graphene Ceramic Coating</option>
+          <option value="fleet">Fleet Reconditioning</option>
+        </select>
+        <div id="ceramicAddonNote" style="display:none;margin-top:0.5rem;padding:0.85rem 1rem;background:rgba(201,168,76,0.07);border:1px solid rgba(201,168,76,0.3);border-left:3px solid #C9A84C;font-size:0.8rem;color:rgba(201,168,76,0.9);line-height:1.65;">
+          ⚠️ Ceramic Coating requires 24–48 hrs cure time — the vehicle must not be driven or exposed to water during that window. We will confirm scheduling requirements with you before your appointment.
+        </div>
+      </div>
+
       <!-- 1. Full Name -->
       <div class="form-group">
         <label class="form-label" for="fname">Full Name</label>
@@ -420,6 +438,9 @@
           Sunday selected — we will confirm availability with you before your deposit is processed.
           If the date is unavailable, we will contact you to reschedule.
         </div>
+        <div class="sunday-notice" id="kisumuNotice">
+          Kisumu bookings are grouped into dedicated detailing weeks each month. We'll confirm your exact date via WhatsApp after you book.
+        </div>
       </div>
 
       <!-- 5. Preferred Time Slot (optional) -->
@@ -436,11 +457,20 @@
         </select>
       </div>
 
-      <!-- 6. Location -->
+      <!-- 6. City -->
       <div class="form-group">
-        <label class="form-label" for="location">Your Location / Estate</label>
+        <label class="form-label" for="city">City</label>
+        <select class="form-control" id="city">
+          <option value="Nairobi">Nairobi</option>
+          <option value="Kisumu">Kisumu</option>
+        </select>
+      </div>
+
+      <!-- 7. Estate / Neighbourhood -->
+      <div class="form-group">
+        <label class="form-label" for="location">Your Estate / Neighbourhood</label>
         <input class="form-control" type="text" id="location"
-               placeholder="e.g. Karen, Runda, Milimani, Riat Hills..."
+               placeholder="e.g. Karen, Runda, Lavington, Westlands, Kilimani..."
                autocomplete="street-address" required>
         <span class="field-error" id="location-error">
           Please enter your location so we can confirm we cover your area
@@ -609,7 +639,7 @@
   // ── SERVICE MAP ──────────────────────────────────────────────────────────────
   var SERVICES = {
     'express-gloss':         { name: 'Express Gloss',                    tagline: 'Showroom Shine in 75 Minutes or Less',          deposit: 2500, balance: 'KES 2,500' },
-    'cabin-refresh':         { name: 'Cabin Refresh',                    tagline: 'Deep Interior Restoration',                     deposit: 2500, balance: null },
+    'cabin-refresh':         { name: 'The Factory-Fresh Cabin Refresh',   tagline: 'Stains & Odors Eliminated',                     deposit: 2500, balance: null },
     'signature-spa':         { name: 'Indigo Signature Spa',             tagline: 'The Ultimate Bumper-to-Bumper Transformation',  deposit: 2500, balance: null },
     'headlight-restoration': { name: 'Headlight Restoration',            tagline: 'Crystal Clarity Restored',                     deposit: 2500, balance: null },
     'paint-correction':      { name: 'Pro Machine Buffing',              tagline: 'Permanent Paint Correction',                   deposit: 2500, balance: null },
@@ -683,6 +713,10 @@
     return /^(07\d{8}|01\d{8}|\+254[71]\d{8})$/.test(cleaned);
   }
 
+  function validateEmail(val) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(val.trim());
+  }
+
   function setError(id, isError) {
     var errEl   = document.getElementById(id + '-error');
     var inputEl = document.getElementById(id);
@@ -695,7 +729,7 @@
     var errs = [
       setError('fname',    !document.getElementById('fname').value.trim()),
       setError('phone',    !validatePhone(document.getElementById('phone').value)),
-      setError('email',    !document.getElementById('email').validity.valid),
+      setError('email',    !validateEmail(document.getElementById('email').value)),
       setError('date',     !document.getElementById('date').value),
       setError('location', !document.getElementById('location').value.trim()),
       setError('vehicle',  !document.getElementById('vehicle').value.trim())
@@ -713,12 +747,26 @@
     return true;
   }
 
-  // ── KITENGELA / KIAMBU / ATHI RIVER SURCHARGE NOTICE (Express Gloss only) ───
+  // ── CITY SELECTOR ───────────────────────────────────────────────────────────
+  var cityEl       = document.getElementById('city');
   var locationInput = document.getElementById('location');
-  var surchargeEl   = document.getElementById('surchargeNotice');
-  var SURCHARGE_RE  = /kitengela|kiambu|athi\s*river/i;
+  var kisumuNotice = document.getElementById('kisumuNotice');
+
+  var NBI_PLACEHOLDER = 'e.g. Karen, Runda, Lavington, Westlands, Kilimani...';
+  var KSM_PLACEHOLDER = 'e.g. Riat Hills, Milimani, Kanyakwar...';
+
+  cityEl.addEventListener('change', function() {
+    var isKisumu = this.value === 'Kisumu';
+    locationInput.placeholder = isKisumu ? KSM_PLACEHOLDER : NBI_PLACEHOLDER;
+    kisumuNotice.classList.toggle('visible', isKisumu);
+    checkSurcharge();
+  });
+
+  // ── KITENGELA / KIAMBU / ATHI RIVER SURCHARGE NOTICE (Express Gloss, Nairobi only) ───
+  var surchargeEl  = document.getElementById('surchargeNotice');
+  var SURCHARGE_RE = /kitengela|kiambu|athi\s*river/i;
   function checkSurcharge() {
-    if (slug === 'express-gloss' && SURCHARGE_RE.test(locationInput.value)) {
+    if (slug === 'express-gloss' && cityEl.value === 'Nairobi' && SURCHARGE_RE.test(locationInput.value)) {
       surchargeEl.style.display = 'block';
     } else {
       surchargeEl.style.display = 'none';
@@ -728,6 +776,20 @@
     locationInput.addEventListener('input', checkSurcharge);
     locationInput.addEventListener('change', checkSurcharge);
   }
+
+  // ── ADD-ON SERVICE SELECTOR ─────────────────────────────────────────────────
+  var ADDON_WA = {
+    'paint-correction':      'Add-on requested: Pro Machine Buffing (Sedan from KES 6,000 / SUV from KES 7,000 — final price confirmed on-site)',
+    'headlight-restoration': 'Add-on requested: Headlight Restoration (KES 5,000 per set — final price confirmed on-site)',
+    'ceramic-coating':       'Add-on requested: Premium Graphene Ceramic Coating (Sedan KES 80,000 / SUV KES 90,000 — final price confirmed on-site)\n⚠️ Note: Ceramic Coating requires 24–48hrs cure time, vehicle must not be driven or exposed to water during that window.',
+    'fleet':                 'Add-on requested: Fleet Reconditioning — our team will follow up with a custom quote.'
+  };
+
+  var addonEl       = document.getElementById('addon');
+  var ceramicNote   = document.getElementById('ceramicAddonNote');
+  addonEl.addEventListener('change', function() {
+    ceramicNote.style.display = (this.value === 'ceramic-coating') ? 'block' : 'none';
+  });
 
   // Clear error state on user input
   ['fname','phone','email','date','location','vehicle'].forEach(function(id) {
@@ -749,9 +811,11 @@
     var email    = document.getElementById('email').value.trim();
     var date     = document.getElementById('date').value;
     var timeSlot = document.getElementById('timeSlot').value || 'Flexible / Anytime';
+    var city     = document.getElementById('city').value;
     var location = document.getElementById('location').value.trim();
     var vehicle  = document.getElementById('vehicle').value.trim();
     var notes    = document.getElementById('notes').value.trim();
+    var addon    = document.getElementById('addon').value;
     var svcName  = service ? service.name : 'Service';
     var deposit  = service ? service.deposit : 2500;
 
@@ -798,12 +862,15 @@
           '*Name:* ' + name + '\n' +
           '*Date:* ' + date + '\n' +
           '*Time Slot:* ' + displayTime + '\n' +
+          '*City:* ' + city + '\n' +
           '*Location:* ' + location + '\n' +
-          '*Vehicle:* ' + vehicle + '\n\n' +
+          '*Vehicle:* ' + vehicle + '\n' +
+          '*Email:* ' + email + '\n\n' +
           '💳 *Payment Reference:* ' + ref + '\n' +
           '💰 *Deposit Paid:* KES 2,500\n' +
-          '💰 *Balance Due on Completion:* ' + balanceDue + '\n\n' +
-          '━━━━━━━━━━━━━━━━\n' +
+          '💰 *Balance Due on Completion:* ' + balanceDue + '\n' +
+          (addon && ADDON_WA[addon] ? '\n➕ ' + ADDON_WA[addon] + '\n' : '') +
+          '\n━━━━━━━━━━━━━━━━\n' +
           '📌 *WHAT HAPPENS NEXT*\n' +
           '━━━━━━━━━━━━━━━━\n' +
           '1️⃣ Send this message to confirm your slot\n' +
@@ -819,7 +886,7 @@
         document.getElementById('successRef').textContent      = 'Reference: ' + ref;
         document.getElementById('successService').textContent  = svcName;
         document.getElementById('successDate').textContent     = date;
-        document.getElementById('successLocation').textContent = location;
+        document.getElementById('successLocation').textContent = city + ' — ' + location;
         document.getElementById('successVehicle').textContent  = vehicle;
         document.getElementById('waSuccessBtn').href           = waUrl;
 
