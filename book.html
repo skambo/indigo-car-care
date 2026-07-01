@@ -353,7 +353,6 @@
   </style>
 
   <script src="https://js.paystack.co/v1/inline.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 <body>
 
@@ -890,43 +889,30 @@
         document.getElementById('successVehicle').textContent  = vehicle;
         document.getElementById('waSuccessBtn').href           = waUrl;
 
-        /*
-         * EMAILJS SETUP — 3 steps:
-         * 1. Create free account at emailjs.com
-         * 2. Add a Gmail service — connect jkcartage2015@gmail.com
-         * 3. Create an email template, copy the Service ID,
-         *    Template ID and Public Key into the three
-         *    placeholders below
-         * This sends Joe an automatic email for every paid booking.
-         * Takes ~15 minutes to set up.
-         */
-        try {
-          emailjs.send(
-            'YOUR_SERVICE_ID',
-            'YOUR_TEMPLATE_ID',
-            {
-              to_email:        'jkcartage2015@gmail.com',
-              booking_ref:     ref,
-              client_name:     name,
-              client_whatsapp: phone,
-              client_email:    email,
-              service:         svcName,
-              date:            date,
-              time_slot:       displayTime,
-              location:        location,
-              vehicle:         vehicle,
-              notes:           notes,
-              deposit_paid:    'KES 2,500',
-              paystack_ref:    ref
-            },
-            'YOUR_PUBLIC_KEY'
-          ).then(
-            function()    { console.log('Booking notification sent to Joe'); },
-            function(err) { console.warn('EmailJS failed — WhatsApp is primary:', err); }
-          ).catch(function(err) { console.warn('EmailJS error:', err); });
-        } catch(e) {
-          console.warn('EmailJS not available:', e);
-        }
+        // Fire-and-forget email to client + Joe via Resend serverless function.
+        // Runs after WhatsApp opens — a failure here never affects the booking.
+        fetch('/api/send-booking-email', {
+          method:  'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name:          name,
+            email:         email,
+            phone:         phone,
+            service:       svcName,
+            addon:         addon ? (ADDON_WA[addon] ? addon : addon) : '',
+            date:          date,
+            timeSlot:      displayTime,
+            city:          city,
+            location:      location,
+            vehicle:       vehicle,
+            notes:         notes,
+            paystackRef:   ref,
+            depositAmount: 'KES 2,500'
+          })
+        })
+        .then(function(r) { return r.json(); })
+        .then(function(d) { console.log('Email result:', d); })
+        .catch(function(err) { console.warn('Email send failed (WhatsApp is primary):', err); });
 
         // Show overlay and auto-open WhatsApp so message is pre-filled and ready to send
         document.getElementById('successOverlay').classList.add('visible');
