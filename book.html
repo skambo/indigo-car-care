@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Book Your Detail — Indigo Car Care Club</title>
-  <meta name="description" content="Book your Indigo Car Care Club mobile detailing service. Pay your deposit securely online — we confirm via WhatsApp within 5 minutes."/>
+  <title>Book Your Detail at Indigo Car Care Club</title>
+  <meta name="description" content="Book your Indigo Car Care Club mobile detailing service. Pay your deposit securely online. We confirm via WhatsApp within 5 minutes."/>
   <meta name="robots" content="noindex"/>
   <link rel="canonical" href="https://indigocarcare.com/book.html"/>
 
@@ -39,7 +39,7 @@
       border-bottom: 1px solid rgba(204,0,0,0.2);
       min-height: 60px;
     }
-    .nav-logo img { height: 34px; width: auto; }
+    .nav-logo img { height: 42px; width: auto; }
     .nav-back {
       font-family: 'DM Mono', monospace; font-size: 0.7rem;
       letter-spacing: 0.12em; text-transform: uppercase;
@@ -397,10 +397,9 @@
           <option value="paint-correction">Pro Machine Buffing</option>
           <option value="headlight-restoration">Headlight Restoration</option>
           <option value="ceramic-coating">Premium Graphene Ceramic Coating</option>
-          <option value="fleet">Fleet Reconditioning</option>
         </select>
         <div id="ceramicAddonNote" style="display:none;margin-top:0.5rem;padding:0.85rem 1rem;background:rgba(201,168,76,0.07);border:1px solid rgba(201,168,76,0.3);border-left:3px solid #C9A84C;font-size:0.8rem;color:rgba(201,168,76,0.9);line-height:1.65;">
-          ⚠️ Ceramic Coating requires 24–48 hrs cure time — the vehicle must not be driven or exposed to water during that window. We will confirm scheduling requirements with you before your appointment.
+          ⚠️ Ceramic Coating requires 24 to 48 hours cure time. The vehicle must not be driven or exposed to water during that window. We will confirm scheduling requirements with you before your appointment.
         </div>
       </div>
 
@@ -434,7 +433,7 @@
         <input class="form-control" type="date" id="date" required>
         <span class="field-error" id="date-error">Please select your preferred date of service</span>
         <div class="sunday-notice" id="sundayNotice">
-          Sunday selected — we will confirm availability with you before your deposit is processed.
+          Sunday selected. We will confirm availability with you before your deposit is processed.
           If the date is unavailable, we will contact you to reschedule.
         </div>
         <div class="sunday-notice" id="kisumuNotice">
@@ -450,9 +449,9 @@
         </label>
         <select class="form-control" id="timeSlot">
           <option value="Flexible / Anytime">Flexible / Anytime</option>
-          <option value="Morning (8am – 11am)">Morning (8am – 11am)</option>
-          <option value="Midday (11am – 2pm)">Midday (11am – 2pm)</option>
-          <option value="Afternoon (2pm – 5pm)">Afternoon (2pm – 5pm)</option>
+          <option value="Morning (8am to 11am)">Morning (8am to 11am)</option>
+          <option value="Midday (11am to 2pm)">Midday (11am to 2pm)</option>
+          <option value="Afternoon (2pm to 5pm)">Afternoon (2pm to 5pm)</option>
         </select>
       </div>
 
@@ -504,11 +503,11 @@
 
       <!-- TERMS BOX -->
       <div class="terms-box">
-        <div class="terms-box-title">Booking Terms — Please Read</div>
+        <div class="terms-box-title">Please Read Our Booking Terms</div>
 
         <div class="terms-item">
           <span class="ico ok">✓</span>
-          <p>Your KES 2,500 deposit secures your booking slot.</p>
+          <p>Your deposit (shown above) secures your booking slot.</p>
         </div>
         <div class="terms-item">
           <span class="ico ok">✓</span>
@@ -516,19 +515,19 @@
         </div>
         <div class="terms-item">
           <span class="ico ok">✓</span>
-          <p>Cancellations with 48+ hours notice: full deposit refund.</p>
+          <p id="cancelRefundLine">Cancellations with 24 or more hours notice receive a full deposit refund.</p>
         </div>
         <div class="terms-item">
           <span class="ico no">✗</span>
-          <p>Cancellations with less than 48 hours notice: deposit is non-refundable. This protects our team's time and travel.</p>
+          <p id="cancelForfeitLine">Cancellations with less than 24 hours notice are non-refundable. This protects our team's time and travel.</p>
         </div>
         <div class="terms-item">
           <span class="ico no">✗</span>
-          <p>No-shows on the day: deposit is forfeited in full.</p>
+          <p>No-shows on the day forfeit the deposit in full.</p>
         </div>
         <div class="terms-item">
           <span class="ico ok">✓</span>
-          <p>Sunday bookings are subject to availability — we will confirm via WhatsApp before processing your deposit.</p>
+          <p>Sunday bookings are subject to availability. We will confirm via WhatsApp before processing your deposit.</p>
         </div>
 
         <div class="terms-note">
@@ -540,7 +539,7 @@
           <input type="checkbox" id="termsCheck" onchange="togglePayBtn()">
           <label for="termsCheck">
             I have read and agree to the Indigo Car Care Club Booking Terms and Conditions.
-            I understand that cancellations within 48 hours of my booking are non-refundable.
+            I understand that cancellations within <span id="cancelWindowLabel">24 hours</span> of my booking are non-refundable.
             <a href="/terms.html" target="_blank">View full Terms &amp; Conditions →</a>
           </label>
         </div>
@@ -548,13 +547,13 @@
 
       <!-- PAY BUTTON -->
       <button type="submit" class="pay-btn" id="payBtn" disabled>
-        Pay KES 2,500 Deposit &amp; Confirm Booking
+        Pay Deposit &amp; Confirm Booking
       </button>
 
       <!-- FAILURE NOTICE -->
       <div class="failure-notice" id="failureNotice">
         <strong>Payment not completed.</strong> You can try again above, or pay manually:<br>
-        <div class="mpesa-line">M-Pesa Paybill 516600 · Account 929787 · Amount KES 2,500</div>
+        <div class="mpesa-line" id="failureMpesaLine">M-Pesa Paybill 516600 · Account 929787</div>
         Then WhatsApp us your M-Pesa ref on <strong>+254 112 657 174</strong>
       </div>
 
@@ -590,7 +589,7 @@
       </div>
     </div>
 
-    <div class="success-deposit">💰 Deposit Paid: KES 2,500</div>
+    <div class="success-deposit" id="successDeposit">💰 Deposit Paid: —</div>
 
     <p class="success-instruction">
       WhatsApp is opening with your booking summary.<br>
@@ -636,19 +635,44 @@
 
 <script>
   // ── SERVICE MAP ──────────────────────────────────────────────────────────────
+  // depositType: 'percent50' (cryogenic / dry ice blasting) or 'flat2000' (everything else).
+  // Deposit and balance are always computed from price + depositType — never hardcoded
+  // per service — so Paystack, WhatsApp and the confirmation email stay in sync.
   var SERVICES = {
-    'express-gloss':         { name: 'Express Gloss',                    tagline: 'Showroom Shine in 75 Minutes or Less',          deposit: 2500, balance: 'KES 2,500' },
-    'cabin-refresh':         { name: 'The Factory-Fresh Cabin Refresh',   tagline: 'Stains & Odors Eliminated',                     deposit: 2500, balance: null },
-    'signature-spa':         { name: 'Indigo Signature Spa',             tagline: 'The Ultimate Bumper-to-Bumper Transformation',  deposit: 2500, balance: null },
-    'headlight-restoration': { name: 'Headlight Restoration',            tagline: 'Crystal Clarity Restored',                     deposit: 2500, balance: null },
-    'paint-correction':      { name: 'Pro Machine Buffing',              tagline: 'Permanent Paint Correction',                   deposit: 2500, balance: null },
-    'ceramic-coating':       { name: 'Premium Graphene Ceramic Coating', tagline: 'The Pinnacle of Paint Protection',             deposit: 2500, balance: null },
-    'fleet':                 { name: 'Fleet Reconditioning',             tagline: 'B2B Fleet & Dealership Service',               deposit: 2500, balance: null }
+    'cryo-aero-clean-engine':        { name: 'Aero-Clean Engine Restoration',              tagline: '100% waterless mechanical blast, −78.5°C dry ice treatment', price: 22000,  depositType: 'percent50' },
+    'cryo-undercarriage-deep-blast': { name: 'Undercarriage Deep Blast & Protection',      tagline: 'Deep mud & grime stripping, plus protective sealant',        price: 35000,  depositType: 'percent50' },
+    'cryo-power-core-combo':         { name: 'The Power Core (Engine + Undercarriage Combo)', tagline: 'Full engine and undercarriage decontamination',           price: 49900,  depositType: 'percent50' },
+    'cryo-bumper-to-bumper':         { name: 'Bumper-to-Bumper Cryogenic Restoration',     tagline: 'Complete engine, undercarriage, wheels and calipers',        price: 75000,  depositType: 'percent50' },
+    'cabin-refresh':                 { name: 'Indigo Cabin Refresh (Sedan)',               tagline: 'Stains and odors eliminated, full interior deep clean',      price: 12000,  depositType: 'flat2000' },
+    'cabin-refresh-suv':             { name: 'Indigo Cabin Refresh (SUV+)',                tagline: 'Stains and odors eliminated, full interior deep clean',      price: 14000,  depositType: 'flat2000' },
+    'signature-spa':                 { name: 'Indigo Signature Spa (Sedan)',               tagline: 'Cabin refresh plus single-stage paint correction',           price: 22000,  depositType: 'flat2000' },
+    'signature-spa-suv':             { name: 'Indigo Signature Spa (SUV+)',                tagline: 'Cabin refresh plus single-stage paint correction',           price: 24000,  depositType: 'flat2000' },
+    'cryo-extreme-clean':            { name: 'Indigo Extreme Clean (Sedan)',               tagline: 'Cabin refresh plus cryogenic engine detailing, waterless',   price: 32000,  depositType: 'percent50' },
+    'cryo-extreme-clean-suv':        { name: 'Indigo Extreme Clean (SUV)',                 tagline: 'Cabin refresh plus cryogenic engine detailing, waterless',   price: 34000,  depositType: 'percent50' },
+    'cryo-sovereign-spa':            { name: 'The Indigo Sovereign Spa',                   tagline: 'Bumper-to-bumper cryogenic rebirth plus ceramic coating',     price: 145000, depositType: 'percent50' },
+    'paint-correction':              { name: 'Pro Machine Buffing',                        tagline: 'From KSh 12,000 (Sedan) / KSh 15,000 (SUV). Final price confirmed on-site.', price: 12000, depositType: 'flat2000', variablePrice: true },
+    'ceramic-coating':               { name: 'Premium Graphene Ceramic Coating',           tagline: 'KSh 80,000 (Sedan) / KSh 90,000 (SUV)',                       price: 80000,  depositType: 'flat2000', variablePrice: true },
+    'headlight-restoration':         { name: 'Headlight Professional Restoration',         tagline: 'Crystal clarity restored, per set',                           price: 5000,   depositType: 'flat2000' }
   };
 
+  function computeDeposit(svc) {
+    if (!svc) return 2000;
+    return svc.depositType === 'percent50' ? Math.round(svc.price * 0.5) : 2000;
+  }
+
+  function computeBalanceLabel(svc, deposit) {
+    if (!svc || svc.variablePrice) return 'Confirmed on-site';
+    return 'KES ' + (svc.price - deposit).toLocaleString();
+  }
+
   // ── READ URL PARAM ───────────────────────────────────────────────────────────
-  var slug = new URLSearchParams(window.location.search).get('service') || '';
+  var slug    = new URLSearchParams(window.location.search).get('service') || '';
   var service = SERVICES[slug] || null;
+  var deposit = computeDeposit(service);
+
+  // Cancellation window: 48 hours for cryogenic (percent50) services, 24 hours for everything else.
+  // Derived from the same depositType field that drives the deposit amount, so this stays in sync.
+  var cancelWindowHours = (service && service.depositType === 'percent50') ? 48 : 24;
 
   var summaryEl   = document.getElementById('serviceSummary');
   var formWrapper = document.getElementById('formWrapper');
@@ -659,11 +683,16 @@
         '<div class="svc-label">Selected Service</div>' +
         '<div class="svc-name">' + service.name + '</div>' +
         '<div class="svc-tagline">' + service.tagline + '</div>' +
-        '<div class="svc-deposit">Deposit to confirm: <strong>KES ' + service.deposit.toLocaleString() + '</strong></div>' +
-        '<div class="svc-balance">Balance payable on completion of service</div>' +
+        '<div class="svc-deposit">Deposit to confirm: <strong>KES ' + deposit.toLocaleString() + '</strong></div>' +
+        '<div class="svc-balance">Balance due on completion: ' + computeBalanceLabel(service, deposit) + '</div>' +
         '<a href="/index.html#services" class="svc-change">← Change service</a>' +
       '</div>';
     formWrapper.style.display = 'block';
+    document.getElementById('payBtn').textContent = 'Pay KES ' + deposit.toLocaleString() + ' Deposit & Confirm Booking';
+    document.getElementById('failureMpesaLine').textContent = 'M-Pesa Paybill 516600 · Account 929787 · Amount KES ' + deposit.toLocaleString();
+    document.getElementById('cancelRefundLine').textContent = 'Cancellations with ' + cancelWindowHours + ' or more hours notice receive a full deposit refund.';
+    document.getElementById('cancelForfeitLine').textContent = 'Cancellations with less than ' + cancelWindowHours + ' hours notice are non-refundable. This protects our team\'s time and travel.';
+    document.getElementById('cancelWindowLabel').textContent = cancelWindowHours + ' hours';
   } else {
     summaryEl.innerHTML =
       '<div class="no-service">' +
@@ -761,11 +790,11 @@
     checkSurcharge();
   });
 
-  // ── KITENGELA / KIAMBU / ATHI RIVER SURCHARGE NOTICE (Express Gloss, Nairobi only) ───
+  // ── KITENGELA / KIAMBU / ATHI RIVER / LIMURU SURCHARGE NOTICE (outer-metro Nairobi zones) ───
   var surchargeEl  = document.getElementById('surchargeNotice');
-  var SURCHARGE_RE = /kitengela|kiambu|athi\s*river/i;
+  var SURCHARGE_RE = /kitengela|kiambu|athi\s*river|limuru/i;
   function checkSurcharge() {
-    if (slug === 'express-gloss' && cityEl.value === 'Nairobi' && SURCHARGE_RE.test(locationInput.value)) {
+    if (cityEl.value === 'Nairobi' && SURCHARGE_RE.test(locationInput.value)) {
       surchargeEl.style.display = 'block';
     } else {
       surchargeEl.style.display = 'none';
@@ -778,10 +807,9 @@
 
   // ── ADD-ON SERVICE SELECTOR ─────────────────────────────────────────────────
   var ADDON_WA = {
-    'paint-correction':      'Add-on requested: Pro Machine Buffing (Sedan from KES 6,000 / SUV from KES 7,000 — final price confirmed on-site)',
-    'headlight-restoration': 'Add-on requested: Headlight Restoration (KES 5,000 per set — final price confirmed on-site)',
-    'ceramic-coating':       'Add-on requested: Premium Graphene Ceramic Coating (Sedan KES 80,000 / SUV KES 90,000 — final price confirmed on-site)\n⚠️ Note: Ceramic Coating requires 24–48hrs cure time, vehicle must not be driven or exposed to water during that window.',
-    'fleet':                 'Add-on requested: Fleet Reconditioning — our team will follow up with a custom quote.'
+    'paint-correction':      'Add-on requested: Pro Machine Buffing (from KES 12,000 Sedan / KES 15,000 SUV, final price confirmed on-site)',
+    'headlight-restoration': 'Add-on requested: Headlight Restoration (KES 5,000 per set, final price confirmed on-site)',
+    'ceramic-coating':       'Add-on requested: Premium Graphene Ceramic Coating (Sedan KES 80,000 / SUV KES 90,000, final price confirmed on-site)\n⚠️ Note: Ceramic Coating requires 24 to 48 hours cure time. The vehicle must not be driven or exposed to water during that window.'
   };
 
   var addonEl       = document.getElementById('addon');
@@ -816,7 +844,6 @@
     var notes    = document.getElementById('notes').value.trim();
     var addon    = document.getElementById('addon').value;
     var svcName  = service ? service.name : 'Service';
-    var deposit  = service ? service.deposit : 2500;
 
     btn.disabled    = true;
     btn.textContent = 'Opening Payment…';
@@ -842,8 +869,9 @@
       callback: function(response) {
         var ref = response.reference;
 
-        // Balance due — only Express Gloss has a known flat price
-        var balanceDue = (service && service.balance) ? service.balance : 'Balance to be confirmed on-site';
+        // Balance due — computed from the selected service's price, unless it's a
+        // variable-price service (final price confirmed on-site).
+        var balanceDue = computeBalanceLabel(service, deposit);
 
         // Normalise time slot display
         var displayTime = (/flexible/i).test(timeSlot) ? 'Flexible / To be confirmed' : timeSlot;
@@ -853,7 +881,7 @@
           '🚗 *INDIGO CAR CARE CLUB*\n' +
           '_Your Ride, Your Pride_\n\n' +
           '✅ *Booking Confirmed!*\n' +
-          'Your deposit of KES 2,500 has been received.\n\n' +
+          'Your deposit of KES ' + deposit.toLocaleString() + ' has been received.\n\n' +
           '━━━━━━━━━━━━━━━━\n' +
           '📋 *BOOKING SUMMARY*\n' +
           '━━━━━━━━━━━━━━━━\n' +
@@ -866,7 +894,7 @@
           '*Vehicle:* ' + vehicle + '\n' +
           '*Email:* ' + email + '\n\n' +
           '💳 *Payment Reference:* ' + ref + '\n' +
-          '💰 *Deposit Paid:* KES 2,500\n' +
+          '💰 *Deposit Paid:* KES ' + deposit.toLocaleString() + '\n' +
           '💰 *Balance Due on Completion:* ' + balanceDue + '\n' +
           (addon && ADDON_WA[addon] ? '\n➕ ' + ADDON_WA[addon] + '\n' : '') +
           '\n━━━━━━━━━━━━━━━━\n' +
@@ -874,8 +902,8 @@
           '━━━━━━━━━━━━━━━━\n' +
           '1️⃣ Send this message to confirm your slot\n' +
           '2️⃣ We will reply within 5 minutes to confirm your arrival time\n' +
-          '3️⃣ Our team arrives at your location — you don\'t lift a finger\n\n' +
-          '⚠️ *Cancellation Policy:* 48+ hours notice = full refund. Less than 48 hours = deposit forfeited.\n\n' +
+          '3️⃣ Our team arrives at your location. You don\'t lift a finger.\n\n' +
+          '⚠️ *Cancellation Policy:* ' + cancelWindowHours + '+ hours notice = full refund. Less than ' + cancelWindowHours + ' hours = deposit forfeited.\n\n' +
           '📞 Questions? Call or WhatsApp: +254 112 657 174\n' +
           '🌐 indigocarcare.com';
 
@@ -885,8 +913,9 @@
         document.getElementById('successRef').textContent      = 'Reference: ' + ref;
         document.getElementById('successService').textContent  = svcName;
         document.getElementById('successDate').textContent     = date;
-        document.getElementById('successLocation').textContent = city + ' — ' + location;
+        document.getElementById('successLocation').textContent = city + ', ' + location;
         document.getElementById('successVehicle').textContent  = vehicle;
+        document.getElementById('successDeposit').textContent  = '💰 Deposit Paid: KES ' + deposit.toLocaleString();
         document.getElementById('waSuccessBtn').href           = waUrl;
 
         // Fire-and-forget email to client + Joe via Resend serverless function.
@@ -907,7 +936,7 @@
             vehicle:       vehicle,
             notes:         notes,
             paystackRef:   ref,
-            depositAmount: 'KES 2,500'
+            depositAmount: 'KES ' + deposit.toLocaleString()
           })
         })
         .then(function(r) { return r.json(); })
@@ -921,7 +950,7 @@
       },
       onClose: function() {
         btn.disabled    = false;
-        btn.textContent = 'Pay KES 2,500 Deposit & Confirm Booking';
+        btn.textContent = 'Pay KES ' + deposit.toLocaleString() + ' Deposit & Confirm Booking';
         failure.classList.add('visible');
         failure.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       }

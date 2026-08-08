@@ -92,7 +92,7 @@ export default async function handler(req, res) {
 
               <!-- Deposit -->
               <div style="background:#0d1f12;border:1px solid #1a3d22;padding:14px 16px;margin-bottom:24px;">
-                <p style="margin:0;font-size:13px;color:#16a34a;font-weight:600;">✓ Deposit Paid: KES 2,500 — deducted from your total on the day</p>
+                <p style="margin:0;font-size:13px;color:#16a34a;font-weight:600;">✓ Deposit Paid: ${esc(depositAmount || 'KES 2,000')}. Deducted from your total on the day.</p>
               </div>
 
               <!-- What happens next -->
@@ -148,7 +148,7 @@ Location:       ${location}
 Vehicle:        ${vehicle}
 Notes:          ${notes || '—'}
 
-Deposit Paid:   ${depositAmount || 'KES 2,500'}
+Deposit Paid:   ${depositAmount || 'KES 2,000'}
 Paystack Ref:   ${paystackRef}
 `;
 
