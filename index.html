@@ -103,15 +103,6 @@
     .hero-sub { font-size: 1rem; color: var(--muted); max-width: 640px; margin: 0 auto 1.25rem; line-height: 1.75; font-weight: 300; }
     .hero-sub strong { color: var(--text); font-weight: 500; }
     .hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1.5rem; }
-    .hero-promo-badge {
-      display: inline-flex; align-items: center; flex-wrap: wrap; justify-content: center; gap: 0.6rem;
-      background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.4);
-      padding: 0.6rem 1.2rem; margin-top: 1.75rem;
-      font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.03em; color: var(--text);
-    }
-    .hero-promo-badge strong { color: var(--green); text-transform: uppercase; letter-spacing: 0.06em; }
-    .hero-promo-badge a { color: var(--green); text-decoration: underline; text-underline-offset: 3px; white-space: nowrap; transition: color 0.2s; }
-    .hero-promo-badge a:hover { color: var(--white); }
     .btn-primary { background: var(--red); color: var(--white); font-family: 'DM Mono', monospace; font-size: 0.78rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; padding: 1rem 2.2rem; border: none; cursor: pointer; text-decoration: none; transition: all 0.2s; display: inline-block; }
     .btn-primary:hover { background: var(--red-light); transform: translateY(-2px); }
     .btn-outline { background: transparent; color: var(--white); font-family: 'DM Mono', monospace; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 1rem 2.2rem; border: 1px solid rgba(255,255,255,0.2); cursor: pointer; text-decoration: none; transition: all 0.2s; display: inline-block; }
@@ -144,8 +135,8 @@
     .price-table tr:last-child td { border-bottom: none; }
 
     /* LAUNCH OFFER BANNER */
-    .launch-banner { background: linear-gradient(135deg, rgba(34,197,94,0.12), rgba(204,0,0,0.04)); border: 1px solid rgba(34,197,94,0.4); border-top: 3px solid var(--green); padding: 3.5rem 2.5rem; text-align: center; max-width: 900px; margin: 0 auto; box-shadow: 0 0 50px rgba(34,197,94,0.06); }
-    .launch-banner h3 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.1rem, 5vw, 3.4rem); color: var(--green); letter-spacing: 0.04em; margin-bottom: 0.75rem; }
+    .launch-banner { background: linear-gradient(135deg, rgba(204,0,0,0.14), rgba(204,0,0,0.02)); border: 1px solid rgba(204,0,0,0.35); padding: 3rem 2.5rem; text-align: center; max-width: 900px; margin: 0 auto; }
+    .launch-banner h3 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(1.8rem, 4vw, 2.8rem); color: var(--red); letter-spacing: 0.04em; margin-bottom: 0.75rem; }
     .launch-banner p { font-size: 0.9rem; color: var(--text); line-height: 1.8; max-width: 600px; margin: 0 auto; }
     .launch-banner .launch-note { font-size: 0.78rem; color: var(--muted); margin-top: 1rem; font-weight: 300; }
 
@@ -356,12 +347,6 @@
       </div>
     </div>
 
-    <div class="hero-promo-badge">
-      <strong>Launch Offer</strong>
-      <span>15% off your first booking</span>
-      <a href="index.html?promo=launch15#packages">Claim Your Spot →</a>
-    </div>
-
     <div class="hero-actions">
       <a href="https://wa.me/254112657174?text=Hi%20Indigo!%20I%27d%20like%20to%20book%20mobile%20dry%20ice%20blasting." target="_blank" rel="noopener" class="btn-primary">Book via WhatsApp (+254 112 657 174)</a>
       <a href="#packages" class="btn-outline">View Full Service Menu &amp; Pricing</a>
@@ -442,7 +427,7 @@
     <p>Be among the first 20 vehicle owners in Kenya to experience precision mobile dry ice detailing. Pre-book today for 15% off any cryogenic package.</p>
     <p class="launch-note">Requires a 50% mobilization deposit to reserve your media allocation and mobile team slot. 48hrs advance booking required for dry ice appointments.</p>
     <div style="margin-top:1.75rem;">
-      <a href="index.html?promo=launch15#packages" class="btn-primary">Claim Your Launch Slot</a>
+      <a href="#packages" class="btn-primary">Claim Your Launch Slot</a>
     </div>
   </div>
 </section>
@@ -709,40 +694,6 @@
 </a>
 
 <script>
-  // ── LAUNCH PROMO (promo=launch15) ────────────────────────────────────────────
-  // Cryogenic service slugs, mirrors the depositType: 'percent50' entries in the
-  // SERVICES map on book.html. Keep this list in sync with that map.
-  var CRYO_SERVICE_SLUGS = [
-    'cryo-aero-clean-engine',
-    'cryo-undercarriage-deep-blast',
-    'cryo-power-core-combo',
-    'cryo-bumper-to-bumper',
-    'cryo-extreme-clean',
-    'cryo-extreme-clean-suv',
-    'cryo-sovereign-spa'
-  ];
-
-  var launchPromoActive = new URLSearchParams(window.location.search).get('promo') === 'launch15';
-  if (launchPromoActive) {
-    try { sessionStorage.setItem('launchPromoActive', '1'); } catch (e) {}
-  } else {
-    try { launchPromoActive = sessionStorage.getItem('launchPromoActive') === '1'; } catch (e) {}
-  }
-
-  // Appends &promo=launch15 to a booking link's href, only when its target service
-  // is cryogenic and the promo is active. Non-cryo links are left untouched.
-  function applyPromoToLink(link) {
-    if (!launchPromoActive || !link) return;
-    var href = link.getAttribute('href');
-    if (!href) return;
-    var match = href.match(/[?&]service=([^&]+)/);
-    if (!match || CRYO_SERVICE_SLUGS.indexOf(match[1]) === -1) return;
-    if (/[?&]promo=launch15\b/.test(href)) return;
-    link.setAttribute('href', href + (href.indexOf('?') !== -1 ? '&' : '?') + 'promo=launch15');
-  }
-
-  document.querySelectorAll('a[href*="book.html?service="]').forEach(applyPromoToLink);
-
   function toggleMobileNav() {
     const mob = document.getElementById('navMobile');
     const btn = document.getElementById('navHamburger');
@@ -780,7 +731,6 @@
           priceEl.textContent = toggle.getAttribute('data-price-suv');
           linkEl.href = '/book.html?service=' + toggle.getAttribute('data-service-suv');
         }
-        applyPromoToLink(linkEl);
       });
     });
   });
