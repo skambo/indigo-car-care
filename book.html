@@ -97,6 +97,19 @@
     }
     .svc-change:hover { color: var(--red); }
 
+    /* ── LAUNCH PROMO BANNER ─────────────────────────────────── */
+    .promo-banner {
+      margin-bottom: 1.5rem;
+      padding: 0.85rem 1.1rem;
+      background: rgba(34,197,94,0.08);
+      border: 1px solid rgba(34,197,94,0.3);
+      border-left: 3px solid var(--green);
+      font-size: 0.82rem; color: var(--green); line-height: 1.6;
+    }
+    .svc-price { font-size: 0.88rem; color: var(--text); margin-bottom: 0.3rem; }
+    .svc-price-was { color: var(--muted); text-decoration: line-through; margin-right: 0.5rem; }
+    .svc-price-now { font-family: 'DM Mono', monospace; color: var(--green); }
+
     /* ── NO-SERVICE FALLBACK ─────────────────────────────────── */
     .no-service {
       text-align: center;
@@ -378,6 +391,9 @@
     <div class="page-eyebrow">Secure Your Slot</div>
     <h1>Book Your Detail</h1>
   </div>
+
+  <!-- Launch offer banner — populated by JS when promo=launch15 applies to the selected service -->
+  <div id="promoBanner"></div>
 
   <!-- Service summary card — populated by JS -->
   <div id="serviceSummary"></div>
@@ -665,10 +681,25 @@
     return 'KES ' + (svc.price - deposit).toLocaleString();
   }
 
-  // ── READ URL PARAM ───────────────────────────────────────────────────────────
-  var slug    = new URLSearchParams(window.location.search).get('service') || '';
+  // ── READ URL PARAMS ──────────────────────────────────────────────────────────
+  var params  = new URLSearchParams(window.location.search);
+  var slug    = params.get('service') || '';
   var service = SERVICES[slug] || null;
-  var deposit = computeDeposit(service);
+
+  // Launch offer: 15% off any cryogenic service (depositType 'percent50'), when
+  // promo=launch15 is present. Non-cryo services are unaffected.
+  var launchPromoActive = params.get('promo') === 'launch15';
+  var isCryoService      = !!(service && service.depositType === 'percent50');
+  var promoApplies       = launchPromoActive && isCryoService;
+
+  // The service object fed to the deposit/balance logic below, with the discounted
+  // price substituted in when the promo applies, so deposit and balance stay in sync
+  // with the discount automatically.
+  var effectiveService = promoApplies
+    ? Object.assign({}, service, { price: Math.round(service.price * 0.85) })
+    : service;
+
+  var deposit = computeDeposit(effectiveService);
 
   // Cancellation window: 48 hours for cryogenic (percent50) services, 24 hours for everything else.
   // Derived from the same depositType field that drives the deposit amount, so this stays in sync.
@@ -676,6 +707,11 @@
 
   var summaryEl   = document.getElementById('serviceSummary');
   var formWrapper = document.getElementById('formWrapper');
+  var promoBanner = document.getElementById('promoBanner');
+
+  promoBanner.innerHTML = promoApplies
+    ? '<div class="promo-banner">Launch offer applied. 15% off this cryogenic service.</div>'
+    : '';
 
   if (service) {
     summaryEl.innerHTML =
@@ -683,8 +719,11 @@
         '<div class="svc-label">Selected Service</div>' +
         '<div class="svc-name">' + service.name + '</div>' +
         '<div class="svc-tagline">' + service.tagline + '</div>' +
+        (promoApplies
+          ? '<div class="svc-price">Price: <span class="svc-price-was">KES ' + service.price.toLocaleString() + '</span><span class="svc-price-now">KES ' + effectiveService.price.toLocaleString() + '</span></div>'
+          : '') +
         '<div class="svc-deposit">Deposit to confirm: <strong>KES ' + deposit.toLocaleString() + '</strong></div>' +
-        '<div class="svc-balance">Balance due on completion: ' + computeBalanceLabel(service, deposit) + '</div>' +
+        '<div class="svc-balance">Balance due on completion: ' + computeBalanceLabel(effectiveService, deposit) + '</div>' +
         '<a href="/index.html#services" class="svc-change">← Change service</a>' +
       '</div>';
     formWrapper.style.display = 'block';
@@ -869,9 +908,10 @@
       callback: function(response) {
         var ref = response.reference;
 
-        // Balance due — computed from the selected service's price, unless it's a
-        // variable-price service (final price confirmed on-site).
-        var balanceDue = computeBalanceLabel(service, deposit);
+        // Balance due — computed from the selected service's price (discounted price
+        // when the launch promo applies), unless it's a variable-price service
+        // (final price confirmed on-site).
+        var balanceDue = computeBalanceLabel(effectiveService, deposit);
 
         // Normalise time slot display
         var displayTime = (/flexible/i).test(timeSlot) ? 'Flexible / To be confirmed' : timeSlot;
