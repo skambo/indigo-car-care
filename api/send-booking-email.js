@@ -54,7 +54,7 @@ export default async function handler(req, res) {
             <td style="padding:32px 32px 24px;">
 
               <p style="margin:0 0 20px;font-size:15px;color:#cccccc;line-height:1.6;">
-                Hi <strong style="color:#ffffff;">${esc(name)}</strong>, your booking is confirmed and your deposit has been received. We'll also reach out on WhatsApp within 5 minutes to confirm your arrival time.
+                Hi <strong style="color:#ffffff;">${esc(name)}</strong>, your booking is confirmed and your deposit has been received. We'll also reach out on WhatsApp to confirm your arrival time.
               </p>
 
               <!-- Reference badge -->
@@ -98,7 +98,7 @@ export default async function handler(req, res) {
               <!-- What happens next -->
               <p style="margin:0 0 8px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#666666;">What Happens Next</p>
               <ol style="margin:0 0 24px;padding-left:20px;color:#cccccc;font-size:14px;line-height:1.8;">
-                <li>We'll confirm your slot on WhatsApp within 5 minutes</li>
+                <li>We'll confirm your slot on WhatsApp</li>
                 <li>Our team arrives at your location — you don't lift a finger</li>
                 <li>Balance is settled after the service is complete</li>
               </ol>

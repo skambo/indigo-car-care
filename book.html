@@ -448,6 +448,7 @@
         <label class="form-label" for="date">Date of Service</label>
         <input class="form-control" type="date" id="date" required>
         <span class="field-error" id="date-error">Please select your preferred date of service</span>
+        <span class="field-error" id="date-leadtime-error">Dry ice blasting requires at least 48 hours advance booking. Please choose a later date.</span>
         <div class="sunday-notice" id="sundayNotice">
           Sunday selected. We will confirm availability with you before your deposit is processed.
           If the date is unavailable, we will contact you to reschedule.
@@ -742,23 +743,85 @@
     formWrapper.style.display = 'none';
   }
 
-  // ── DATE: set min = today, detect Sundays ────────────────────────────────────
-  var dateInput = document.getElementById('date');
+  // ── DATE: set min = today (or +48h for cryogenic services), detect Sundays ────
+  var dateInput    = document.getElementById('date');
+  var timeSlotEl   = document.getElementById('timeSlot');
+  var leadTimeErr  = document.getElementById('date-leadtime-error');
+
+  // Earliest hour of each time slot, used to check the 48-hour cryogenic lead
+  // time against a specific date + slot combination.
+  var SLOT_START_HOUR = {
+    'Flexible / Anytime':     8,
+    'Morning (8am to 11am)':  8,
+    'Midday (11am to 2pm)':   11,
+    'Afternoon (2pm to 5pm)': 14
+  };
+
+  function formatDateInput(d) {
+    var yy = d.getFullYear();
+    var mm = String(d.getMonth() + 1).padStart(2, '0');
+    var dd = String(d.getDate()).padStart(2, '0');
+    return yy + '-' + mm + '-' + dd;
+  }
+
+  function slotStartDate(dateStr, slotVal) {
+    var parts = dateStr.split('-').map(Number);
+    var hour  = SLOT_START_HOUR.hasOwnProperty(slotVal) ? SLOT_START_HOUR[slotVal] : 8;
+    return new Date(parts[0], parts[1] - 1, parts[2], hour, 0, 0, 0);
+  }
+
   (function() {
-    var t = new Date();
-    var yy = t.getFullYear();
-    var mm = String(t.getMonth() + 1).padStart(2, '0');
-    var dd = String(t.getDate()).padStart(2, '0');
-    dateInput.setAttribute('min', yy + '-' + mm + '-' + dd);
+    var minDate = isCryoService ? new Date(Date.now() + 48 * 60 * 60 * 1000) : new Date();
+    dateInput.setAttribute('min', formatDateInput(minDate));
   })();
+
+  // Greys out (disables) any time slot on the selected date that falls inside
+  // the 48-hour cryogenic lead time window. No-op for non-cryo services.
+  function refreshTimeSlotAvailability() {
+    if (!isCryoService || !dateInput.value) {
+      Array.prototype.forEach.call(timeSlotEl.options, function(opt) { opt.disabled = false; });
+      return;
+    }
+    var cutoff = new Date(Date.now() + 48 * 60 * 60 * 1000);
+    Array.prototype.forEach.call(timeSlotEl.options, function(opt) {
+      opt.disabled = slotStartDate(dateInput.value, opt.value) < cutoff;
+    });
+  }
+
+  // Re-validates the selected date/time slot against the 48-hour cryogenic lead
+  // time, updating the inline error and has-error state. Returns whether the
+  // current selection is valid (always true for non-cryo services).
+  function refreshDateValidationUI() {
+    var dateEmpty   = !dateInput.value;
+    var leadInvalid = !dateEmpty && isCryoService &&
+      slotStartDate(dateInput.value, timeSlotEl.value) < new Date(Date.now() + 48 * 60 * 60 * 1000);
+
+    document.getElementById('date-error').classList.toggle('visible', dateEmpty);
+    leadTimeErr.classList.toggle('visible', leadInvalid);
+    dateInput.classList.toggle('has-error', dateEmpty || leadInvalid);
+
+    return !dateEmpty && !leadInvalid;
+  }
 
   dateInput.addEventListener('change', function() {
     var notice = document.getElementById('sundayNotice');
-    if (!this.value) { notice.classList.remove('visible'); return; }
-    var parts = this.value.split('-').map(Number);
-    var sel = new Date(parts[0], parts[1] - 1, parts[2]);
-    notice.classList.toggle('visible', sel.getDay() === 0);
+    if (!this.value) {
+      notice.classList.remove('visible');
+    } else {
+      var parts = this.value.split('-').map(Number);
+      var sel = new Date(parts[0], parts[1] - 1, parts[2]);
+      notice.classList.toggle('visible', sel.getDay() === 0);
+    }
+    refreshTimeSlotAvailability();
+    refreshDateValidationUI();
   });
+
+  timeSlotEl.addEventListener('change', function() {
+    refreshTimeSlotAvailability();
+    refreshDateValidationUI();
+  });
+
+  refreshTimeSlotAvailability();
 
   // ── CHARACTER COUNTER ────────────────────────────────────────────────────────
   var notesTA    = document.getElementById('notes');
@@ -797,7 +860,7 @@
       setError('fname',    !document.getElementById('fname').value.trim()),
       setError('phone',    !validatePhone(document.getElementById('phone').value)),
       setError('email',    !validateEmail(document.getElementById('email').value)),
-      setError('date',     !document.getElementById('date').value),
+      !refreshDateValidationUI(),
       setError('location', !document.getElementById('location').value.trim()),
       setError('vehicle',  !document.getElementById('vehicle').value.trim())
     ];
@@ -941,7 +1004,7 @@
           '📌 *WHAT HAPPENS NEXT*\n' +
           '━━━━━━━━━━━━━━━━\n' +
           '1️⃣ Send this message to confirm your slot\n' +
-          '2️⃣ We will reply within 5 minutes to confirm your arrival time\n' +
+          '2️⃣ We will reply to confirm your arrival time\n' +
           '3️⃣ Our team arrives at your location. You don\'t lift a finger.\n\n' +
           '⚠️ *Cancellation Policy:* ' + cancelWindowHours + '+ hours notice = full refund. Less than ' + cancelWindowHours + ' hours = deposit forfeited.\n\n' +
           '📞 Questions? Call or WhatsApp: +254 112 657 174\n' +
