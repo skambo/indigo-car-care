@@ -1,3 +1,7 @@
+// Dry ice blasting is done at our Industrial Area location only (not mobile).
+// Keep in sync with BLASTING_LOCATION in book.html.
+const BLASTING_LOCATION = 'Industrial Area, Nairobi';
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
@@ -11,8 +15,10 @@ export default async function handler(req, res) {
     addon,
     date,
     timeSlot,
+    isBlasting,
     city,
     location,
+    locationExtra,
     vehicle,
     notes,
     paystackRef,
@@ -25,6 +31,17 @@ export default async function handler(req, res) {
   const RESEND_ENDPOINT  = 'https://api.resend.com/emails';
 
   const results = { clientEmail: null, internalEmail: null };
+
+  // Location shown in both emails. Blasting bookings carry no city or estate, so
+  // they always show the Industrial Area site. For other services, city and estate
+  // are joined and either may be absent without printing blanks or "undefined".
+  const blasting     = isBlasting === true;
+  const locationText = blasting
+    ? BLASTING_LOCATION
+    : [city, location].filter(Boolean).join(' — ') || 'To be confirmed';
+  const locationFull = blasting && locationExtra
+    ? `${BLASTING_LOCATION} (${locationExtra})`
+    : locationText;
 
   // ── CLIENT CONFIRMATION ─────────────────────────────────────────────────────
   const clientHtml = `
@@ -54,7 +71,7 @@ export default async function handler(req, res) {
             <td style="padding:32px 32px 24px;">
 
               <p style="margin:0 0 20px;font-size:15px;color:#cccccc;line-height:1.6;">
-                Hi <strong style="color:#ffffff;">${esc(name)}</strong>, your booking is confirmed and your deposit has been received. We'll also reach out on WhatsApp to confirm your arrival time.
+                Hi <strong style="color:#ffffff;">${esc(name)}</strong>, your booking is confirmed and your deposit has been received. We'll also reach out on WhatsApp to confirm your ${blasting ? 'appointment time' : 'arrival time'}.
               </p>
 
               <!-- Reference badge -->
@@ -82,7 +99,7 @@ export default async function handler(req, res) {
                 </tr>
                 <tr style="border-bottom:1px solid #2a2a2a;">
                   <td style="padding:10px 0;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#666666;">Location</td>
-                  <td style="padding:10px 0;font-size:14px;color:#ffffff;">${esc(city)} — ${esc(location)}</td>
+                  <td style="padding:10px 0;font-size:14px;color:#ffffff;">${esc(locationFull)}</td>
                 </tr>
                 <tr>
                   <td style="padding:10px 0;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#666666;">Vehicle</td>
@@ -99,7 +116,9 @@ export default async function handler(req, res) {
               <p style="margin:0 0 8px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#666666;">What Happens Next</p>
               <ol style="margin:0 0 24px;padding-left:20px;color:#cccccc;font-size:14px;line-height:1.8;">
                 <li>We'll confirm your slot on WhatsApp</li>
-                <li>Our team arrives at your location — you don't lift a finger</li>
+                ${blasting
+                  ? `<li>Bring your vehicle to ${esc(BLASTING_LOCATION)} at your booked time</li>`
+                  : `<li>Our team arrives at your location — you don't lift a finger</li>`}
                 <li>Balance is settled after the service is complete</li>
               </ol>
 
@@ -143,8 +162,7 @@ Service:        ${service}
 Add-on:         ${addon || 'None'}
 Date:           ${date}
 Time Slot:      ${timeSlot}
-City:           ${city}
-Location:       ${location}
+${blasting ? '' : `City:           ${city || '—'}\n`}Location:       ${blasting ? locationFull : (location || '—')}
 Vehicle:        ${vehicle}
 Notes:          ${notes || '—'}
 

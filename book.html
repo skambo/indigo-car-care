@@ -11,6 +11,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 
+  <link rel="stylesheet" href="/vendor/flatpickr-4.6.13/flatpickr.min.css">
+
   <style>
     :root {
       --red:       #CC0000;
@@ -159,6 +161,49 @@
       filter: invert(1);
       opacity: 0.85;
       cursor: pointer;
+    }
+
+
+    /* ── BLASTING: LOCATION + SCHEDULE NOTES ─────────────────── */
+    .fixed-location {
+      background: rgba(255,255,255,0.03);
+      border: 1.5px solid rgba(255,255,255,0.09);
+      padding: 0.85rem 1rem; min-height: 52px;
+      font-size: 1rem; color: var(--text); display: flex; align-items: center;
+    }
+    .info-note {
+      margin-top: 0.5rem; padding: 0.85rem 1rem;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.09);
+      border-left: 3px solid var(--red);
+      font-size: 0.8rem; color: var(--muted); line-height: 1.65;
+    }
+    .info-note a { color: var(--red); }
+
+    /* ── FLATPICKR (dark theme to match the form) ────────────── */
+    .flatpickr-calendar {
+      background: var(--mid); border: 1px solid rgba(204,0,0,0.3);
+      border-radius: 0; box-shadow: 0 12px 40px rgba(0,0,0,0.6);
+      font-family: 'DM Sans', sans-serif; max-width: calc(100vw - 2rem);
+    }
+    .flatpickr-calendar.arrowTop::before, .flatpickr-calendar.arrowTop::after { display: none; }
+    .flatpickr-months .flatpickr-month, .flatpickr-current-month .flatpickr-monthDropdown-months,
+    .flatpickr-current-month input.cur-year, span.flatpickr-weekday { background: transparent; color: var(--text); fill: var(--text); }
+    span.flatpickr-weekday { color: var(--muted); }
+    .flatpickr-months .flatpickr-prev-month, .flatpickr-months .flatpickr-next-month { color: var(--text); fill: var(--text); }
+    .flatpickr-months .flatpickr-prev-month:hover svg, .flatpickr-months .flatpickr-next-month:hover svg { fill: var(--red-light); }
+    .flatpickr-day { color: var(--text); border-radius: 0; max-width: none; height: 40px; line-height: 40px; }
+    .flatpickr-day:hover, .flatpickr-day:focus { background: rgba(204,0,0,0.25); border-color: rgba(204,0,0,0.25); }
+    .flatpickr-day.today { border-color: var(--yellow); }
+    .flatpickr-day.selected, .flatpickr-day.selected:hover { background: var(--red); border-color: var(--red); color: var(--white); }
+    .flatpickr-day.flatpickr-disabled, .flatpickr-day.flatpickr-disabled:hover,
+    .flatpickr-day.prevMonthDay, .flatpickr-day.nextMonthDay { color: rgba(136,136,136,0.35); background: transparent; border-color: transparent; cursor: not-allowed; }
+    .flatpickr-day.flatpickr-disabled { text-decoration: line-through; }
+    @media (max-width: 480px) {
+      .flatpickr-calendar { width: calc(100vw - 2.5rem); }
+      .flatpickr-innerContainer, .flatpickr-rContainer, .flatpickr-days, .dayContainer { width: 100%; min-width: 0; max-width: none; }
+      .dayContainer { justify-content: space-around; }
+      .flatpickr-day { width: 14.28%; max-width: none; flex-basis: 14.28%; height: 44px; line-height: 44px; }
     }
 
     .char-count {
@@ -366,6 +411,7 @@
   </style>
 
   <script src="https://js.paystack.co/v1/inline.js"></script>
+  <script src="/vendor/flatpickr-4.6.13/flatpickr.min.js"></script>
 </head>
 <body>
 
@@ -445,16 +491,19 @@
 
       <!-- 4. Date of Service -->
       <div class="form-group">
-        <label class="form-label" for="date">Date of Service</label>
+        <label class="form-label" for="date" id="dateLabel">Date of Service</label>
+        <!-- Native picker, used for non-blasting services -->
         <input class="form-control" type="date" id="date" required>
+        <!-- Flatpickr picker, used for blasting services (Thursday and Friday only).
+             Native date inputs cannot disable specific weekdays. Kept hidden until blasting mode. -->
+        <input class="form-control" type="text" id="dateBlasting" placeholder="Select a Thursday or Friday" style="display:none;" autocomplete="off">
         <span class="field-error" id="date-error">Please select your preferred date of service</span>
         <span class="field-error" id="date-leadtime-error">Dry ice blasting requires at least 48 hours advance booking. Please choose a later date.</span>
+        <span class="field-error" id="date-weekday-error">Dry ice blasting is only available on Thursdays and Fridays. Please choose a Thursday or Friday.</span>
+        <div class="info-note" id="blastingScheduleNote" style="display:none;"></div>
         <div class="sunday-notice" id="sundayNotice">
           Sunday selected. We will confirm availability with you before your deposit is processed.
           If the date is unavailable, we will contact you to reschedule.
-        </div>
-        <div class="sunday-notice" id="kisumuNotice">
-          Kisumu bookings are grouped into dedicated detailing weeks each month. We'll confirm your exact date via WhatsApp after you book.
         </div>
       </div>
 
@@ -466,23 +515,32 @@
         </label>
         <select class="form-control" id="timeSlot">
           <option value="Flexible / Anytime">Flexible / Anytime</option>
-          <option value="Morning (8am to 11am)">Morning (8am to 11am)</option>
+          <option data-morning="1" value="Morning (8am to 11am)">Morning (8am to 11am)</option>
           <option value="Midday (11am to 2pm)">Midday (11am to 2pm)</option>
           <option value="Afternoon (2pm to 5pm)">Afternoon (2pm to 5pm)</option>
         </select>
       </div>
 
-      <!-- 6. City -->
-      <div class="form-group">
+      <!-- 6a. Blasting location: fixed, read only. Text comes from BLASTING_LOCATION in the script. -->
+      <div class="form-group" id="blastingLocationGroup" style="display:none;">
+        <span class="form-label">Location</span>
+        <div class="fixed-location" id="blastingLocationLine"></div>
+        <div class="info-note" id="blastingLocationNote"></div>
+        <!-- OPTIONAL, supply later: street address and/or map pin for the Industrial Area site.
+             Set BLASTING_ADDRESS_DETAIL and BLASTING_MAP_URL in the script. Nothing here blocks booking. -->
+        <div class="info-note" id="blastingAddressDetail" style="display:none;"></div>
+      </div>
+
+      <!-- 6. City (non-blasting only) -->
+      <div class="form-group" id="cityGroup">
         <label class="form-label" for="city">City</label>
         <select class="form-control" id="city">
           <option value="Nairobi">Nairobi</option>
-          <option value="Kisumu">Kisumu</option>
         </select>
       </div>
 
-      <!-- 7. Estate / Neighbourhood -->
-      <div class="form-group">
+      <!-- 7. Estate / Neighbourhood (non-blasting only) -->
+      <div class="form-group" id="locationGroup">
         <label class="form-label" for="location">Your Estate / Neighbourhood</label>
         <input class="form-control" type="text" id="location"
                placeholder="e.g. Karen, Runda, Lavington, Westlands, Kilimani..."
@@ -542,7 +600,7 @@
           <span class="ico no">✗</span>
           <p>No-shows on the day forfeit the deposit in full.</p>
         </div>
-        <div class="terms-item">
+        <div class="terms-item" id="sundayTermsItem">
           <span class="ico ok">✓</span>
           <p>Sunday bookings are subject to availability. We will confirm via WhatsApp before processing your deposit.</p>
         </div>
@@ -638,7 +696,7 @@
   <div class="footer-logo">
     <img src="/images/indigo-car-care-club-logo.webp" alt="Indigo Car Care Club logo" width="300" height="168" loading="lazy"/>
   </div>
-  <div class="footer-tagline">Kisumu &amp; Nairobi's Premium Detail Studio · We Come to You</div>
+  <div class="footer-tagline">Nairobi's Premium Detail Studio · Dry Ice Blasting at Industrial Area · Mobile Detailing in Nairobi</div>
   <div class="footer-links">
     <a href="/index.html">Home</a>
     <a href="/index.html#services">Services</a>
@@ -681,6 +739,20 @@
     if (!svc || svc.variablePrice) return 'Confirmed on-site';
     return 'KES ' + (svc.price - deposit).toLocaleString();
   }
+
+  // ── BLASTING CONFIG (dry ice blasting only) ─────────────────────────────────
+  // Blasting is not a mobile service. It is done at our Industrial Area location,
+  // on Thursdays and Fridays, from 9am. Change the location text here and
+  // every place that shows it (form, WhatsApp, success card, Paystack, email) follows.
+  var BLASTING_LOCATION       = 'Industrial Area, Nairobi';
+  var BLASTING_LOCATION_NOTE  = 'Dry ice blasting is currently done at our Industrial Area location only. It is not offered as a mobile service.';
+  var BLASTING_SCHEDULE_NOTE  = 'Dry ice blasting is available on Thursdays and Fridays, from 9am.';
+  var BLASTING_DAYS           = [4, 5];   // Date.getDay(): 4 = Thursday, 5 = Friday
+  var BLASTING_DAY_NAMES      = 'Thursday or Friday';
+
+  // OPTIONAL, to be supplied by Joe later. Leave empty to hide. Never blocks a booking.
+  var BLASTING_ADDRESS_DETAIL = '';       // e.g. 'Enterprise Road, next to ...'
+  var BLASTING_MAP_URL        = '';       // e.g. a Google Maps pin link
 
   // ── READ URL PARAMS ──────────────────────────────────────────────────────────
   var params  = new URLSearchParams(window.location.search);
@@ -731,7 +803,7 @@
     document.getElementById('payBtn').textContent = 'Pay KES ' + deposit.toLocaleString() + ' Deposit & Confirm Booking';
     document.getElementById('failureMpesaLine').textContent = 'M-Pesa Paybill 516600 · Account 929787 · Amount KES ' + deposit.toLocaleString();
     document.getElementById('cancelRefundLine').textContent = 'Cancellations with ' + cancelWindowHours + ' or more hours notice receive a full deposit refund.';
-    document.getElementById('cancelForfeitLine').textContent = 'Cancellations with less than ' + cancelWindowHours + ' hours notice are non-refundable. This protects our team\'s time and travel.';
+    document.getElementById('cancelForfeitLine').textContent = 'Cancellations with less than ' + cancelWindowHours + ' hours notice are non-refundable. This protects our team\'s time and ' + (isCryoService ? 'materials' : 'travel') + '.';
     document.getElementById('cancelWindowLabel').textContent = cancelWindowHours + ' hours';
   } else {
     summaryEl.innerHTML =
@@ -743,16 +815,25 @@
     formWrapper.style.display = 'none';
   }
 
-  // ── DATE: set min = today (or +48h for cryogenic services), detect Sundays ────
-  var dateInput    = document.getElementById('date');
-  var timeSlotEl   = document.getElementById('timeSlot');
-  var leadTimeErr  = document.getElementById('date-leadtime-error');
+  // ── DATE, LOCATION AND MODE ───────────────────────────────────────────────────
+  // Two date inputs. Non-blasting services use the native #date input exactly as
+  // before. Blasting uses #dateBlasting (flatpickr) because a native date input
+  // cannot grey out specific weekdays. applyServiceMode() switches between them.
+  var nativeDateEl   = document.getElementById('date');
+  var blastDateEl    = document.getElementById('dateBlasting');
+  var dateInput      = nativeDateEl;      // the active input (value is always YYYY-MM-DD)
+  var blastPicker    = null;
+  var blastingMode   = false;
+  var timeSlotEl     = document.getElementById('timeSlot');
+  var leadTimeErr    = document.getElementById('date-leadtime-error');
+  var weekdayErr     = document.getElementById('date-weekday-error');
 
   // Earliest hour of each time slot, used to check the 48-hour cryogenic lead
   // time against a specific date + slot combination.
   var SLOT_START_HOUR = {
     'Flexible / Anytime':     8,
     'Morning (8am to 11am)':  8,
+    'Morning (9am to 11am)':  9,
     'Midday (11am to 2pm)':   11,
     'Afternoon (2pm to 5pm)': 14
   };
@@ -764,21 +845,43 @@
     return yy + '-' + mm + '-' + dd;
   }
 
+  function parseDateInput(str) {
+    var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(str || '');
+    return m ? new Date(+m[1], +m[2] - 1, +m[3]) : null;
+  }
+
   function slotStartDate(dateStr, slotVal) {
     var parts = dateStr.split('-').map(Number);
     var hour  = SLOT_START_HOUR.hasOwnProperty(slotVal) ? SLOT_START_HOUR[slotVal] : 8;
     return new Date(parts[0], parts[1] - 1, parts[2], hour, 0, 0, 0);
   }
 
-  (function() {
-    var minDate = isCryoService ? new Date(Date.now() + 48 * 60 * 60 * 1000) : new Date();
-    dateInput.setAttribute('min', formatDateInput(minDate));
-  })();
+  function isBlastingDay(d) {
+    return !!d && BLASTING_DAYS.indexOf(d.getDay()) !== -1;
+  }
+
+  // Earliest selectable date: today, or +48h for blasting (existing lead time rule).
+  function minDateFor(blasting) {
+    return blasting ? new Date(Date.now() + 48 * 60 * 60 * 1000) : new Date();
+  }
+
+  // Whether a YYYY-MM-DD string is allowed for the given mode.
+  function isDateValidForMode(str, blasting) {
+    var d = parseDateInput(str);
+    if (!d) return false;
+    var min = parseDateInput(formatDateInput(minDateFor(blasting)));
+    if (d < min) return false;
+    return blasting ? isBlastingDay(d) : true;
+  }
+
+  function visibleDateEl() {
+    return (blastingMode && blastPicker && blastPicker.altInput) ? blastPicker.altInput : nativeDateEl;
+  }
 
   // Greys out (disables) any time slot on the selected date that falls inside
-  // the 48-hour cryogenic lead time window. No-op for non-cryo services.
+  // the 48-hour cryogenic lead time window. No-op for non-blasting services.
   function refreshTimeSlotAvailability() {
-    if (!isCryoService || !dateInput.value) {
+    if (!blastingMode || !dateInput.value) {
       Array.prototype.forEach.call(timeSlotEl.options, function(opt) { opt.disabled = false; });
       return;
     }
@@ -788,40 +891,140 @@
     });
   }
 
-  // Re-validates the selected date/time slot against the 48-hour cryogenic lead
-  // time, updating the inline error and has-error state. Returns whether the
-  // current selection is valid (always true for non-cryo services).
+  // Re-validates the selected date/time slot against the blasting weekday rule and
+  // the 48-hour lead time, updating inline errors and has-error state. Returns
+  // whether the current selection is valid (always true for non-blasting, if set).
   function refreshDateValidationUI() {
-    var dateEmpty   = !dateInput.value;
-    var leadInvalid = !dateEmpty && isCryoService &&
+    var dateEmpty    = !dateInput.value;
+    var parsed       = parseDateInput(dateInput.value);
+    var weekdayInvalid = !dateEmpty && blastingMode && !isBlastingDay(parsed);
+    var leadInvalid  = !dateEmpty && !weekdayInvalid && blastingMode &&
       slotStartDate(dateInput.value, timeSlotEl.value) < new Date(Date.now() + 48 * 60 * 60 * 1000);
 
     document.getElementById('date-error').classList.toggle('visible', dateEmpty);
+    weekdayErr.classList.toggle('visible', weekdayInvalid);
     leadTimeErr.classList.toggle('visible', leadInvalid);
-    dateInput.classList.toggle('has-error', dateEmpty || leadInvalid);
+    visibleDateEl().classList.toggle('has-error', dateEmpty || weekdayInvalid || leadInvalid);
 
-    return !dateEmpty && !leadInvalid;
+    return !dateEmpty && !weekdayInvalid && !leadInvalid;
   }
 
-  dateInput.addEventListener('change', function() {
+  function onDateChanged() {
     var notice = document.getElementById('sundayNotice');
-    if (!this.value) {
-      notice.classList.remove('visible');
-    } else {
-      var parts = this.value.split('-').map(Number);
-      var sel = new Date(parts[0], parts[1] - 1, parts[2]);
-      notice.classList.toggle('visible', sel.getDay() === 0);
-    }
+    var sel = parseDateInput(dateInput.value);
+    notice.classList.toggle('visible', !!sel && !blastingMode && sel.getDay() === 0);
     refreshTimeSlotAvailability();
     refreshDateValidationUI();
-  });
+  }
+
+  nativeDateEl.addEventListener('change', onDateChanged);
 
   timeSlotEl.addEventListener('change', function() {
     refreshTimeSlotAvailability();
     refreshDateValidationUI();
   });
 
-  refreshTimeSlotAvailability();
+  // Builds the flatpickr instance once, the first time blasting mode is needed.
+  function ensureBlastPicker() {
+    if (blastPicker || typeof flatpickr !== 'function') return;
+    blastPicker = flatpickr(blastDateEl, {
+      dateFormat:    'Y-m-d',            // value read by the form
+      altInput:      true,               // friendly display text
+      altFormat:     'D, j M Y',
+      altInputClass: 'form-control',
+      disableMobile: true,               // force flatpickr on phones, the native picker cannot block weekdays
+      minDate:       minDateFor(true),
+      disable:       [function(date) { return !isBlastingDay(date); }],
+      locale:        { firstDayOfWeek: 1 },
+      monthSelectorType: 'static',
+      onChange:      function() { onDateChanged(); }
+    });
+    blastPicker.altInput.setAttribute('placeholder', 'Select a Thursday or Friday');
+    blastPicker.altInput.setAttribute('aria-label', 'Date of service, Thursdays and Fridays only');
+    blastPicker.altInput.id = 'dateBlastingDisplay';
+    blastPicker.altInput.addEventListener('focus', function() { setError('dateBlastingDisplay', false); });
+  }
+
+  // Single switch for everything that differs between blasting and other services:
+  // date picker, location fields, notes. Safe to call repeatedly, and any date
+  // that is not valid for the new mode is cleared.
+  function applyServiceMode(blasting) {
+    var carried = dateInput.value;
+    blastingMode = !!blasting;
+
+    if (blastingMode) ensureBlastPicker();
+    var useBlastPicker = blastingMode && !!blastPicker;
+
+    // date inputs
+    nativeDateEl.style.display = useBlastPicker ? 'none' : '';
+    if (blastPicker) blastPicker.altInput.style.display = useBlastPicker ? '' : 'none';
+    dateInput = useBlastPicker ? blastDateEl : nativeDateEl;
+    document.getElementById('dateLabel').setAttribute('for', useBlastPicker ? 'dateBlastingDisplay' : 'date');
+    nativeDateEl.setAttribute('min', formatDateInput(minDateFor(false)));
+    if (blastPicker) blastPicker.set('minDate', minDateFor(true));
+
+    // keep the chosen date only if it is still valid for this mode
+    var keep = carried && isDateValidForMode(carried, blastingMode) ? carried : '';
+    nativeDateEl.value = keep;
+    if (blastPicker) { if (keep) blastPicker.setDate(keep, false); else blastPicker.clear(); }
+    document.getElementById('date-error').classList.remove('visible');
+    weekdayErr.classList.remove('visible');
+    leadTimeErr.classList.remove('visible');
+    nativeDateEl.classList.remove('has-error');
+    if (blastPicker) blastPicker.altInput.classList.remove('has-error');
+
+    // notes and location fields
+    document.getElementById('blastingScheduleNote').style.display = blastingMode ? 'block' : 'none';
+    document.getElementById('blastingScheduleNote').textContent   = BLASTING_SCHEDULE_NOTE;
+    document.getElementById('blastingLocationGroup').style.display = blastingMode ? 'flex' : 'none';
+    document.getElementById('blastingLocationLine').textContent    = 'Location: ' + BLASTING_LOCATION;
+    document.getElementById('blastingLocationNote').textContent    = BLASTING_LOCATION_NOTE;
+    renderBlastingAddressDetail();
+    document.getElementById('cityGroup').style.display     = blastingMode ? 'none' : 'flex';
+    document.getElementById('locationGroup').style.display = blastingMode ? 'none' : 'flex';
+    document.getElementById('sundayTermsItem').style.display = blastingMode ? 'none' : 'flex';
+    if (blastingMode) {
+      surchargeEl.style.display = 'none';
+    } else {
+      checkSurcharge();
+    }
+    // Blasting starts at 9am, so its Morning slot reads 9am to 11am. Standard keeps 8am.
+    var morningOpt = timeSlotEl.querySelector('option[data-morning]');
+    var morningText = blastingMode ? 'Morning (9am to 11am)' : 'Morning (8am to 11am)';
+    morningOpt.value = morningText;
+    morningOpt.textContent = morningText;
+
+    onDateChanged();
+    if (!dateInput.value) {   // do not flag an untouched field as an error
+      document.getElementById('date-error').classList.remove('visible');
+      visibleDateEl().classList.remove('has-error');
+    }
+  }
+
+  // Optional address / map pin for the blasting site. Hidden while both are empty.
+  function renderBlastingAddressDetail() {
+    var box = document.getElementById('blastingAddressDetail');
+    box.textContent = '';
+    if (BLASTING_ADDRESS_DETAIL) box.appendChild(document.createTextNode(BLASTING_ADDRESS_DETAIL + ' '));
+    if (BLASTING_MAP_URL) {
+      var a = document.createElement('a');
+      a.href = BLASTING_MAP_URL; a.target = '_blank'; a.rel = 'noopener';
+      a.textContent = 'View on map';
+      box.appendChild(a);
+    }
+    box.style.display = (BLASTING_ADDRESS_DETAIL || BLASTING_MAP_URL) ? 'block' : 'none';
+  }
+
+  // Location values carried through the booking flow (WhatsApp, Paystack, success card, email).
+  function bookingLocation() {
+    if (blastingMode) {
+      var extra = [BLASTING_ADDRESS_DETAIL, BLASTING_MAP_URL].filter(Boolean).join(' ');
+      return { isBlasting: true, city: '', location: BLASTING_LOCATION, display: BLASTING_LOCATION, extra: extra };
+    }
+    var c = document.getElementById('city').value;
+    var l = document.getElementById('location').value.trim();
+    return { isBlasting: false, city: c, location: l, display: c + ', ' + l, extra: '' };
+  }
 
   // ── CHARACTER COUNTER ────────────────────────────────────────────────────────
   var notesTA    = document.getElementById('notes');
@@ -861,14 +1064,14 @@
       setError('phone',    !validatePhone(document.getElementById('phone').value)),
       setError('email',    !validateEmail(document.getElementById('email').value)),
       !refreshDateValidationUI(),
-      setError('location', !document.getElementById('location').value.trim()),
+      setError('location', !blastingMode && !document.getElementById('location').value.trim()),
       setError('vehicle',  !document.getElementById('vehicle').value.trim())
     ];
     // Scroll to first error
     var ids = ['fname','phone','email','date','location','vehicle'];
     for (var i = 0; i < errs.length; i++) {
       if (errs[i]) {
-        var el = document.getElementById(ids[i]);
+        var el = ids[i] === 'date' ? visibleDateEl() : document.getElementById(ids[i]);
         el.scrollIntoView({ behavior: 'smooth', block: 'center' });
         el.focus();
         return false;
@@ -880,23 +1083,17 @@
   // ── CITY SELECTOR ───────────────────────────────────────────────────────────
   var cityEl       = document.getElementById('city');
   var locationInput = document.getElementById('location');
-  var kisumuNotice = document.getElementById('kisumuNotice');
-
-  var NBI_PLACEHOLDER = 'e.g. Karen, Runda, Lavington, Westlands, Kilimani...';
-  var KSM_PLACEHOLDER = 'e.g. Riat Hills, Milimani, Kanyakwar...';
 
   cityEl.addEventListener('change', function() {
-    var isKisumu = this.value === 'Kisumu';
-    locationInput.placeholder = isKisumu ? KSM_PLACEHOLDER : NBI_PLACEHOLDER;
-    kisumuNotice.classList.toggle('visible', isKisumu);
     checkSurcharge();
   });
 
   // ── KITENGELA / KIAMBU / ATHI RIVER / LIMURU SURCHARGE NOTICE (outer-metro Nairobi zones) ───
+  // Never applies to blasting: those bookings are at Industrial Area and have no estate field.
   var surchargeEl  = document.getElementById('surchargeNotice');
   var SURCHARGE_RE = /kitengela|kiambu|athi\s*river|limuru/i;
   function checkSurcharge() {
-    if (cityEl.value === 'Nairobi' && SURCHARGE_RE.test(locationInput.value)) {
+    if (!blastingMode && cityEl.value === 'Nairobi' && SURCHARGE_RE.test(locationInput.value)) {
       surchargeEl.style.display = 'block';
     } else {
       surchargeEl.style.display = 'none';
@@ -906,6 +1103,9 @@
     locationInput.addEventListener('input', checkSurcharge);
     locationInput.addEventListener('change', checkSurcharge);
   }
+
+  // Initial mode comes from the selected service.
+  applyServiceMode(isCryoService);
 
   // ── ADD-ON SERVICE SELECTOR ─────────────────────────────────────────────────
   var ADDON_WA = {
@@ -938,10 +1138,11 @@
     var name     = document.getElementById('fname').value.trim();
     var phone    = document.getElementById('phone').value.trim();
     var email    = document.getElementById('email').value.trim();
-    var date     = document.getElementById('date').value;
+    var date     = dateInput.value;
     var timeSlot = document.getElementById('timeSlot').value || 'Flexible / Anytime';
-    var city     = document.getElementById('city').value;
-    var location = document.getElementById('location').value.trim();
+    var loc      = bookingLocation();
+    var city     = loc.city;
+    var location = loc.location;
     var vehicle  = document.getElementById('vehicle').value.trim();
     var notes    = document.getElementById('notes').value.trim();
     var addon    = document.getElementById('addon').value;
@@ -992,8 +1193,9 @@
           '*Name:* ' + name + '\n' +
           '*Date:* ' + date + '\n' +
           '*Time Slot:* ' + displayTime + '\n' +
-          '*City:* ' + city + '\n' +
+          (loc.isBlasting ? '' : '*City:* ' + city + '\n') +
           '*Location:* ' + location + '\n' +
+          (loc.extra ? '*Address / map:* ' + loc.extra + '\n' : '') +
           '*Vehicle:* ' + vehicle + '\n' +
           '*Email:* ' + email + '\n\n' +
           '💳 *Payment Reference:* ' + ref + '\n' +
@@ -1005,7 +1207,9 @@
           '━━━━━━━━━━━━━━━━\n' +
           '1️⃣ Send this message to confirm your slot\n' +
           '2️⃣ We will reply to confirm your arrival time\n' +
-          '3️⃣ Our team arrives at your location. You don\'t lift a finger.\n\n' +
+          (loc.isBlasting
+            ? '3️⃣ Bring your vehicle to ' + BLASTING_LOCATION + ' at your booked time.\n\n'
+            : '3️⃣ Our team arrives at your location. You don\'t lift a finger.\n\n') +
           '⚠️ *Cancellation Policy:* ' + cancelWindowHours + '+ hours notice = full refund. Less than ' + cancelWindowHours + ' hours = deposit forfeited.\n\n' +
           '📞 Questions? Call or WhatsApp: +254 112 657 174\n' +
           '🌐 indigocarcare.com';
@@ -1016,7 +1220,7 @@
         document.getElementById('successRef').textContent      = 'Reference: ' + ref;
         document.getElementById('successService').textContent  = svcName;
         document.getElementById('successDate').textContent     = date;
-        document.getElementById('successLocation').textContent = city + ', ' + location;
+        document.getElementById('successLocation').textContent = loc.display;
         document.getElementById('successVehicle').textContent  = vehicle;
         document.getElementById('successDeposit').textContent  = '💰 Deposit Paid: KES ' + deposit.toLocaleString();
         document.getElementById('waSuccessBtn').href           = waUrl;
@@ -1034,8 +1238,10 @@
             addon:         addon ? (ADDON_WA[addon] ? addon : addon) : '',
             date:          date,
             timeSlot:      displayTime,
+            isBlasting:    loc.isBlasting,
             city:          city,
             location:      location,
+            locationExtra: loc.extra,
             vehicle:       vehicle,
             notes:         notes,
             paystackRef:   ref,
